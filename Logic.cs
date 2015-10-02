@@ -229,22 +229,25 @@ namespace TechniteLogic
 				{
 					Grid.RelativeCell target = Grid.RelativeCell.Invalid;
 					Technite.Task task;
+					byte amount = 0;
                     if (t.CurrentResources.Matter > t.CurrentResources.Energy)
 					{
 						//Out.Log(Significance.Low, "Trying to transfer matter");
 						task = Technite.Task.TransferMatterTo;
 						target = Helper.GetLitOrUpperTechnite(t.Location);
+						amount = t.CurrentResources.Matter;
 					}
 					else
 					{
 						//Out.Log(Significance.Low, "Trying to transfer energy");
 						task = Technite.Task.TransferEnergyTo;
 						target = Helper.GetUnlitOrLowerTechnite(t.Location);
+						amount = t.CurrentResources.Energy;
 
 					}
 					if (target != Grid.RelativeCell.Invalid)
 					{
-						t.SetNextTask(task, target);
+						t.SetNextTask(task, target, amount);
 					}
 					else
 					{

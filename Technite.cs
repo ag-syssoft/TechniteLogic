@@ -210,7 +210,7 @@ namespace TechniteLogic
 			/// content type degrades. Most matter types follow a chain of degradations until they are finally removed entirely (<see cref="Technite.DegradeTo"/>). If
 			/// multiple technites try to consume the same terrain cell, the order is determined randomly, and the terrain cell
 			/// may be degraded several times during the same round.
-			/// If the targeted cell contains a technite of the local faction, the spective technite is destroyed, and a portion of
+			/// If the targeted cell contains a technite of the local faction, the respective technite is destroyed, and a portion of
 			/// its resources awarded to the local technite.
 			/// If the targeted cell contains a hostile technite, the relative amount of stored energy determines which technite wins.
 			/// If the local technite has equal or more energy in storage than the hostile technite, the targeted technite is destroyed, and
@@ -255,6 +255,7 @@ namespace TechniteLogic
 			/// Kills the local technite and replaces it with the content specified in the task parameter.
 			/// Conversion into a type that cannot be mined by technites is not possible. If, for Grid.Content type, MatterYield[type] is 0,
 			/// then type is not a valid transform parameter. An exception will be thrown in this case.
+			/// The local technite also loses an amount of matter equal to MatterYield[parameter]. The task will fail otherwise.
 			/// </summary>
 			SelfTransformToType,
 
@@ -426,10 +427,18 @@ namespace TechniteLogic
 		}
 
 
-		class TaskException : Exception
+		public class TaskException : Exception
 		{
-			public TaskException(string message) : base(message)
-			{ }
+			public readonly Technite	SourceTechnite;
+			public TaskException(Technite t, string message) : base(message)
+			{ 
+				SourceTechnite = t;
+			}
+
+			public override string ToString()
+			{
+				return SourceTechnite.Location+": "+base.ToString();
+			}
 
 		}
 
@@ -449,15 +458,18 @@ namespace TechniteLogic
 
 			Grid.HCellID absoluteTarget = Location + target;
 			if (!absoluteTarget.IsValid)
-				throw new TaskException(Location+": Trying to set invalid relative target "+target+". Task not set.");
+				throw new TaskException(this,"Trying to set invalid relative target "+target+". Task not set.");
 
 			if (t == Task.SelfTransformToType)
 			{
 				if (parameter > MatterYield.Length)
-					throw new TaskException(Location+": Parameter for task "+t+" ("+parameter+") is not a valid matter type.");
+					throw new TaskException(this,"Parameter for task "+t+" ("+parameter+") is not a valid matter type.");
 				if (MatterYield[parameter] == 0)
-					throw new TaskException(Location + ": Parameter for task " + t + " (" + parameter + "/"+((Grid.Content)parameter) + ") is not a suitable transformation output.");
+					throw new TaskException(this,"Parameter for task " + t + " (" + parameter + "/"+((Grid.Content)parameter) + ") is not a suitable transformation output.");
 			}
+			else
+			if ((t == Task.TransferEnergyTo || t == Task.TransferMatterTo) && parameter == 0)
+				throw new TaskException(this, "Task "+t+" requires a non-zero parameter value");
 
 			Grid.Content content = Grid.World.CellStacks[absoluteTarget.StackID].volumeCell[absoluteTarget.Layer].content;
 			nextTask = t;
