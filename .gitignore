@@ -1,0 +1,4 @@
+obj/
+*.exe.manifest
+*.exe.config
+*.exe

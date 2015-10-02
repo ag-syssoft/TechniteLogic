@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechniteLogic", "TechniteLogic.csproj", "{AE0700C4-D48E-47E9-84C1-C4EF172B85F5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{10085537-A210-4828-9C90-B23F7BACD0A4} = {10085537-A210-4828-9C90-B23F7BACD0A4}
+		{B9F262AF-B3C7-44A8-A095-CF84F5B6C009} = {B9F262AF-B3C7-44A8-A095-CF84F5B6C009}
+		{9CF5C4DC-7A7F-47E0-A945-0E8EB46071CF} = {9CF5C4DC-7A7F-47E0-A945-0E8EB46071CF}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logging", "Logging\Logging.csproj", "{9CF5C4DC-7A7F-47E0-A945-0E8EB46071CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Math3D", "Math3D\Math3D.csproj", "{10085537-A210-4828-9C90-B23F7BACD0A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protocol", "Protocol\Protocol.csproj", "{B9F262AF-B3C7-44A8-A095-CF84F5B6C009}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE0700C4-D48E-47E9-84C1-C4EF172B85F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE0700C4-D48E-47E9-84C1-C4EF172B85F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE0700C4-D48E-47E9-84C1-C4EF172B85F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE0700C4-D48E-47E9-84C1-C4EF172B85F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CF5C4DC-7A7F-47E0-A945-0E8EB46071CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CF5C4DC-7A7F-47E0-A945-0E8EB46071CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CF5C4DC-7A7F-47E0-A945-0E8EB46071CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CF5C4DC-7A7F-47E0-A945-0E8EB46071CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10085537-A210-4828-9C90-B23F7BACD0A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10085537-A210-4828-9C90-B23F7BACD0A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10085537-A210-4828-9C90-B23F7BACD0A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10085537-A210-4828-9C90-B23F7BACD0A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9F262AF-B3C7-44A8-A095-CF84F5B6C009}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9F262AF-B3C7-44A8-A095-CF84F5B6C009}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9F262AF-B3C7-44A8-A095-CF84F5B6C009}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9F262AF-B3C7-44A8-A095-CF84F5B6C009}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
