@@ -125,7 +125,7 @@ namespace TechniteLogic
 				return EvaluateChoices(location, (relative, cell) =>
 				{
 					Grid.Content content = Grid.World.GetCell(cell).content;
-					int yield = Technite.MatterYield[(int)content] + 1;
+					int yield = Technite.MatterYield[(int)content];	//zero is zero, no exceptions
 					if (Grid.World.GetCell(cell.BottomNeighbor).content != Grid.Content.Technite)
 						return yield;
 					return NotAChoice;
@@ -168,9 +168,17 @@ namespace TechniteLogic
 
 			//let's do some simple processing
 
+			//			bool slightlyVerbose = Technite.All.Count() < 20;
+
+			int at = 0;
 			foreach (Technite t in Technite.All)
 			{
-				//Out.Log(Significance.Low, "Processing "+t);
+				at++;
+				if (at < 20)
+					Out.Log(Significance.Low, "Processing "+t);
+				else
+					if (at == 20)
+						Out.Log(Significance.Low, "...");
 
 
 				if (t.LastTaskResult == Technite.TaskResult.MoreWorkNeeded)
