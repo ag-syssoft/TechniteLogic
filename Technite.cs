@@ -566,7 +566,7 @@ namespace TechniteLogic
 				all.Add(tech);
 
 				if (cellContent != Grid.Content.Technite)
-					Out.Log(Significance.Unusual, "Expected technite content in cell " + loc + ", but found " + cellContent + " (reused state is " + tech.Status + ")");
+					Out.Log(Significance.Unusual, "Expected technite content in cell, but found " + cellContent + " (reused state is " + tech + ")");
 
 
 				return;
@@ -576,16 +576,20 @@ namespace TechniteLogic
 			tech.ImportState(state);
 			map.Add(loc,tech);
 			all.Add(tech);
+			Out.Log(Significance.Low, tech + " created");
 
 			if (cellContent != Grid.Content.Technite)
-				Out.Log(Significance.Unusual, "Expected technite content in cell " + loc + ", but found " + cellContent + " (new state is " + tech.Status + ")");
+				Out.Log(Significance.Unusual, "Expected technite content in cell, but found " + cellContent + " (new state is " + tech + ")");
 		}
 
 		/// <summary>
 		/// Called during Cleanup(), if death is detected.
 		/// </summary>
 		public virtual void OnDeath()
-		{}
+		{
+			Out.Log(Significance.Low, this + " died");
+
+		}
 
 		/// <summary>
 		/// Automatically called after technite state frames have been received, before logic processing should begin.
