@@ -272,10 +272,14 @@ namespace TechniteLogic
 			BadCommand,
 			CannotEatThis,
 			CannotGnawAtThis,
-            CannotStandThere,
+			CannotStandThere,
 			TechniteLacksResources,
 			NoTechniteAtDestination,
 			MoreWorkNeeded,
+			/// <summary>
+			/// Could not complete operation in the iteration required. Most commonly this means some other technite delayed execution of the requested job
+			/// </summary>
+			OperationWindowMissed,
 			Again,
 			Success
 		};
@@ -491,6 +495,14 @@ namespace TechniteLogic
 			taskResult = (TaskResult)state.taskResult;
 			this.state = new CompressedState(state.state).Decoded;
 			exists = true;
+
+			if (taskResult == Technite.TaskResult.OperationWindowMissed)
+			{
+				if (++windowMissedThisRound < MaxLogPerRound)
+					Out.Log(Significance.Unusual, "Operation Window Missed on " + nextTask + " of " + this);
+			}
+
+
 			if (taskResult != TaskResult.MoreWorkNeeded)
 				nextTask = Task.None;
 
@@ -549,6 +561,11 @@ namespace TechniteLogic
 		/// </summary>
 		public static Func<Grid.HCellID, Technite>	createNew = (loc) => new Technite(loc);
 
+
+		private static int createdThisRound = 0,
+							diedThisRound = 0,
+							windowMissedThisRound = 0;
+		private const int MaxLogPerRound = 3;
 		/// <summary>
 		/// Automatically called for each technite state chunk received from the server.
 		/// </summary>
@@ -576,7 +593,8 @@ namespace TechniteLogic
 			tech.ImportState(state);
 			map.Add(loc,tech);
 			all.Add(tech);
-			Out.Log(Significance.Low, tech + " created");
+			if (++createdThisRound <= MaxLogPerRound)
+				Out.Log(Significance.Low, tech + " created");
 
 			if (cellContent != Grid.Content.Technite)
 				Out.Log(Significance.Unusual, "Expected technite content in cell, but found " + cellContent + " (new state is " + tech + ")");
@@ -587,7 +605,8 @@ namespace TechniteLogic
 		/// </summary>
 		public virtual void OnDeath()
 		{
-			Out.Log(Significance.Low, this + " died");
+			if (++diedThisRound <= MaxLogPerRound)
+				Out.Log(Significance.Low, this + " died");
 
 		}
 
@@ -606,6 +625,17 @@ namespace TechniteLogic
 				}
 			}
 			check.Clear();
+
+
+			if (diedThisRound > 0)
+				Out.Log(Significance.Common, diedThisRound + " technite(s) died this round.");
+			diedThisRound = 0;
+			if (createdThisRound > 0)
+				Out.Log(Significance.Common, createdThisRound + " technite(s) were created this round.");
+            createdThisRound = 0;
+			if (windowMissedThisRound > 0)
+				Out.Log(Significance.Unusual, windowMissedThisRound + " technite(s) missed their operation window this round.");
+			windowMissedThisRound = 0;
 
 			//int badCount = 0;
 			//foreach (Grid.CellStack stack in Grid.World.CellStacks)
