@@ -653,6 +653,16 @@ namespace TechniteLogic
 			//	Out.Log(Significance.Unusual, "Found terrain holes in "+badCount+"/"+(Grid.World.CellStacks.Length*Grid.CellStack.LayersPerStack)+" locations");
 		}
 
+		/// <summary>
+		/// Erases all global technite data from the session.
+		/// Use this to reset technite state to program default
+		/// </summary>
+		public static void FlushAllData()
+		{
+			map.Clear();
+			all.Clear();
+			check.Clear();
+		}
 
 		internal Interface.Struct.TechniteInstruction ExportInstruction()
 		{

@@ -85,13 +85,11 @@ namespace TechniteLogic
 				}
 			}
 
-			//public static void Setup(Interface.Struct.GridNode[] nodes)
-			//{
-			//	Debug.Assert(Nodes == null);
-			//	Nodes = new Node[nodes.Length];
-			//	for (int i = 0; i < nodes.Length; i++)
-			//		Nodes[i] = nodes[i];
-			//}
+			internal static void FlushAllData()
+			{
+				Nodes = null;
+				nodeBuffer = null;
+			}
 		}
 
 		/// <summary>
@@ -143,6 +141,13 @@ namespace TechniteLogic
 			}
 
 			private static bool isSetUp = false;
+
+			public static void StaticReset()
+			{
+				isSetUp = false;
+				HeightPerLayer = 0f;
+				LayersPerStack = 0;
+			}
 
 
 			public static void Setup(float heightPerLayer, int numLayersPerStack)
@@ -286,6 +291,14 @@ namespace TechniteLogic
 					return CeilingCell;
 				return CellStacks[cell.StackID].volumeCell[cell.Layer];
 			}
+
+			internal static void FlushAllData()
+			{
+				CellStacks = null;
+				FloorCell = new CellStack.Cell();
+				CeilingCell = new CellStack.Cell();
+				CellStack.StaticReset();
+            }
 		}
 
 		
@@ -525,5 +538,16 @@ namespace TechniteLogic
 		{
 			CellStack.Setup(heightPerLayer, numLayersPerStack);
 		}
+
+		/// <summary>
+		/// Erases all global grid data from the session.
+		/// Use this to reset grid state to program default
+		/// </summary>
+		public static void FlushAllData()
+		{
+			World.FlushAllData();
+			Graph.FlushAllData();
+		}
+
 	}
 }

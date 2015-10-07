@@ -25,8 +25,8 @@ namespace TechniteLogic
 
 		protected override void OnClose()
 		{
-			Out.Log(Significance.ProgramFatal, "Connection lost to host. Exiting");
-			Program.ShutDown(0);
+			Out.Log(Significance.Important, "Connection lost to host.");
+			//Program.ShutDown(0);
 		}
 
 		protected override void OnAbnormalException(Exception e)
@@ -39,14 +39,14 @@ namespace TechniteLogic
 		public void Connect(ushort port)
 		{
 			try
-			{ 
-				TcpClient.Connect("localhost",port);
+			{
+                TcpClient.Connect("localhost",port);
 				StartNoSSLSelf();
 			}
 			catch (Exception ex)
 			{
-				Out.Log(Significance.ProgramFatal,"Unable to connect to service host on port "+port+": "+ex.ToString());
-				Program.ShutDown(-1);
+			//	Out.Log(Significance.Important,"Unable to connect to service host on port "+port+": "+ex.ToString());
+				//Program.ShutDown(-1);
 			}
 		}
 

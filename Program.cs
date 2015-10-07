@@ -55,10 +55,20 @@ namespace TechniteLogic
 
 			Interface.Register();
 
-			Client client = new Client();
+
 			System.Threading.Thread.Sleep(100);
-			Out.Log(Logging.Significance.Important, "Connecting to server on port "+serverPort);
-			client.Connect(serverPort);
+			for (;;)
+			{
+				Client client = new Client();
+
+				Out.Log(Logging.Significance.Important, "Connecting to server on port " + serverPort);
+				client.Connect(serverPort);
+
+				Grid.FlushAllData();
+				Technite.FlushAllData();
+
+				System.Threading.Thread.Sleep(2000);
+			}
 
 			ShutDown(0);
 		}
