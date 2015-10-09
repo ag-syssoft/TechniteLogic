@@ -71,10 +71,24 @@ namespace TechniteLogic
 
 			}
 
+
+			public enum TechniteChunkFlags
+			{
+				IsFirst = 0x1,
+				IsLast = 0x2
+
+			}
+
 			public struct TechniteStateChunk
 			{
-				public bool isFirst;
+				public byte flags;
 				public TechniteState[] states;
+
+
+				public bool FlagIsSet(TechniteChunkFlags flag)
+				{
+					return ((int)flags & (int)flag) != 0;
+				}
 
 			}
 
@@ -176,10 +190,12 @@ namespace TechniteLogic
 			public static void TechniteStateChunk(Protocol.Client cl, Struct.TechniteStateChunk chunk)
 			{
 				Out.Log(Significance.Common, "Received technite state chunk containing "+chunk.states.Length+" technites");
-				if (chunk.isFirst)
+				if (chunk.FlagIsSet(Struct.TechniteChunkFlags.IsFirst))
 					Technite.Reset();
 				foreach (var state in chunk.states)
 					Technite.CreateOrUpdate(state);
+				if (chunk.FlagIsSet(Struct.TechniteChunkFlags.IsLast))
+					Technite.Cleanup();
 
 			}
 
