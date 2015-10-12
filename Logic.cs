@@ -180,6 +180,8 @@ namespace TechniteLogic
 					if (at == 20)
 						Out.Log(Significance.Low, "...");
 
+				if (t.Status.TTL <= t.TTLCostPerRound)
+					t.SetCustomColor(new Technite.Color(255, 0, 0));
 
 				if (t.LastTaskResult == Technite.TaskResult.MoreWorkNeeded)
 				{
