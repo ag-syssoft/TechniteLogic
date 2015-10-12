@@ -207,7 +207,8 @@ namespace Protocol
 
 		protected void Join()
 		{
-			threadHandle.Join();
+			if (threadHandle != null)
+				threadHandle.Join();
 		}
 
 		public void ForceDisconnect()
