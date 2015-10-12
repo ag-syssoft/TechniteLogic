@@ -513,6 +513,8 @@ namespace TechniteLogic
 			/// </summary>
 			public HCellID BottomNeighbor { get { return new HCellID(StackID,Layer-1); } }
 
+			public Vec3 UpDirection { get { return Graph.Nodes[StackID].StackDirection; } }
+
 			/// <summary>
 			/// Enumerates through all valid/existing neighboring cells, using relative descriptors
 			/// </summary>
