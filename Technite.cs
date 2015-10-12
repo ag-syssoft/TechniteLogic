@@ -490,7 +490,15 @@ namespace TechniteLogic
 		Grid.RelativeCell	taskTarget;
 
 		State				state;
-		bool				exists = false;
+
+		enum TransitionState
+		{
+			Unknown,
+			RemoveFromMap,
+			Preserved
+		}
+
+		TransitionState transitionState = TransitionState.Unknown;
 
 
 		/// <summary>
@@ -568,7 +576,7 @@ namespace TechniteLogic
 			resources = state.resources;
 			taskResult = (TaskResult)state.taskResult;
 			this.state = new CompressedState(state.state).Decoded;
-			exists = true;
+			transitionState = TransitionState.Preserved;
 
 			if (taskResult == Technite.TaskResult.OperationWindowMissed)
 			{
@@ -630,7 +638,7 @@ namespace TechniteLogic
 			check.Clear();
 			foreach (var t in all)
 			{ 
-				t.exists = false;	//leave in dict for now
+				t.transitionState = TransitionState.Unknown;	//leave in dict for now
 				check.Add(t);
 			}
 			all.Clear();
@@ -659,14 +667,22 @@ namespace TechniteLogic
 			Technite tech;
 			if (map.TryGetValue(loc, out tech))
 			{
-				tech.ImportState(state);
-				all.Add(tech);
+				if (tech.state.TTL < new CompressedState(state.state).GetTTL())
+				{
+					tech.transitionState = TransitionState.RemoveFromMap;
+					map.Remove(loc);
+				}
+				else
+				{
+					tech.ImportState(state);
+					all.Add(tech);
 
-				if (cellContent != Grid.Content.Technite)
-					Out.Log(Significance.Unusual, "Expected technite content in cell, but found " + cellContent + " (reused state is " + tech + ")");
+					if (cellContent != Grid.Content.Technite)
+						Out.Log(Significance.Unusual, "Expected technite content in cell, but found " + cellContent + " (reused state is " + tech + ")");
 
 
-				return;
+					return;
+				}
 			}
 			tech = createNew(loc);
 			//new Technite(loc);
@@ -698,10 +714,11 @@ namespace TechniteLogic
 		{
 			foreach (Technite t in check)
 			{
-				if (!t.exists)
+				if (t.transitionState != TransitionState.Preserved)
 				{
 					t.OnDeath();
-					map.Remove(t.Location);
+					if (t.transitionState != TransitionState.RemoveFromMap)
+						map.Remove(t.Location);
 				}
 			}
 			check.Clear();
