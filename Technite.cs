@@ -33,23 +33,8 @@ namespace TechniteLogic
 		/// </summary>
 		public static byte[] MatterYield = new byte[Enum.GetValues(typeof(Grid.Content)).Length - 1];//discounting Undefined
 
+		public static byte[] MatterDegradeTo = new byte[Enum.GetValues(typeof(Grid.Content)).Length - 1];//discounting Undefined
 
-		public static Dictionary<Grid.Content,Grid.Content> DegradeTo = new Dictionary<Grid.Content,Grid.Content>()
-		{
-			{	Grid.Content.Unknown, Grid.Content.Unknown },
-			{	Grid.Content.Granite, Grid.Content.Rock },
-			{	Grid.Content.Earth, Grid.Content.Clear},
-			{	Grid.Content.Grass, Grid.Content.Earth},
-			{	Grid.Content.Rock, Grid.Content.Earth},
-			{	Grid.Content.Sand, Grid.Content.Earth},
-			{	Grid.Content.Snow, Grid.Content.Clear},
-			{	Grid.Content.Foundation, Grid.Content.Rock},
-			{	Grid.Content.Road, Grid.Content.Rock},
-			{	Grid.Content.Lava, Grid.Content.Lava},
-			{	Grid.Content.Technite, Grid.Content.Technite},
-			{	Grid.Content.Water, Grid.Content.Water},
-			{	Grid.Content.Clear, Grid.Content.Clear},
-		};
 
 		/// <summary>
 		/// Byte encoding of a technite location. Used as a more compact description applied during serialization.
@@ -208,7 +193,7 @@ namespace TechniteLogic
 			/// <summary>
 			/// Destructive task to gain matter from a world volume cell.
 			/// If the targeted cell contains terrain matter, the full matter yield is awarded to the local technite, and the respective
-			/// content type degrades. Most matter types follow a chain of degradations until they are finally removed entirely (<see cref="Technite.DegradeTo"/>). If
+			/// content type degrades. Most matter types follow a chain of degradations until they are finally removed entirely (<see cref="Technite.MatterDegradeTo"/>). If
 			/// multiple technites try to consume the same terrain cell, the order is determined randomly, and the terrain cell
 			/// may be degraded several times during the same round.
 			/// If the targeted cell contains a technite of the local faction, the respective technite is destroyed, and a portion of
@@ -629,6 +614,12 @@ namespace TechniteLogic
 		/// </summary>
 		public Task LastTask { get { return nextTask; } }
 
+		public static byte[] TTLCostAtLayer { get; internal set; }
+		public static byte[] EnergyYieldAtLayer { get; internal set; }
+
+
+		public byte TTLCostPerRound { get { return TTLCostAtLayer[Location.Layer]; } }
+		public byte EnergyYieldPerRound { get { return EnergyYieldAtLayer[Location.Layer]; } }
 
 		/// <summary>
 		/// Automatically called once before the first technite state chunk is processed.

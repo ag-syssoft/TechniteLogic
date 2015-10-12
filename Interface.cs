@@ -159,6 +159,9 @@ namespace TechniteLogic
 				public float heightPerLayer;
 				public int numLayersPerStack;
 				public byte[] matterYieldByContentType;
+				public byte[] matterDegradationTable;
+				public byte[] ttlCostAtLayer,
+								energyYieldAtLayer;
 			}
 
 			public struct NodeChunk
@@ -244,11 +247,21 @@ namespace TechniteLogic
 					Out.Log(Significance.ProgramFatal, "Received matter yield vector (" + gridConfig.matterYieldByContentType.Length + ") does not match number of supported content types (" + Technite.MatterYield.Length + ").");
 					return;
 				}
+				if (Technite.MatterDegradeTo.Length != gridConfig.matterDegradationTable.Length)
+				{
+					Out.Log(Significance.ProgramFatal, "Received matter degradation vector (" + gridConfig.matterDegradationTable.Length + ") does not match number of supported content types (" + Technite.MatterDegradeTo.Length + ").");
+					return;
+				}
 
-				Technite.MatterYield = gridConfig.matterYieldByContentType;
-            }
+                Technite.MatterYield = gridConfig.matterYieldByContentType;
+				Technite.MatterDegradeTo = gridConfig.matterDegradationTable;
 
-			internal static void WorldInfo(Protocol.Client cl, Struct.WorldInfo worldInfo)
+				Technite.TTLCostAtLayer = gridConfig.ttlCostAtLayer;
+				Technite.EnergyYieldAtLayer = gridConfig.energyYieldAtLayer;
+
+		}
+
+		internal static void WorldInfo(Protocol.Client cl, Struct.WorldInfo worldInfo)
 			{
 				Grid.World.Setup((Grid.Content)worldInfo.coreContent);
 
@@ -267,7 +280,7 @@ namespace TechniteLogic
 
 		public static string CompileProtocolString()
 		{
-			return "Aquinas v1.0." + (int)ChannelID.Count;
+			return "Aquinas v1.1." + (int)ChannelID.Count;
 		}
 
 		private static void SendColorChunks(Protocol.Client cl, UInt32 offset, List<Struct.Color> list)
