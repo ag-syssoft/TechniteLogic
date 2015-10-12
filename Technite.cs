@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Logging;
+using Math3D;
 
 namespace TechniteLogic
 {
@@ -269,18 +270,49 @@ namespace TechniteLogic
 		public enum TaskResult
 		{
 			NothingToDo,
+			/// <summary>
+			/// This usually should not happen as it indicates a problem with the targeted cell or the command itself.
+			/// </summary>
 			BadCommand,
+			/// <summary>
+			/// The targeted terrain cell is not suitable for consumation. This may happen if the targeted cell contains laval,
+			/// or any contained entity is indestructible.
+			/// </summary>
 			CannotEatThis,
+			/// <summary>
+			/// The targeted cell contains something that cannot be harvested without destroying it.
+			/// This may happen if the target cell contains a live technite, a structure/vehicle, or lava. With the exception of lava, using ConsumeSurroundingCell,
+			/// instead, will yield better results.
+			/// </summary>
 			CannotGnawAtThis,
+			/// <summary>
+			/// The desired location is not valid for a new technite to spawn into
+			/// </summary>
 			CannotStandThere,
+			/// <summary>
+			/// The operation failed because the technite has insufficient resources to complete it.
+			/// </summary>
 			TechniteLacksResources,
+			/// <summary>
+			/// A transfer operation failed because the targeted cell does not contain a live technite.
+			/// </summary>
 			NoTechniteAtDestination,
+			/// <summary>
+			/// The operation has changed something, but the same command must be issued again.
+			/// This happens if the technite is explicitly or implicitly trying to consume a terrain cell that requires multiple iterations to desolve completely.
+			/// </summary>
 			MoreWorkNeeded,
 			/// <summary>
-			/// Could not complete operation in the iteration required. Most commonly this means some other technite delayed execution of the requested job
+			/// Could not complete operation in the iteration required. Most commonly this means some other technite is competing for the same target cell and has delayed the local cell too long
 			/// </summary>
 			OperationWindowMissed,
+			/// <summary>
+			/// This code is never transfered to the client but contained here for compatibility reasons. Certain commands require the executing server to retry a certain operation at a later stage.
+			/// </summary>
 			Again,
+			/// <summary>
+			/// The operation succeeded as intended.
+			/// </summary>
 			Success
 		};
 
@@ -390,6 +422,63 @@ namespace TechniteLogic
 
 		Resources			resources, lastResources;
 		TaskResult			taskResult = TaskResult.NothingToDo;
+		Color				customColor = new Color();
+		bool				usesCustomColor = false;
+
+
+		public struct Color
+		{
+			public readonly byte Red, Green, Blue;
+
+			public Color(byte red, byte green, byte blue)
+			{
+				Red = red;
+				Green = green;
+				Blue = blue;
+			}
+
+			public			Color(Vec3 color)
+			{
+				Red = ClampF(color.x);
+				Green = ClampF(color.y);
+				Blue = ClampF(color.z);
+			}
+
+			public			Color(double red, double green, double blue)
+			{
+				Red = ClampF(red);
+				Green = ClampF(green);
+				Blue = ClampF(blue);
+			}
+
+			private static byte ClampF(float f)
+			{
+				return (byte)Math.Min(Math.Max(0f, f * 255f), 255f);
+			}
+			private static byte ClampF(double f)
+			{
+				return (byte)Math.Min(Math.Max(0.0, f * 255.0), 255.0);
+			}
+
+			internal static Color Random(Random r)
+			{
+				return new Color(r.NextDouble(), r.NextDouble(), r.NextDouble());
+			}
+
+			public static implicit operator Vec3(Color c)
+			{
+				return new Vec3((float)c.Red / 255f, (float)c.Green / 255f, (float)c.Blue / 255f);
+			}
+
+		};
+
+
+		public Color		CustomColor { get { return customColor; } }
+		public bool			UsesCustomColor {  get { return usesCustomColor;  } }
+
+		public void			SetCustomColor(Color color) { customColor = color;  usesCustomColor = true; }
+		public void			UnsetCustomColor() { usesCustomColor = false; }
+
 		
 		/// <summary>
 		/// World volume location of the local technite. Readonly and unique: technites cannot move.

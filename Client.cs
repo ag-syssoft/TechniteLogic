@@ -19,7 +19,7 @@ namespace TechniteLogic
 		protected override void OnReadThreadStart()
 		{
 			Out.Log(Significance.Common, "Connected. Authenticating...");
-			Interface.ready.SendTo(this);
+			Interface.ready.SendTo(this,Interface.CompileProtocolString());
 
 		}
 
@@ -43,7 +43,7 @@ namespace TechniteLogic
                 TcpClient.Connect("localhost",port);
 				StartNoSSLSelf();
 			}
-			catch (Exception ex)
+			catch (Exception /*ex*/)
 			{
 			//	Out.Log(Significance.Important,"Unable to connect to service host on port "+port+": "+ex.ToString());
 				//Program.ShutDown(-1);

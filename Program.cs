@@ -70,7 +70,7 @@ namespace TechniteLogic
 				System.Threading.Thread.Sleep(2000);
 			}
 
-			ShutDown(0);
+			//ShutDown(0);
 		}
 
 
