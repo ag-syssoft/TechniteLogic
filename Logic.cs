@@ -183,6 +183,9 @@ namespace TechniteLogic
 				if (t.Status.TTL <= t.TTLCostPerRound)
 					t.SetCustomColor(new Technite.Color(255, 0, 0));
 
+				//this will color technites depending on their up-direction in the world:
+				//t.SetCustomColor(new Technite.Color(t.Location.UpDirection*0.5f + 0.5f));
+
 				if (t.LastTaskResult == Technite.TaskResult.MoreWorkNeeded)
 				{
 					bool skip = false;
