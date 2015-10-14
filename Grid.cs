@@ -467,7 +467,7 @@ namespace TechniteLogic
 			}
 
 			/// <summary>
-			/// Enumerates all valid/existing neighboring cells
+			/// Enumerates all valid/existing neighboring cells, including up, down, and diagonal
 			/// </summary>
 			/// <returns></returns>
 			public IEnumerable<HCellID>			GetNeighbors()
@@ -487,7 +487,7 @@ namespace TechniteLogic
 			}
 
 			/// <summary>
-			/// Enumerates all existing horizontal neighbors
+			/// Enumerates all existing horizontal neighbors, excluding up, down, and diagonal
 			/// </summary>
 			/// <returns></returns>
 			public IEnumerable<HCellID>			GetHorizontalNeighbors()
@@ -513,7 +513,22 @@ namespace TechniteLogic
 			/// </summary>
 			public HCellID BottomNeighbor { get { return new HCellID(StackID,Layer-1); } }
 
+			/// <summary>
+			/// Up-direction of the stack of this ID in world space
+			/// </summary>
 			public Vec3 UpDirection { get { return Graph.Nodes[StackID].StackDirection; } }
+
+			/// <summary>
+			/// Absolute world location of this cell ID in world space
+			/// </summary>
+			public Vec3 WorldPosition
+			{
+				get
+				{
+					var node = Graph.Nodes[StackID];
+					return node.StackBase + node.StackDirection * CellStack.HeightPerLayer;
+				}
+			}
 
 			/// <summary>
 			/// Enumerates through all valid/existing neighboring cells, using relative descriptors
