@@ -18,13 +18,18 @@ namespace TechniteLogic
 			Ready,					//c2s: String: protocol version+name
 			Error,					//s2c: String: message
 			TechniteStateChunk,     //s2c: TechniteStateChunk
-			InstructTechnites,      //s2c: <signal>
+			InstructTechnites,      //s2c: uint32: roundnumber
 			TechniteInstructionChunk, //c2s: TechniteInstructionChunk
 
 			NodeChunk,      //s2c: NodeChunk - completed before SessionBegin is sent
 			GridConfig,		//s2c: GridConfig
 			GridDelta,      //s2c: GridDelta
 			WorldInfo,		//s2c: WorldInfo
+
+			CreateControlMarker,	//s2c: ControlMarker
+			CreateGameObject,		//s2c: GameObject
+			RemoveControlMarker,	//s2c: UINT32 (compressed location)
+			RemoveGameObject,       //s2c: RemoveGameObject
 
 			RequestNextRound, //c2s: <signal>
 
@@ -43,12 +48,16 @@ namespace TechniteLogic
         {
 			ChannelMap.Register<string>((uint)ChannelID.Error, Event.Error);
 			ChannelMap.Register<Struct.TechniteStateChunk>((uint)ChannelID.TechniteStateChunk, Event.TechniteStateChunk);
-			ChannelMap.RegisterSignal((uint)ChannelID.InstructTechnites,Event.InstructTechnites);
+			ChannelMap.Register<UInt32>((uint)ChannelID.InstructTechnites,Event.InstructTechnites);
 			ChannelMap.Register<Struct.GridConfig>((uint)ChannelID.GridConfig, Event.GridConfig);
 			ChannelMap.Register<Struct.NodeChunk>((uint)ChannelID.NodeChunk, Event.NodeChunk);
 			ChannelMap.Register<Struct.GridDelta>((uint)ChannelID.GridDelta, Event.GridDelta);
 			ChannelMap.Register<Struct.WorldInfo>((uint)ChannelID.WorldInfo, Event.WorldInfo);
-        }
+			ChannelMap.Register<Struct.ControlMarker>((uint)ChannelID.CreateControlMarker, Event.CreateControlMarker);
+			ChannelMap.Register<Struct.GameObject>((uint)ChannelID.CreateGameObject, Event.CreateGameObject);
+			ChannelMap.Register<UInt32>((uint)ChannelID.RemoveControlMarker, Event.RemoveControlMarker);
+			ChannelMap.Register<Struct.GameObjectID>((uint)ChannelID.RemoveGameObject, Event.RemoveGameObject);
+		}
 
 
 		public class Struct
@@ -137,6 +146,36 @@ namespace TechniteLogic
 				public byte value;
 			}
 
+
+			public struct GameObjectID
+			{
+				public UInt32	location;
+				public bool		isGhost;
+				public Objects.GameObject.ObjectType type;
+			}
+
+			public struct GameObject
+			{
+				public GameObjectID id;
+				public UInt32	birthRound;
+				public byte		height;
+				public bool		isBroad;
+				public string	className;
+				public bool		isMine;
+			}
+
+			public struct ControlMarker
+			{
+				public UInt32	location;
+				public float	radius;
+				public byte		typeIndex;
+				public UInt32	birthRound;
+			}
+
+
+			
+
+
 			public struct GridDelta
 			{
 				public UInt32 nodeOffset,
@@ -164,6 +203,13 @@ namespace TechniteLogic
 								energyYieldAtLayer;
 			}
 
+			public struct Chunk<T>
+			{
+				public bool isLast;
+				public T[] elements;
+
+			}
+
 			public struct NodeChunk
 			{
 				public bool isLast;
@@ -180,7 +226,7 @@ namespace TechniteLogic
         public static class Event
 		{
 
-			public static void InstructTechnites(Protocol.Client cl)
+			public static void InstructTechnites(Protocol.Client cl, UInt32 roundNumber)
 			{
 				Technite.Cleanup();	//updates must be done by now
 				Logic.ProcessTechnites();
@@ -273,6 +319,26 @@ namespace TechniteLogic
 				client.ForceDisconnect();
 				return;
 			}
+
+			internal static void CreateControlMarker(Protocol.Client arg1, Struct.ControlMarker marker)
+			{
+				Objects.Add(marker);
+			}
+
+			internal static void CreateGameObject(Protocol.Client arg1, Struct.GameObject obj)
+			{
+				Objects.Add(obj);
+			}
+
+			internal static void RemoveControlMarker(Protocol.Client arg1, UInt32 markerID)
+			{
+				Objects.RemoveControlMarker(markerID);
+			}
+
+			internal static void RemoveGameObject(Protocol.Client arg1, Struct.GameObjectID objID)
+			{
+				Objects.Remove(objID);
+			}
 		}
 
 		static List<Struct.Color> colorBuffer = new List<Struct.Color>();
@@ -280,7 +346,7 @@ namespace TechniteLogic
 
 		public static string CompileProtocolString()
 		{
-			return "Aquinas v1.1." + (int)ChannelID.Count;
+			return "Aquinas v1.2." + (int)ChannelID.Count;
 		}
 
 		private static void SendColorChunks(Protocol.Client cl, UInt32 offset, List<Struct.Color> list)

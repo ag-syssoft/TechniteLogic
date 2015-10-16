@@ -66,6 +66,7 @@ namespace TechniteLogic
 
 				Grid.FlushAllData();
 				Technite.FlushAllData();
+				Objects.FlushAllData();
 
 				System.Threading.Thread.Sleep(2000);
 			}
