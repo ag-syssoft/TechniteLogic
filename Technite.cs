@@ -41,33 +41,36 @@ namespace TechniteLogic
 		/// </summary>
 		public struct CompressedLocation
 		{
-			private readonly UInt32		data;
+			private readonly UInt32		Data;
 
-			public UInt32	Data { get { return data; } }
+//			public UInt32	Data { get { return Data; } }
 
 			public CompressedLocation(UInt32 data)
 			{
-				this.data = data;
+				Data = data;
 			}
 
-			public	Grid.HCellID	GetU()
+			public	Grid.CellID	CellID
 			{
-				return new Grid.HCellID(data >> 8, (int)GetLayer());
+				get
+				{
+					return new Grid.CellID(GetStackID(), (int)GetLayer());
+				}
 			}
 
 
 			public uint		GetLayer()
 			{
-				return data & 0xFF;
+				return Data & 0xFF;
 			}
 		
 			public uint	GetStackID()
 			{
-				return data >> 8;
+				return Data >> 8;
 			}
 
 
-			public static implicit operator CompressedLocation(Grid.HCellID cellID)
+			public static implicit operator CompressedLocation(Grid.CellID cellID)
 			{
 				return new CompressedLocation((cellID.StackID << 8) | (uint)cellID.Layer );
 			}
@@ -167,7 +170,7 @@ namespace TechniteLogic
 		/// </summary>
 		/// <param name="location">Location to look at</param>
 		/// <returns>Technite reference, if a technite was found in the given location, null otherwise</returns>
-		public static Technite Find(Grid.HCellID location)
+		public static Technite Find(Grid.CellID location)
 		{
 			Technite rs;
 			if (map.TryGetValue(location, out rs))
@@ -468,7 +471,7 @@ namespace TechniteLogic
 		/// <summary>
 		/// World volume location of the local technite. Readonly and unique: technites cannot move.
 		/// </summary>
-		public readonly Grid.HCellID	Location;
+		public readonly Grid.CellID	Location;
 
 		/// <summary>
 		/// Retrieves the current resource fill level of the local technite.
@@ -542,7 +545,7 @@ namespace TechniteLogic
 		public void SetNextTask(Task t, Grid.RelativeCell target, byte parameter = 0)
 		{
 
-			Grid.HCellID absoluteTarget = Location + target;
+			Grid.CellID absoluteTarget = Location + target;
 			if (!absoluteTarget.IsValid)
 				throw new TaskException(this,"Trying to set invalid relative target "+target+". Task not set.");
 
@@ -563,7 +566,7 @@ namespace TechniteLogic
 			taskTarget = target;
 		}
 
-		protected /**/				Technite(Grid.HCellID loc)
+		protected /**/				Technite(Grid.CellID loc)
 		{
 			Location = loc;
 		}
@@ -592,7 +595,7 @@ namespace TechniteLogic
 
 
 
-		private static Dictionary<Grid.HCellID,Technite>	map = new Dictionary<Grid.HCellID,Technite>();
+		private static Dictionary<Grid.CellID,Technite>	map = new Dictionary<Grid.CellID,Technite>();
 
 		private static List<Technite>	all = new List<Technite>(), check = new List<Technite>();
 
@@ -647,7 +650,7 @@ namespace TechniteLogic
 		/// <summary>
 		/// Overwritable constructor for new technites, in case derived classes are desired
 		/// </summary>
-		public static Func<Grid.HCellID, Technite>	createNew = (loc) => new Technite(loc);
+		public static Func<Grid.CellID, Technite>	createNew = (loc) => new Technite(loc);
 
 
 		private static int createdThisRound = 0,
@@ -660,7 +663,7 @@ namespace TechniteLogic
 		/// <param name="state"></param>
 		public static void CreateOrUpdate(Interface.Struct.TechniteState state)
 		{
-			Grid.HCellID loc = new CompressedLocation(state.location).GetU();
+			Grid.CellID loc = new CompressedLocation(state.location).CellID;
 
 			Grid.Content cellContent = Grid.World.CellStacks[loc.StackID].volumeCell[loc.Layer].content;
 
@@ -771,7 +774,7 @@ namespace TechniteLogic
 			};
 		}
 
-		internal static bool EnoughSupportHere(Grid.HCellID cell)
+		internal static bool EnoughSupportHere(Grid.CellID cell)
 		{
 			if (Grid.IsSolid(cell.BottomNeighbor.BottomNeighbor))
 				return true;

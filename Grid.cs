@@ -62,7 +62,7 @@ namespace TechniteLogic
 
 			public static Node[] Nodes { get; private set; }
 
-			public static Vec3 GetLocation(HCellID loc)
+			public static Vec3 GetLocation(CellID loc)
 			{
 				return Nodes[loc.StackID].GetLocation(loc.Layer);
 			}
@@ -120,7 +120,7 @@ namespace TechniteLogic
 		/// <param name="location">Location to check the content of</param>
 		/// <param name="includeTechnites">Set true to also consider technites as solid</param>
 		/// <returns>True, if the determined content type is solid enough to support a technite, false otherwise</returns>
-		public static bool IsSolid(HCellID location, bool includeTechnites=false)
+		public static bool IsSolid(CellID location, bool includeTechnites=false)
 		{
 			return IsSolid(World.GetCell(location).content,includeTechnites);
 		}
@@ -283,7 +283,7 @@ namespace TechniteLogic
 			/// </summary>
 			/// <param name="cell"></param>
 			/// <returns></returns>
-			public static CellStack.Cell GetCell(HCellID cell)
+			public static CellStack.Cell GetCell(CellID cell)
 			{
 				if (cell.Layer < 0)
 					return FloorCell;
@@ -395,11 +395,11 @@ namespace TechniteLogic
 				return "->" + NeighborIndex + " |" + HeightDelta;
 			}
 
-			public static Grid.HCellID operator+(Grid.HCellID cell, RelativeCell t)
+			public static Grid.CellID operator+(Grid.CellID cell, RelativeCell t)
 			{
 				if (t.NeighborIndex == ThisStackNeighborIndex)
-					return new Grid.HCellID(cell.StackID, cell.Layer + t.HeightDelta);
-				return new Grid.HCellID(Grid.Graph.Nodes[cell.StackID].Neighbors[t.NeighborIndex], cell.Layer + t.HeightDelta);
+					return new Grid.CellID(cell.StackID, cell.Layer + t.HeightDelta);
+				return new Grid.CellID(Grid.Graph.Nodes[cell.StackID].Neighbors[t.NeighborIndex], cell.Layer + t.HeightDelta);
 			}
 
 			public static readonly RelativeCell Invalid = new RelativeCell(uint.MaxValue, 0);
@@ -411,7 +411,7 @@ namespace TechniteLogic
 		/// <summary>
 		/// Volume cell identifier using (unsigned) integers to describe the layer (0..CellStack.LayersPerStack-1) this cell resides on
 		/// </summary>
-		public struct HCellID
+		public struct CellID
 		{
 			public readonly uint StackID;
 
@@ -421,9 +421,9 @@ namespace TechniteLogic
 			/// </summary>
 			public readonly int Layer;
 
-			public static readonly HCellID Invalid = new HCellID(uint.MaxValue,int.MaxValue);
+			public static readonly CellID Invalid = new CellID(uint.MaxValue,int.MaxValue);
 
-			public HCellID(uint stackID, int layer)
+			public CellID(uint stackID, int layer)
 			{
 				StackID = stackID;
 				Layer = layer;
@@ -446,17 +446,17 @@ namespace TechniteLogic
 
 			public override bool Equals(object obj)
 			{
-				if (!(obj is HCellID))
+				if (!(obj is CellID))
 					return false;
-				return ((HCellID)obj) == this;
+				return ((CellID)obj) == this;
 			}
 
-			public static bool operator==(HCellID a, HCellID b)
+			public static bool operator==(CellID a, CellID b)
 			{
 				return a.StackID == b.StackID && a.Layer == b.Layer;
 			}
 
-			public static bool operator !=(HCellID a, HCellID b)
+			public static bool operator !=(CellID a, CellID b)
 			{
 				return a.StackID != b.StackID || a.Layer != b.Layer;
 			}
@@ -470,7 +470,7 @@ namespace TechniteLogic
 			/// Enumerates all valid/existing neighboring cells, including up, down, and diagonal
 			/// </summary>
 			/// <returns></returns>
-			public IEnumerable<HCellID>			GetNeighbors()
+			public IEnumerable<CellID>			GetNeighbors()
 			{
 				int lower = Layer > 0 ? Layer-1 : Layer,
 					upper = Layer + 1 < CellStack.LayersPerStack ? Layer+1 : Layer;
@@ -479,10 +479,10 @@ namespace TechniteLogic
 				{
 					foreach (var n in neighbors)
 					{
-						yield return new HCellID(n, layer);
+						yield return new CellID(n, layer);
 					}
 					if (layer != Layer)
-						yield return new HCellID(StackID,layer);
+						yield return new CellID(StackID,layer);
 				}
 			}
 
@@ -490,12 +490,12 @@ namespace TechniteLogic
 			/// Enumerates all existing horizontal neighbors, excluding up, down, and diagonal
 			/// </summary>
 			/// <returns></returns>
-			public IEnumerable<HCellID>			GetHorizontalNeighbors()
+			public IEnumerable<CellID>			GetHorizontalNeighbors()
 			{
 				var neighbors = Grid.Graph.Nodes[StackID].Neighbors;
 				foreach (var n in neighbors)
 				{
-					yield return new HCellID(n, Layer);
+					yield return new CellID(n, Layer);
 				}
 			}
 
@@ -504,14 +504,14 @@ namespace TechniteLogic
 			/// Use IsValid to determine the validity if necessary.
 			/// World.GetCell will always work with this value, however
 			/// </summary>
-			public HCellID	TopNeighbor { get { return new HCellID(StackID,Layer+1); } }
+			public CellID	TopNeighbor { get { return new CellID(StackID,Layer+1); } }
 
 			/// <summary>
 			/// Describes the neighbor cell directly beneath this cell. Note that this cell might not be part of the volume.
 			/// Use IsValid to determine the validity if necessary.
 			/// World.GetCell will always work with this value, however
 			/// </summary>
-			public HCellID BottomNeighbor { get { return new HCellID(StackID,Layer-1); } }
+			public CellID BottomNeighbor { get { return new CellID(StackID,Layer-1); } }
 
 			/// <summary>
 			/// Up-direction of the stack of this ID in world space

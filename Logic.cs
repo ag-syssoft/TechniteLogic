@@ -24,13 +24,13 @@ namespace TechniteLogic
 			/// <param name="location">Location to evaluate the neighborhood of</param>
 			/// <param name="f">Evaluation function. Must return 0/NotAChoice if not applicable, and >1 otherwise. Higher values indicate higher probability</param>
 			/// <returns>Chocen relative cell, or Grid.RelativeCell.Invalid if none was found.</returns>
-			public static Grid.RelativeCell EvaluateChoices(Grid.HCellID location, Func<Grid.RelativeCell, Grid.HCellID, int> f)
+			public static Grid.RelativeCell EvaluateChoices(Grid.CellID location, Func<Grid.RelativeCell, Grid.CellID, int> f)
 			{
 				options.Clear();
 				int total = 0;
 				foreach (var n in location.GetRelativeNeighbors())
 				{
-					Grid.HCellID cellLocation = location + n;
+					Grid.CellID cellLocation = location + n;
 					int q = f(n, cellLocation);
 					if (q > 0)
 					{
@@ -60,7 +60,7 @@ namespace TechniteLogic
 			/// <param name="location"></param>
 			/// <param name="f">Evaluation function. Must return 0/NotAChoice if not applicable, and >1 otherwise. Higher values indicate higher probability</param>
 			/// <returns>Chocen relative cell, or Grid.RelativeCell.Invalid if none was found.</returns>
-			public static Grid.RelativeCell EvaluateNeighborTechnites(Grid.HCellID location, Func<Grid.RelativeCell, Technite, int> f)
+			public static Grid.RelativeCell EvaluateNeighborTechnites(Grid.CellID location, Func<Grid.RelativeCell, Technite, int> f)
 			{
 				return EvaluateChoices(location, (relative, cell) =>
 				{
@@ -84,7 +84,7 @@ namespace TechniteLogic
 			/// </summary>
 			/// <param name="location"></param>
 			/// <returns></returns>
-			public static Grid.RelativeCell GetLitOrUpperTechnite(Grid.HCellID location)
+			public static Grid.RelativeCell GetLitOrUpperTechnite(Grid.CellID location)
 			{
 				return EvaluateNeighborTechnites(location, (relative, technite) =>
 				{
@@ -102,7 +102,7 @@ namespace TechniteLogic
 			/// </summary>
 			/// <param name="location"></param>
 			/// <returns></returns>
-			public static Grid.RelativeCell GetUnlitOrLowerTechnite(Grid.HCellID location)
+			public static Grid.RelativeCell GetUnlitOrLowerTechnite(Grid.CellID location)
 			{
 				return EvaluateNeighborTechnites(location, (relative, technite) =>
 				{
@@ -120,7 +120,7 @@ namespace TechniteLogic
 			/// </summary>
 			/// <param name="location"></param>
 			/// <returns></returns>
-			public static Grid.RelativeCell GetFoodChoice(Grid.HCellID location)
+			public static Grid.RelativeCell GetFoodChoice(Grid.CellID location)
 			{
 				return EvaluateChoices(location, (relative, cell) =>
 				{
@@ -138,7 +138,7 @@ namespace TechniteLogic
 			/// </summary>
 			/// <param name="location"></param>
 			/// <returns></returns>
-			public static Grid.RelativeCell GetSplitTarget(Grid.HCellID location)
+			public static Grid.RelativeCell GetSplitTarget(Grid.CellID location)
 			{
 				return EvaluateChoices(location, (relative, cell) =>
 				{
