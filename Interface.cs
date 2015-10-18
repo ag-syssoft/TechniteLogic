@@ -151,7 +151,7 @@ namespace TechniteLogic
 			{
 				public UInt32	location;
 				public bool		isGhost;
-				public GameObjects.GameObject.ObjectType type;
+				public Objects.GameObject.ObjectType type;
 			}
 
 			public struct GameObject
@@ -229,9 +229,7 @@ namespace TechniteLogic
 			public static void InstructTechnites(Protocol.Client cl, UInt32 roundNumber)
 			{
 				Technite.Cleanup();	//updates must be done by now
-				Session.roundNumber = roundNumber;
 				Logic.ProcessTechnites();
-
 
 				SendColorState(cl);
 
@@ -324,22 +322,22 @@ namespace TechniteLogic
 
 			internal static void CreateControlMarker(Protocol.Client arg1, Struct.ControlMarker marker)
 			{
-				GameObjects.Add(marker);
+				Objects.Add(marker);
 			}
 
 			internal static void CreateGameObject(Protocol.Client arg1, Struct.GameObject obj)
 			{
-				GameObjects.Add(obj);
+				Objects.Add(obj);
 			}
 
 			internal static void RemoveControlMarker(Protocol.Client arg1, UInt32 markerID)
 			{
-				GameObjects.RemoveControlMarker(markerID);
+				Objects.RemoveControlMarker(markerID);
 			}
 
 			internal static void RemoveGameObject(Protocol.Client arg1, Struct.GameObjectID objID)
 			{
-				GameObjects.Remove(objID);
+				Objects.Remove(objID);
 			}
 		}
 

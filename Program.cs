@@ -66,7 +66,7 @@ namespace TechniteLogic
 
 				Grid.FlushAllData();
 				Technite.FlushAllData();
-				GameObjects.FlushAllData();
+				Objects.FlushAllData();
 
 				System.Threading.Thread.Sleep(2000);
 			}
