@@ -7,7 +7,7 @@ using Logging;
 
 namespace TechniteLogic
 {
-	public static class Objects
+	public static class GameObjects
 	{
 		/// <summary>
 		/// Known player object (building, vehicle, or satellite) in the world.
@@ -185,7 +185,7 @@ namespace TechniteLogic
 		public static List<ControlMarker> ControlMarkers { get; private set; }
 
 
-		static Objects()
+		static GameObjects()
 		{
 			All = new List<GameObject>();
 			ControlMarkers = new List<ControlMarker>();
