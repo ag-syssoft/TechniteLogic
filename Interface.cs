@@ -229,7 +229,9 @@ namespace TechniteLogic
 			public static void InstructTechnites(Protocol.Client cl, UInt32 roundNumber)
 			{
 				Technite.Cleanup();	//updates must be done by now
+				Session.roundNumber = roundNumber;
 				Logic.ProcessTechnites();
+
 
 				SendColorState(cl);
 

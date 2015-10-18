@@ -190,7 +190,7 @@ namespace TechniteLogic
 					float r02 = r0*r0,
 							r12 = r1*r1;
 					int atRange = 2;
-					foreach (var obj in TechniteLogic.GameObjects.All)
+					foreach (var obj in Objects.AllGameObjects)
 					{
 						float d2 = Vec.QuadraticDistance(obj.ID.Location.WorldPosition,t.Location.WorldPosition);
 						if (d2 < r12)

@@ -186,20 +186,20 @@ namespace TechniteLogic
 
 
 
-		public static List<GameObject> All { get; private set; }
-		public static List<ControlMarker> ControlMarkers { get; private set; }
+		public static List<GameObject> AllGameObjects { get; private set; }
+		public static List<ControlMarker> AllControlMarkers { get; private set; }
 
 
 		static Objects()
 		{
-			All = new List<GameObject>();
-			ControlMarkers = new List<ControlMarker>();
+			AllGameObjects = new List<GameObject>();
+			AllControlMarkers = new List<ControlMarker>();
 		}
 
 		public static void		FlushAllData()
 		{
-			All.Clear();
-			ControlMarkers.Clear();
+			AllGameObjects.Clear();
+			AllControlMarkers.Clear();
 		}
 
 
@@ -207,19 +207,19 @@ namespace TechniteLogic
 		{
 			GameObject nobj = new GameObject(obj);
 			Out.Log(Significance.Low, "Added game object " + nobj);
-			All.Add(nobj);
+			AllGameObjects.Add(nobj);
 		}
 
 		public static void Remove(Interface.Struct.GameObjectID obj)
 		{
 			GameObject.ObjectID id = new GameObject.ObjectID(obj);
 
-			for (int i = 0; i < All.Count; i++)
+			for (int i = 0; i < AllGameObjects.Count; i++)
 			{
-				if (All[i].ID == id)
+				if (AllGameObjects[i].ID == id)
 				{
 					Out.Log(Significance.Low, "Removed game object " + id);
-					All.RemoveAt(i);
+					AllGameObjects.RemoveAt(i);
 					return;
 				}
 			}
@@ -230,19 +230,19 @@ namespace TechniteLogic
 		{
 			ControlMarker nmarker = new ControlMarker(marker);
             Out.Log(Significance.Low, "Added control marker " + nmarker);
-			ControlMarkers.Add(nmarker);
+			AllControlMarkers.Add(nmarker);
 		}
 
 		public static void RemoveControlMarker(UInt32 markerLocation)
 		{
 			Grid.CellID id = new Technite.CompressedLocation(markerLocation).CellID;
 
-			for (int i = 0; i < ControlMarkers.Count; i++)
+			for (int i = 0; i < AllControlMarkers.Count; i++)
 			{
-				if (ControlMarkers[i].Location == id)
+				if (AllControlMarkers[i].Location == id)
 				{
 					Out.Log(Significance.Low, "Removed control marker " + id);
-					ControlMarkers.RemoveAt(i);
+					AllControlMarkers.RemoveAt(i);
 					return;
 				}
 			}
