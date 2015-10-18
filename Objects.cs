@@ -117,6 +117,8 @@ namespace TechniteLogic
 				ClassName = other.className;
 			}
 
+			public int Age { get { return (int)(Session.roundNumber - BirthRound); } }
+
 			public override bool Equals(object obj)
 			{
 				return obj is GameObject && ((GameObject)obj == this);
@@ -136,7 +138,7 @@ namespace TechniteLogic
 			}
 			public override string ToString()
 			{
-				return ID + " [born " + BirthRound + "], class=" + ClassName;
+				return (IsMine ? "My ":"")+ ID + " [age " + Age + "], class=" + ClassName;
 			}
 		}
 
@@ -164,6 +166,9 @@ namespace TechniteLogic
 			/// </summary>
 			public readonly UInt32			BirthRound;
 
+			public int Age { get { return (int)(Session.roundNumber - BirthRound); } }
+
+
 			public ControlMarker(Interface.Struct.ControlMarker other)
 			{
 				BirthRound = other.birthRound;
@@ -174,7 +179,7 @@ namespace TechniteLogic
 
 			public override string ToString()
 			{
-				return Location + " [born " + BirthRound + "], type=" + TypeIndex + ", Radius=" + Radius;
+				return Location + " [age " + Age + "], type=" + TypeIndex + ", Radius=" + Radius;
 			}
 
 		}
