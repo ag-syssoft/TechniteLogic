@@ -32,6 +32,11 @@ namespace Logging
 
 		}
 
+		static Out()
+		{
+			System.IO.File.Delete("execution.log");
+		}
+
 		public static void Log(string clientName, string accountID, string accountName, Significance significance, String message)
 		{
 			string printLine, fileLine;
