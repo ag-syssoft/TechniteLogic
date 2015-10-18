@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Logging;
+using Math3D;
 
 namespace TechniteLogic
 {
@@ -182,7 +183,34 @@ namespace TechniteLogic
 
 				if (t.Status.TTL <= t.TTLCostPerRound)
 					t.SetCustomColor(new Technite.Color(255, 0, 0));
-
+				else
+				{
+					float r0 = Grid.CellStack.HeightPerLayer * 2f;
+					float r1 = r0 + Grid.CellStack.HeightPerLayer * 2f;
+					float r02 = r0*r0,
+							r12 = r1*r1;
+					int atRange = 2;
+					foreach (var obj in TechniteLogic.GameObjects.All)
+					{
+						float d2 = Vec.QuadraticDistance(obj.ID.Location.WorldPosition,t.Location.WorldPosition);
+						if (d2 < r12)
+						{
+							atRange = 1;
+							if (d2 < r02)
+							{
+								atRange = 0;
+								break;
+							}
+						}
+					}
+					//if (atRange == 0)
+					//	t.SetCustomColor(new Technite.Color(255,0,0));
+					//else
+						if (atRange == 1)
+							t.SetCustomColor(new Technite.Color(255, 255, 0));
+						else
+							t.UnsetCustomColor();
+				}
 				//this will color technites depending on their up-direction in the world:
 				//t.SetCustomColor(new Technite.Color(t.Location.UpDirection*0.5f + 0.5f));
 
