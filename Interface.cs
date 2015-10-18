@@ -199,7 +199,7 @@ namespace TechniteLogic
 				public int numLayersPerStack;
 				public byte[] matterYieldByContentType;
 				public byte[] matterDegradationTable;
-				public byte[] ttlCostAtLayer,
+				public byte[] initialTTLAtLayer,
 								energyYieldAtLayer;
 			}
 
@@ -304,7 +304,7 @@ namespace TechniteLogic
                 Technite.MatterYield = gridConfig.matterYieldByContentType;
 				Technite.MatterDegradeTo = gridConfig.matterDegradationTable;
 
-				Technite.TTLCostAtLayer = gridConfig.ttlCostAtLayer;
+				Technite.InitialTTLAtLayer = gridConfig.initialTTLAtLayer;
 				Technite.EnergyYieldAtLayer = gridConfig.energyYieldAtLayer;
 
 		}
@@ -348,7 +348,7 @@ namespace TechniteLogic
 
 		public static string CompileProtocolString()
 		{
-			return "Aquinas v1.2." + (int)ChannelID.Count;
+			return "Aquinas v1.3." + (int)ChannelID.Count;
 		}
 
 		private static void SendColorChunks(Protocol.Client cl, UInt32 offset, List<Struct.Color> list)

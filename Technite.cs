@@ -625,11 +625,13 @@ namespace TechniteLogic
 		/// </summary>
 		public Task LastTask { get { return nextTask; } }
 
-		public static byte[] TTLCostAtLayer { get; internal set; }
+		/// <summary>
+		/// The TTL value assigned to new technites on that layer.
+		/// </summary>
+		public static byte[] InitialTTLAtLayer { get; internal set; }
 		public static byte[] EnergyYieldAtLayer { get; internal set; }
 
 
-		public byte TTLCostPerRound { get { return TTLCostAtLayer[Location.Layer]; } }
 		public byte EnergyYieldPerRound { get { return EnergyYieldAtLayer[Location.Layer]; } }
 
 		/// <summary>
