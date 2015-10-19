@@ -206,8 +206,8 @@ namespace TechniteLogic
 					//if (atRange == 0)
 					//	t.SetCustomColor(new Technite.Color(255,0,0));
 					//else
-						if (atRange == 1)
-							t.SetCustomColor(new Technite.Color(255, 255, 0));
+						if (atRange == 0)
+							t.SetCustomColor(new Technite.Color(32, 32, 32));
 						else
 							t.UnsetCustomColor();
 				}
@@ -247,7 +247,9 @@ namespace TechniteLogic
 					}
 				}
 				else
-					if (t.CanGnawAt)
+				{
+					bool waitForSplitEnergy = t.Status.Lit && t.CurrentResources.Matter >= Technite.SplitMatterCost;
+                    if (t.CanGnawAt && !waitForSplitEnergy)
 					{
 						Grid.RelativeCell target = Helper.GetFoodChoice(t.Location);
 						if (target != Grid.RelativeCell.Invalid)
@@ -260,12 +262,12 @@ namespace TechniteLogic
 							tryTransfer = true;
 						}
 					}
-				else
-				{
-					//Out.Log(Significance.Unusual, "Insufficient resources to do anything");
-					tryTransfer = t.CurrentResources != Technite.Resources.Zero;
+					else
+					{
+						//Out.Log(Significance.Unusual, "Insufficient resources to do anything");
+						tryTransfer = !waitForSplitEnergy && t.CurrentResources != Technite.Resources.Zero;
+					}
 				}
-
 				if (tryTransfer)
 				{
 					Grid.RelativeCell target = Grid.RelativeCell.Invalid;

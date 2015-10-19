@@ -544,7 +544,7 @@ namespace TechniteLogic
 		/// <param name="parameter">Task parameter. What the parameter does depends on the task executed.</param>
 		public void SetNextTask(Task t, Grid.RelativeCell target, byte parameter = 0)
 		{
-
+			//Out.Log(Significance.Low, this + "->" + t + " @" + target);
 			Grid.CellID absoluteTarget = Location + target;
 			if (!absoluteTarget.IsValid)
 				throw new TaskException(this,"Trying to set invalid relative target "+target+". Task not set.");
