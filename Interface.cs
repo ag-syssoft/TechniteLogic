@@ -15,20 +15,21 @@ namespace TechniteLogic
 		public enum ChannelID
 		{
 			Unused,
-			Ready,					//c2s: String: protocol version+name
-			Error,					//s2c: String: message
+			Ready,                  //c2s: String: protocol version+name
+			Error,                  //s2c: String: message
 			TechniteStateChunk,     //s2c: TechniteStateChunk
-			InstructTechnites,      //s2c: uint32: roundnumber
+			InstructTechnites,      //s2c: InstructTechnites
 			TechniteInstructionChunk, //c2s: TechniteInstructionChunk
 
 			NodeChunk,      //s2c: NodeChunk - completed before SessionBegin is sent
-			GridConfig,		//s2c: GridConfig
+			GridConfig,     //s2c: GridConfig
 			GridDelta,      //s2c: GridDelta
-			WorldInfo,		//s2c: WorldInfo
+			WorldInfo,      //s2c: WorldInfo
+			BeginSession,   //s2c: BeginSession
 
-			CreateControlMarker,	//s2c: ControlMarker
-			CreateGameObject,		//s2c: GameObject
-			RemoveControlMarker,	//s2c: UINT32 (compressed location)
+			CreateControlMarker,    //s2c: ControlMarker
+			CreateGameObject,       //s2c: GameObject
+			RemoveControlMarker,    //s2c: UINT32 (compressed location)
 			RemoveGameObject,       //s2c: RemoveGameObject
 
 			RequestNextRound, //c2s: <signal>
@@ -48,7 +49,7 @@ namespace TechniteLogic
         {
 			ChannelMap.Register<string>((uint)ChannelID.Error, Event.Error);
 			ChannelMap.Register<Struct.TechniteStateChunk>((uint)ChannelID.TechniteStateChunk, Event.TechniteStateChunk);
-			ChannelMap.Register<UInt32>((uint)ChannelID.InstructTechnites,Event.InstructTechnites);
+			ChannelMap.Register<Struct.InstructTechnites>((uint)ChannelID.InstructTechnites,Event.InstructTechnites);
 			ChannelMap.Register<Struct.GridConfig>((uint)ChannelID.GridConfig, Event.GridConfig);
 			ChannelMap.Register<Struct.NodeChunk>((uint)ChannelID.NodeChunk, Event.NodeChunk);
 			ChannelMap.Register<Struct.GridDelta>((uint)ChannelID.GridDelta, Event.GridDelta);
@@ -57,6 +58,8 @@ namespace TechniteLogic
 			ChannelMap.Register<Struct.GameObject>((uint)ChannelID.CreateGameObject, Event.CreateGameObject);
 			ChannelMap.Register<UInt32>((uint)ChannelID.RemoveControlMarker, Event.RemoveControlMarker);
 			ChannelMap.Register<Struct.GameObjectID>((uint)ChannelID.RemoveGameObject, Event.RemoveGameObject);
+			ChannelMap.Register<Struct.BeginSession>((uint)ChannelID.BeginSession, Event.BeginSession);
+
 		}
 
 
@@ -173,7 +176,11 @@ namespace TechniteLogic
 			}
 
 
-			
+			public struct InstructTechnites
+			{
+				public UInt32 roundNumber,
+								techniteSubRoundNumber;
+			}
 
 
 			public struct GridDelta
@@ -216,20 +223,31 @@ namespace TechniteLogic
 				public GridNode[] nodes;
 			}
 
+			public struct BeginSession
+			{
+				public string factionUUID;
+				public byte techniteGridID;
+
+				public UInt32 roundNumber,
+								techniteSubRoundNumber;
+			}
+
 			//public struct SessionBegin
 			//{
 			//	public GridConfig grid;
 			//	public byte myFactionGridID;
 			//}
-        }
+		}
 
         public static class Event
 		{
 
-			public static void InstructTechnites(Protocol.Client cl, UInt32 roundNumber)
+			public static void InstructTechnites(Protocol.Client cl, Struct.InstructTechnites instruct)
 			{
 				Technite.Cleanup();	//updates must be done by now
-				Session.roundNumber = roundNumber;
+				Session.roundNumber = instruct.roundNumber;
+				Session.techniteSubRoundNumber = instruct.techniteSubRoundNumber;
+				Out.Log(Significance.Common, "Instructing technites in round " + Session.roundNumber+"/"+Session.techniteSubRoundNumber);
 				Logic.ProcessTechnites();
 
 
@@ -341,6 +359,11 @@ namespace TechniteLogic
 			{
 				Objects.Remove(objID);
 			}
+
+			internal static void BeginSession(Protocol.Client arg1, Struct.BeginSession session)
+			{
+				Session.Begin(session);
+			}
 		}
 
 		static List<Struct.Color> colorBuffer = new List<Struct.Color>();
@@ -348,7 +371,7 @@ namespace TechniteLogic
 
 		public static string CompileProtocolString()
 		{
-			return "Aquinas v1.3." + (int)ChannelID.Count;
+			return "Aquinas v1.4." + (int)ChannelID.Count;
 		}
 
 		private static void SendColorChunks(Protocol.Client cl, UInt32 offset, List<Struct.Color> list)
