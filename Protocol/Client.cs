@@ -77,6 +77,8 @@ namespace Protocol
 				while (tcpClient != null)
 				{
 					int read = ioStream.Read(buffer, 0, tcpClient.ReceiveBufferSize);
+					if (read <= 0)
+						break;
 					queue.Append(buffer, read);
 
 					do
