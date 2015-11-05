@@ -188,7 +188,6 @@ namespace TechniteLogic
 				public UInt32 nodeOffset,
 								nodeCount;
 				public GridDeltaBlock[] contentBlocks,
-										structureCountBlocks,
 										techniteFactionBlocks;
 
 			}
@@ -371,7 +370,7 @@ namespace TechniteLogic
 
 		public static string CompileProtocolString()
 		{
-			return "Aquinas v1.4." + (int)ChannelID.Count;
+			return "Aquinas v1.5." + (int)ChannelID.Count;
 		}
 
 		private static void SendColorChunks(Protocol.Client cl, UInt32 offset, List<Struct.Color> list)

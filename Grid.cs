@@ -173,13 +173,12 @@ namespace TechniteLogic
 			public CellStack()
 			{
 				for (int i = 0; i < volumeCell.Length; i++)
-					volumeCell[i] = new Cell() { content = Content.Undefined, structureCount = 0, techniteFactionID = 0 };
+					volumeCell[i] = new Cell() { content = Content.Undefined, techniteFactionID = 0 };
 			}
 
             public struct Cell
             {
 				public Content content;
-				public byte structureCount;
 				public byte techniteFactionID;
 
 
@@ -187,12 +186,6 @@ namespace TechniteLogic
 				{
 					if (value != 0 || content == Content.Undefined)
 						content = (Content)(value);
-				}
-
-				internal void ApplyStructureDelta(byte value)
-				{
-					if (value != 0)
-						structureCount = (byte)(value - 1);
 				}
 
 				internal void ApplyTechniteDelta(byte value)
@@ -265,7 +258,6 @@ namespace TechniteLogic
 
 
 				ApplyDeltaField(delta, delta.contentBlocks, (stack, layer, value) => stack.volumeCell[layer].ApplyContentDelta(value));
-				ApplyDeltaField(delta, delta.structureCountBlocks, (stack, layer, value) => stack.volumeCell[layer].ApplyStructureDelta(value));
 				ApplyDeltaField(delta, delta.techniteFactionBlocks, (stack, layer, value) => stack.volumeCell[layer].ApplyTechniteDelta(value));
 
 			}
