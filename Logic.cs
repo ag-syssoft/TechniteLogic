@@ -159,6 +159,7 @@ namespace TechniteLogic
 			}
 		}
 
+		private static Random random = new Random();
 
 		/// <summary>
 		/// Central logic method. Invoked once per round to determine the next task for each technite.
@@ -231,6 +232,11 @@ namespace TechniteLogic
 						//Out.Log(Significance.Common, "Still busy doing last job ("+t.LastTask+"). Allowing technite to continue");
 						continue;
 					}
+				}
+				if (t.CurrentResources.Energy > 9 && random.NextDouble() < 0.1)
+				{
+					t.SetNextTask(Technite.Task.Scan, Grid.RelativeCell.Self, t.CurrentResources.Energy);
+					continue;
 				}
 				bool tryTransfer = false;
 				if (t.CanSplit)

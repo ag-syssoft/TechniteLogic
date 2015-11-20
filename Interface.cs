@@ -370,7 +370,7 @@ namespace TechniteLogic
 
 		public static string CompileProtocolString()
 		{
-			return "Aquinas v1.5." + (int)ChannelID.Count;
+			return "Aquinas v1.6." + (int)ChannelID.Count;
 		}
 
 		private static void SendColorChunks(Protocol.Client cl, UInt32 offset, List<Struct.Color> list)
