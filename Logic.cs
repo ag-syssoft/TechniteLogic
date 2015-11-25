@@ -173,10 +173,12 @@ namespace TechniteLogic
 			//			bool slightlyVerbose = Technite.All.Count() < 20;
 
 			int at = 0;
+            Console.WriteLine();
 			foreach (Technite t in Technite.All)
 			{
 				at++;
-				if (at < 20)
+                Console.WriteLine("Die höhe dieses Technites: " + t.Location.Layer);
+                if (at < 20)
 					Out.Log(Significance.Low, "Processing "+t);
 				else
 					if (at == 20)
