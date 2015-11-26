@@ -167,11 +167,54 @@ namespace TechniteLogic
 		public static void ProcessTechnites()
 		{
             Out.Log(Significance.Common, "ProcessTechnites()");
+            int spielphase = 0;
 
             foreach (Technite t in Technite.All)
             {
-                Console.WriteLine("test");
+                switch (spielphase)
+                {
+                    case 0: //Wenn spawn unter der Erde -> Hochfressen
+                        Grid.RelativeCell target = Helper.GetSplitTarget(t.Location.TopNeighbor);
+                        //Grid.RelativeCell target = new Grid.RelativeCell(t.Location.TopNeighbor.StackID, 1);
+                        //if (target != Grid.RelativeCell.Invalid)
+                        
+                        //{
+                        //t.SetNextTask(Technite.Task.GrowTo, target);
+                        //}
+                        //else
+                        //{
+                        //    target = Helper.GetLitOrUpperTechnite(t.Location);
+                        //    t.SetNextTask(Technite.Task.TransferEnergyTo, target);
+                        //}
+                        break;
+                    case 1: //an der Planetoberfläche
+                            Console.WriteLine("test");
+                            if (Technite.All.Count() < 100)
+                            {
+                                if (t.CanConsume)
+                                {
+                                    target = Helper.GetFoodChoice(t.Location);
+                                    //Grid.RelativeCell target = Helper.GetSplitTarget(t.Location);
+                                    t.SetNextTask(Technite.Task.ConsumeSurroundingCell, target);
+                                }
+                                else if (t.CanSplit)
+                                {
+                                    target = Helper.GetSplitTarget(t.Location);
+                                    t.SetNextTask(Technite.Task.ConsumeSurroundingCell, target);
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("mehr als 100");
+                            }
+                        break;
+                    //case 2:
+
+                }
             }
+
+
+
 
             ////let's do some simple processing
 
