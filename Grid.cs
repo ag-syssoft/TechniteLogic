@@ -491,12 +491,28 @@ namespace TechniteLogic
 				}
 			}
 
-			/// <summary>
-			/// Describes the neighbor cell directly atop this cell. Note that this cell might not be part of the volume.
-			/// Use IsValid to determine the validity if necessary.
-			/// World.GetCell will always work with this value, however
-			/// </summary>
-			public CellID	TopNeighbor { get { return new CellID(StackID,Layer+1); } }
+            public IEnumerable<RelativeCell> GetRelativeUpperNeighbors()
+            {
+                int /*lower = Layer > 0 ? -1 : 0,*/
+                    upper = Layer + 1 < CellStack.LayersPerStack ? 1 : 0;
+                uint numNeighbors = (uint)Grid.Graph.Nodes[StackID].Neighbors.Length;
+                //for (int delta = lower; delta <= upper; delta++)
+                //{
+                    for (uint i = 0; i < numNeighbors; i++)
+                    {
+                        yield return new RelativeCell(i, upper);
+                    }
+                    if (upper != 0)
+                        yield return new RelativeCell(upper);
+                //}
+            }
+
+            /// <summary>
+            /// Describes the neighbor cell directly atop this cell. Note that this cell might not be part of the volume.
+            /// Use IsValid to determine the validity if necessary.
+            /// World.GetCell will always work with this value, however
+            /// </summary>
+            public CellID	TopNeighbor { get { return new CellID(StackID,Layer+1); } }
 
 			/// <summary>
 			/// Describes the neighbor cell directly beneath this cell. Note that this cell might not be part of the volume.
@@ -541,7 +557,26 @@ namespace TechniteLogic
 						yield return new RelativeCell(delta);
 				}
 			}
-		}
+
+            /// <summary>
+			/// Enumerates through the only one valid/existing top neighboring cell, using relative descriptors
+			/// </summary>
+			/// <returns></returns>
+            public IEnumerable<RelativeCell> GetRelativeUpperNeighbor()
+            {
+                int upper = Layer + 1 < CellStack.LayersPerStack ? 1 : 0;
+                //uint numNeighbors = (uint)Grid.Graph.Nodes[StackID].Neighbors.Length;
+                //for (int delta = lower; delta <= upper; delta++)
+                //{
+                    //for (uint i = 0; i < numNeighbors; i++)
+                    //{
+                        //yield return new RelativeCell(i, delta);
+                    //}
+                    //if (delta != 0)
+                        yield return new RelativeCell(upper);
+                //}
+            }
+        }
 
 		internal static void BeginSession(float heightPerLayer, int numLayersPerStack)
 		{

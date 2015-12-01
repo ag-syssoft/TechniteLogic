@@ -54,6 +54,24 @@ namespace TechniteLogic
 				return Grid.RelativeCell.Invalid;
 			}
 
+            public static Grid.RelativeCell EvaluateUpper(Grid.CellID location, Func<Grid.RelativeCell, Grid.CellID, int> f)
+            {
+                options.Clear();
+                Console.WriteLine("Versucht UpperNeighbor zu finden");
+                //Grid.RelativeCell n = location.GetMyUpperNeighbor(location);
+                foreach(var n in location.GetRelativeUpperNeighbors())
+                {
+                    Grid.CellID cellLocation = location + n;
+                    int q = f(n, cellLocation);
+                    options.Add(new KeyValuePair<int, Grid.RelativeCell>(q, n));
+                    return options[0].Value;
+                }
+                
+                //Grid.RelativeCell n = location.GetUpperNeighbor();
+                Out.Log(Significance.ProgramFatal, "Logic error");
+                return Grid.RelativeCell.Invalid;
+            }
+
 
 			/// <summary>
 			/// Determines a feasible, possibly ideal neighbor technite target, based on a given evaluation function
@@ -157,6 +175,31 @@ namespace TechniteLogic
 				}
 				);
 			}
+
+            /// <summary>
+            /// Determines the top neighbor cell or splits to top
+            /// </summary>
+            /// /// <param name="location"></param>
+			/// <returns></returns>
+            public static Grid.RelativeCell GetTopTarget(Grid.CellID location)
+            {
+                return EvaluateUpper(location, (relative, cell) =>
+                {
+                    int rs = 100;
+                    Grid.Content content = Grid.World.GetCell(cell).content;
+
+                    if (content != Grid.Content.Clear && content != Grid.Content.Water)
+                        rs -= 90;
+                    if (Grid.World.GetCell(cell.TopNeighbor).content == Grid.Content.Technite)
+                        return NotAChoice;  //probably a bad idea to split beneath technite
+
+                    if (Technite.EnoughSupportHere(cell))
+                        return relative.HeightDelta + rs;
+
+                    return NotAChoice;
+                }
+                );
+            }
 		}
 
 		private static Random random = new Random();
@@ -186,6 +229,26 @@ namespace TechniteLogic
                         //    target = Helper.GetLitOrUpperTechnite(t.Location);
                         //    t.SetNextTask(Technite.Task.TransferEnergyTo, target);
                         //}
+                        if(t.CanSplit)
+                        {
+                            if (target != Grid.RelativeCell.Invalid)
+                            {
+                                Console.WriteLine("target is valid, nämlich: " + target + " nicht zu vergessen: " + target.HeightDelta + " und " + target.NeighborIndex);
+                                t.SetNextTask(Technite.Task.GrowTo, target);
+                            }
+                            else
+                            {
+                                Console.WriteLine("TopNeighbor is Technite");
+                                target = Helper.GetLitOrUpperTechnite(t.Location);
+                                t.SetNextTask(Technite.Task.TransferEnergyTo, target);
+                            }
+                        }
+                        else if (t.CanConsume)
+                        {
+                            target = Helper.GetFoodChoice(t.Location);
+                            //Grid.RelativeCell target = Helper.GetSplitTarget(t.Location);
+                            t.SetNextTask(Technite.Task.ConsumeSurroundingCell, target);
+                        }
                         break;
                     case 1: //an der Planetoberfläche
                             Console.WriteLine("test");

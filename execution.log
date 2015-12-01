@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 26.11.2015 17:52:22	Important							Connecting to server on port 30000
 26.11.2015 17:52:25	Important							Connecting to server on port 30000
 26.11.2015 17:52:26	Common							Connected. Authenticating...
@@ -322,3 +323,956 @@
 26.11.2015 17:53:42	Important							Connecting to server on port 30000
 26.11.2015 17:53:45	Important							Connecting to server on port 30000
 26.11.2015 17:53:48	Important							Connecting to server on port 30000
+=======
+01.12.2015 18:28:04	Important							Connecting to server on port 30000
+01.12.2015 18:28:04	Common							Connected. Authenticating...
+01.12.2015 18:28:05	Common							Received last node-chunk. Completing graph
+01.12.2015 18:28:05	Common							CellStack.Setup: height per layer=0,7, layers per stack=32
+01.12.2015 18:28:05	Common							Set world core content to Lava
+01.12.2015 18:28:05	Common							Applying world delta at range 0...1962 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 1962...3002 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 3002...4042 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 4042...5082 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 5082...6122 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 6122...7162 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 7162...8202 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 8202...9242 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 9242...10282 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 10282...11322 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 11322...12362 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 12362...13402 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 13402...14442 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 14442...15482 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 15482...16522 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 16522...17562 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 17562...18602 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 18602...19642 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 19642...20682 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 20682...21722 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 21722...22762 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 22762...23802 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 23802...24842 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 24842...25882 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 25882...26922 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 26922...27962 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 27962...29002 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 29002...30042 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 30042...31082 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 31082...32122 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 32122...33162 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 33162...34202 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 34202...35242 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 35242...36282 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 36282...37322 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 37322...38362 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 38362...39402 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 39402...40442 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 40442...41482 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 41482...42522 /43562
+01.12.2015 18:28:05	Common							Applying world delta at range 42522...43562 /43562
+01.12.2015 18:28:05	Common							Received technite state chunk containing 7 technites
+01.12.2015 18:28:05	Low							21233[21] (TTL=38, Lit=True) {Energy=72, Matter=12} created
+01.12.2015 18:28:05	Low							21234[22] (TTL=27, Lit=True) {Energy=17, Matter=2} created
+01.12.2015 18:28:05	Low							21267[21] (TTL=33, Lit=False) {Energy=5, Matter=2} created
+01.12.2015 18:28:05	Common							7 technite(s) were created this round.
+01.12.2015 18:28:05	Important							Session started: a500fb6e50ab8446af178c3445835423 in round 377/0
+01.12.2015 18:28:05	Common							Instructing technites in round 377/0
+01.12.2015 18:28:05	Common							ProcessTechnites()
+01.12.2015 18:28:05	ClientFatal							System.IndexOutOfRangeException: Der Index war außerhalb des Arraybereichs.
+   bei TechniteLogic.Grid.RelativeCell.op_Addition(CellID cell, RelativeCell t) in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Grid.cs:Zeile 394.
+   bei TechniteLogic.Technite.SetNextTask(Task t, RelativeCell target, Byte parameter) in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Technite.cs:Zeile 556.
+   bei TechniteLogic.Logic.ProcessTechnites() in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Logic.cs:Zeile 245.
+   bei TechniteLogic.Interface.Event.InstructTechnites(Client cl, InstructTechnites instruct) in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Interface.cs:Zeile 250.
+   bei Protocol.GenericChannelHandler`1.OnReceive(Client sender, Object received) in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Protocol\Channel.cs:Zeile 92.
+   bei Protocol.ChannelHandler.Handle(Client client, Byte[] data, Int32 dataSize) in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Protocol\Channel.cs:Zeile 80.
+   bei Protocol.Client.ThreadMain() in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Protocol\Client.cs:Zeile 115.
+01.12.2015 18:28:05	Important							Connection lost to host.
+01.12.2015 18:28:07	Important							Connecting to server on port 30000
+01.12.2015 18:28:07	Common							Connected. Authenticating...
+01.12.2015 18:28:07	Common							Received last node-chunk. Completing graph
+01.12.2015 18:28:07	Common							CellStack.Setup: height per layer=0,7, layers per stack=32
+01.12.2015 18:28:07	Common							Set world core content to Lava
+01.12.2015 18:28:07	Common							Applying world delta at range 0...1962 /43562
+01.12.2015 18:28:07	Common							Applying world delta at range 1962...3002 /43562
+01.12.2015 18:28:07	Common							Applying world delta at range 3002...4042 /43562
+01.12.2015 18:28:07	Common							Applying world delta at range 4042...5082 /43562
+01.12.2015 18:28:07	Common							Applying world delta at range 5082...6122 /43562
+01.12.2015 18:28:07	Common							Applying world delta at range 6122...7162 /43562
+01.12.2015 18:28:07	Common							Applying world delta at range 7162...8202 /43562
+01.12.2015 18:28:07	Common							Applying world delta at range 8202...9242 /43562
+01.12.2015 18:28:07	Common							Applying world delta at range 9242...10282 /43562
+01.12.2015 18:28:07	Common							Applying world delta at range 10282...11322 /43562
+01.12.2015 18:28:07	Common							Applying world delta at range 11322...12362 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 12362...13402 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 13402...14442 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 14442...15482 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 15482...16522 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 16522...17562 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 17562...18602 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 18602...19642 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 19642...20682 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 20682...21722 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 21722...22762 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 22762...23802 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 23802...24842 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 24842...25882 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 25882...26922 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 26922...27962 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 27962...29002 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 29002...30042 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 30042...31082 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 31082...32122 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 32122...33162 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 33162...34202 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 34202...35242 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 35242...36282 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 36282...37322 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 37322...38362 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 38362...39402 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 39402...40442 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 40442...41482 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 41482...42522 /43562
+01.12.2015 18:28:08	Common							Applying world delta at range 42522...43562 /43562
+01.12.2015 18:28:08	Common							Received technite state chunk containing 7 technites
+01.12.2015 18:28:08	Low							21233[21] (TTL=38, Lit=True) {Energy=72, Matter=12} created
+01.12.2015 18:28:08	Low							21234[22] (TTL=27, Lit=True) {Energy=17, Matter=2} created
+01.12.2015 18:28:08	Low							21267[21] (TTL=33, Lit=False) {Energy=5, Matter=2} created
+01.12.2015 18:28:08	Common							7 technite(s) were created this round.
+01.12.2015 18:28:08	Important							Session started: a500fb6e50ab8446af178c3445835423 in round 377/0
+01.12.2015 18:28:08	Common							Instructing technites in round 377/0
+01.12.2015 18:28:08	Common							ProcessTechnites()
+01.12.2015 18:28:08	ClientFatal							System.IndexOutOfRangeException: Der Index war außerhalb des Arraybereichs.
+   bei TechniteLogic.Grid.RelativeCell.op_Addition(CellID cell, RelativeCell t) in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Grid.cs:Zeile 394.
+   bei TechniteLogic.Technite.SetNextTask(Task t, RelativeCell target, Byte parameter) in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Technite.cs:Zeile 556.
+   bei TechniteLogic.Logic.ProcessTechnites() in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Logic.cs:Zeile 245.
+   bei TechniteLogic.Interface.Event.InstructTechnites(Client cl, InstructTechnites instruct) in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Interface.cs:Zeile 250.
+   bei Protocol.GenericChannelHandler`1.OnReceive(Client sender, Object received) in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Protocol\Channel.cs:Zeile 92.
+   bei Protocol.ChannelHandler.Handle(Client client, Byte[] data, Int32 dataSize) in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Protocol\Channel.cs:Zeile 80.
+   bei Protocol.Client.ThreadMain() in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Protocol\Client.cs:Zeile 115.
+01.12.2015 18:28:08	Important							Connection lost to host.
+01.12.2015 18:28:10	Important							Connecting to server on port 30000
+01.12.2015 18:28:10	Common							Connected. Authenticating...
+01.12.2015 18:28:10	Common							Received last node-chunk. Completing graph
+01.12.2015 18:28:10	Common							CellStack.Setup: height per layer=0,7, layers per stack=32
+01.12.2015 18:28:10	Common							Set world core content to Lava
+01.12.2015 18:28:10	Common							Applying world delta at range 0...1962 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 1962...3002 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 3002...4042 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 4042...5082 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 5082...6122 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 6122...7162 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 7162...8202 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 8202...9242 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 9242...10282 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 10282...11322 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 11322...12362 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 12362...13402 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 13402...14442 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 14442...15482 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 15482...16522 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 16522...17562 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 17562...18602 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 18602...19642 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 19642...20682 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 20682...21722 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 21722...22762 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 22762...23802 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 23802...24842 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 24842...25882 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 25882...26922 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 26922...27962 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 27962...29002 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 29002...30042 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 30042...31082 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 31082...32122 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 32122...33162 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 33162...34202 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 34202...35242 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 35242...36282 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 36282...37322 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 37322...38362 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 38362...39402 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 39402...40442 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 40442...41482 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 41482...42522 /43562
+01.12.2015 18:28:10	Common							Applying world delta at range 42522...43562 /43562
+01.12.2015 18:28:11	Common							Received technite state chunk containing 7 technites
+01.12.2015 18:28:11	Low							21233[21] (TTL=38, Lit=True) {Energy=72, Matter=12} created
+01.12.2015 18:28:11	Unusual							Expected technite content in cell, but found Unknown (new state is 21233[21] (TTL=38, Lit=True) {Energy=72, Matter=12})
+01.12.2015 18:28:11	Low							21234[22] (TTL=27, Lit=True) {Energy=17, Matter=2} created
+01.12.2015 18:28:11	Unusual							Expected technite content in cell, but found Unknown (new state is 21234[22] (TTL=27, Lit=True) {Energy=17, Matter=2})
+01.12.2015 18:28:11	Low							21267[21] (TTL=33, Lit=False) {Energy=5, Matter=2} created
+01.12.2015 18:28:11	Unusual							Expected technite content in cell, but found Unknown (new state is 21267[21] (TTL=33, Lit=False) {Energy=5, Matter=2})
+01.12.2015 18:28:11	Unusual							Expected technite content in cell, but found Unknown (new state is 21267[22] (TTL=31, Lit=True) {Energy=6, Matter=7})
+01.12.2015 18:28:11	Unusual							Expected technite content in cell, but found Unknown (new state is 21200[20] (TTL=38, Lit=False) {Energy=0, Matter=0})
+01.12.2015 18:28:11	Unusual							Expected technite content in cell, but found Unknown (new state is 21234[23] (TTL=30, Lit=True) {Energy=5, Matter=0})
+01.12.2015 18:28:11	Unusual							Expected technite content in cell, but found Unknown (new state is 21268[22] (TTL=32, Lit=True) {Energy=4, Matter=0})
+01.12.2015 18:28:11	Common							7 technite(s) were created this round.
+01.12.2015 18:28:11	Important							Session started: a500fb6e50ab8446af178c3445835423 in round 377/1
+01.12.2015 18:28:11	Common							Instructing technites in round 377/1
+01.12.2015 18:28:11	Common							ProcessTechnites()
+01.12.2015 18:28:11	ClientFatal							System.IndexOutOfRangeException: Der Index war außerhalb des Arraybereichs.
+   bei TechniteLogic.Grid.RelativeCell.op_Addition(CellID cell, RelativeCell t) in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Grid.cs:Zeile 394.
+   bei TechniteLogic.Technite.SetNextTask(Task t, RelativeCell target, Byte parameter) in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Technite.cs:Zeile 556.
+   bei TechniteLogic.Logic.ProcessTechnites() in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Logic.cs:Zeile 245.
+   bei TechniteLogic.Interface.Event.InstructTechnites(Client cl, InstructTechnites instruct) in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Interface.cs:Zeile 250.
+   bei Protocol.GenericChannelHandler`1.OnReceive(Client sender, Object received) in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Protocol\Channel.cs:Zeile 92.
+   bei Protocol.ChannelHandler.Handle(Client client, Byte[] data, Int32 dataSize) in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Protocol\Channel.cs:Zeile 80.
+   bei Protocol.Client.ThreadMain() in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Protocol\Client.cs:Zeile 115.
+01.12.2015 18:28:11	Important							Connection lost to host.
+01.12.2015 18:28:13	Important							Connecting to server on port 30000
+01.12.2015 18:28:13	Common							Connected. Authenticating...
+01.12.2015 18:28:13	Common							Received last node-chunk. Completing graph
+01.12.2015 18:28:13	Common							CellStack.Setup: height per layer=0,7, layers per stack=32
+01.12.2015 18:28:13	Common							Set world core content to Lava
+01.12.2015 18:28:13	Common							Applying world delta at range 0...1962 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 1962...3002 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 3002...4042 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 4042...5082 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 5082...6122 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 6122...7162 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 7162...8202 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 8202...9242 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 9242...10282 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 10282...11322 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 11322...12362 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 12362...13402 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 13402...14442 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 14442...15482 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 15482...16522 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 16522...17562 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 17562...18602 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 18602...19642 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 19642...20682 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 20682...21722 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 21722...22762 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 22762...23802 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 23802...24842 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 24842...25882 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 25882...26922 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 26922...27962 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 27962...29002 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 29002...30042 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 30042...31082 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 31082...32122 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 32122...33162 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 33162...34202 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 34202...35242 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 35242...36282 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 36282...37322 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 37322...38362 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 38362...39402 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 39402...40442 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 40442...41482 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 41482...42522 /43562
+01.12.2015 18:28:13	Common							Applying world delta at range 42522...43562 /43562
+01.12.2015 18:28:13	Common							Received technite state chunk containing 7 technites
+01.12.2015 18:28:13	Low							21233[21] (TTL=38, Lit=True) {Energy=72, Matter=12} created
+01.12.2015 18:28:13	Unusual							Expected technite content in cell, but found Unknown (new state is 21233[21] (TTL=38, Lit=True) {Energy=72, Matter=12})
+01.12.2015 18:28:13	Low							21234[22] (TTL=27, Lit=True) {Energy=17, Matter=2} created
+01.12.2015 18:28:13	Unusual							Expected technite content in cell, but found Unknown (new state is 21234[22] (TTL=27, Lit=True) {Energy=17, Matter=2})
+01.12.2015 18:28:13	Low							21267[21] (TTL=33, Lit=False) {Energy=5, Matter=2} created
+01.12.2015 18:28:13	Unusual							Expected technite content in cell, but found Unknown (new state is 21267[21] (TTL=33, Lit=False) {Energy=5, Matter=2})
+01.12.2015 18:28:13	Unusual							Expected technite content in cell, but found Unknown (new state is 21267[22] (TTL=31, Lit=True) {Energy=6, Matter=7})
+01.12.2015 18:28:13	Unusual							Expected technite content in cell, but found Unknown (new state is 21200[20] (TTL=38, Lit=False) {Energy=0, Matter=0})
+01.12.2015 18:28:13	Unusual							Expected technite content in cell, but found Unknown (new state is 21234[23] (TTL=30, Lit=True) {Energy=5, Matter=0})
+01.12.2015 18:28:13	Unusual							Expected technite content in cell, but found Unknown (new state is 21268[22] (TTL=32, Lit=True) {Energy=4, Matter=0})
+01.12.2015 18:28:13	Common							7 technite(s) were created this round.
+01.12.2015 18:28:13	Important							Session started: a500fb6e50ab8446af178c3445835423 in round 377/1
+01.12.2015 18:28:13	Common							Instructing technites in round 377/1
+01.12.2015 18:28:13	Common							ProcessTechnites()
+01.12.2015 18:28:13	ClientFatal							System.IndexOutOfRangeException: Der Index war außerhalb des Arraybereichs.
+   bei TechniteLogic.Grid.RelativeCell.op_Addition(CellID cell, RelativeCell t) in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Grid.cs:Zeile 394.
+   bei TechniteLogic.Technite.SetNextTask(Task t, RelativeCell target, Byte parameter) in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Technite.cs:Zeile 556.
+   bei TechniteLogic.Logic.ProcessTechnites() in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Logic.cs:Zeile 245.
+   bei TechniteLogic.Interface.Event.InstructTechnites(Client cl, InstructTechnites instruct) in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Interface.cs:Zeile 250.
+   bei Protocol.GenericChannelHandler`1.OnReceive(Client sender, Object received) in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Protocol\Channel.cs:Zeile 92.
+   bei Protocol.ChannelHandler.Handle(Client client, Byte[] data, Int32 dataSize) in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Protocol\Channel.cs:Zeile 80.
+   bei Protocol.Client.ThreadMain() in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Protocol\Client.cs:Zeile 115.
+01.12.2015 18:28:13	Important							Connection lost to host.
+01.12.2015 18:28:15	Important							Connecting to server on port 30000
+01.12.2015 18:28:15	Common							Connected. Authenticating...
+01.12.2015 18:28:15	Common							Received last node-chunk. Completing graph
+01.12.2015 18:28:15	Common							CellStack.Setup: height per layer=0,7, layers per stack=32
+01.12.2015 18:28:15	Common							Set world core content to Lava
+01.12.2015 18:28:15	Common							Applying world delta at range 0...1962 /43562
+01.12.2015 18:28:15	Common							Applying world delta at range 1962...3002 /43562
+01.12.2015 18:28:15	Common							Applying world delta at range 3002...4042 /43562
+01.12.2015 18:28:15	Common							Applying world delta at range 4042...5082 /43562
+01.12.2015 18:28:15	Common							Applying world delta at range 5082...6122 /43562
+01.12.2015 18:28:15	Common							Applying world delta at range 6122...7162 /43562
+01.12.2015 18:28:15	Common							Applying world delta at range 7162...8202 /43562
+01.12.2015 18:28:15	Common							Applying world delta at range 8202...9242 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 9242...10282 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 10282...11322 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 11322...12362 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 12362...13402 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 13402...14442 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 14442...15482 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 15482...16522 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 16522...17562 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 17562...18602 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 18602...19642 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 19642...20682 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 20682...21722 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 21722...22762 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 22762...23802 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 23802...24842 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 24842...25882 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 25882...26922 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 26922...27962 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 27962...29002 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 29002...30042 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 30042...31082 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 31082...32122 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 32122...33162 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 33162...34202 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 34202...35242 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 35242...36282 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 36282...37322 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 37322...38362 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 38362...39402 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 39402...40442 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 40442...41482 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 41482...42522 /43562
+01.12.2015 18:28:16	Common							Applying world delta at range 42522...43562 /43562
+01.12.2015 18:28:16	Common							Received technite state chunk containing 7 technites
+01.12.2015 18:28:16	Low							21233[21] (TTL=38, Lit=True) {Energy=72, Matter=12} created
+01.12.2015 18:28:16	Unusual							Expected technite content in cell, but found Unknown (new state is 21233[21] (TTL=38, Lit=True) {Energy=72, Matter=12})
+01.12.2015 18:28:16	Low							21234[22] (TTL=27, Lit=True) {Energy=17, Matter=2} created
+01.12.2015 18:28:16	Unusual							Expected technite content in cell, but found Unknown (new state is 21234[22] (TTL=27, Lit=True) {Energy=17, Matter=2})
+01.12.2015 18:28:16	Low							21267[21] (TTL=33, Lit=False) {Energy=5, Matter=2} created
+01.12.2015 18:28:16	Unusual							Expected technite content in cell, but found Unknown (new state is 21267[21] (TTL=33, Lit=False) {Energy=5, Matter=2})
+01.12.2015 18:28:16	Unusual							Expected technite content in cell, but found Unknown (new state is 21267[22] (TTL=31, Lit=True) {Energy=6, Matter=7})
+01.12.2015 18:28:16	Unusual							Expected technite content in cell, but found Unknown (new state is 21200[20] (TTL=38, Lit=False) {Energy=0, Matter=0})
+01.12.2015 18:28:16	Unusual							Expected technite content in cell, but found Unknown (new state is 21234[23] (TTL=30, Lit=True) {Energy=5, Matter=0})
+01.12.2015 18:28:16	Unusual							Expected technite content in cell, but found Unknown (new state is 21268[22] (TTL=32, Lit=True) {Energy=4, Matter=0})
+01.12.2015 18:28:16	Common							7 technite(s) were created this round.
+01.12.2015 18:28:16	Important							Session started: a500fb6e50ab8446af178c3445835423 in round 377/1
+01.12.2015 18:28:16	Common							Instructing technites in round 377/1
+01.12.2015 18:28:16	Common							ProcessTechnites()
+01.12.2015 18:28:16	ClientFatal							System.IndexOutOfRangeException: Der Index war außerhalb des Arraybereichs.
+   bei TechniteLogic.Grid.RelativeCell.op_Addition(CellID cell, RelativeCell t) in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Grid.cs:Zeile 394.
+   bei TechniteLogic.Technite.SetNextTask(Task t, RelativeCell target, Byte parameter) in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Technite.cs:Zeile 556.
+   bei TechniteLogic.Logic.ProcessTechnites() in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Logic.cs:Zeile 245.
+   bei TechniteLogic.Interface.Event.InstructTechnites(Client cl, InstructTechnites instruct) in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Interface.cs:Zeile 250.
+   bei Protocol.GenericChannelHandler`1.OnReceive(Client sender, Object received) in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Protocol\Channel.cs:Zeile 92.
+   bei Protocol.ChannelHandler.Handle(Client client, Byte[] data, Int32 dataSize) in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Protocol\Channel.cs:Zeile 80.
+   bei Protocol.Client.ThreadMain() in C:\Users\Lori\Desktop\Uni\7. Semester (WS 2015_16)\Hexaverse\MyTechniteLogic\Protocol\Client.cs:Zeile 115.
+01.12.2015 18:28:16	Important							Connection lost to host.
+01.12.2015 18:28:18	Important							Connecting to server on port 30000
+01.12.2015 18:28:18	Common							Connected. Authenticating...
+01.12.2015 18:28:18	Common							Received last node-chunk. Completing graph
+01.12.2015 18:28:18	Common							CellStack.Setup: height per layer=0,7, layers per stack=32
+01.12.2015 18:28:18	Common							Set world core content to Lava
+01.12.2015 18:28:18	Common							Applying world delta at range 0...1962 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 1962...3002 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 3002...4042 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 4042...5082 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 5082...6122 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 6122...7162 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 7162...8202 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 8202...9242 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 9242...10282 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 10282...11322 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 11322...12362 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 12362...13402 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 13402...14442 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 14442...15482 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 15482...16522 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 16522...17562 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 17562...18602 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 18602...19642 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 19642...20682 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 20682...21722 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 21722...22762 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 22762...23802 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 23802...24842 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 24842...25882 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 25882...26922 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 26922...27962 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 27962...29002 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 29002...30042 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 30042...31082 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 31082...32122 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 32122...33162 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 33162...34202 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 34202...35242 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 35242...36282 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 36282...37322 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 37322...38362 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 38362...39402 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 39402...40442 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 40442...41482 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 41482...42522 /43562
+01.12.2015 18:28:18	Common							Applying world delta at range 42522...43562 /43562
+01.12.2015 18:28:18	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:18	Low							11200[18] (TTL=64, Lit=True) {Energy=3, Matter=0} created
+01.12.2015 18:28:18	Common							1 technite(s) were created this round.
+01.12.2015 18:28:18	Important							Session started: e5987fd73f575242917ee1bdde164956 in round 377/0
+01.12.2015 18:28:18	Common							Instructing technites in round 377/0
+01.12.2015 18:28:18	Common							ProcessTechnites()
+01.12.2015 18:28:19	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:19	Common							Applying world delta at range 10282...11322 /43562
+01.12.2015 18:28:19	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:19	Common							Instructing technites in round 378/0
+01.12.2015 18:28:19	Common							ProcessTechnites()
+01.12.2015 18:28:19	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:19	Common							Applying world delta at range 10282...11322 /43562
+01.12.2015 18:28:19	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:20	Common							Instructing technites in round 378/1
+01.12.2015 18:28:20	Common							ProcessTechnites()
+01.12.2015 18:28:20	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:20	Common							Applying world delta at range 10282...11322 /43562
+01.12.2015 18:28:20	Common							Applying world delta at range 10282...11322 /43562
+01.12.2015 18:28:20	Common							Received technite state chunk containing 2 technites
+01.12.2015 18:28:20	Low							11199[19] (TTL=40, Lit=True) {Energy=3, Matter=0} created
+01.12.2015 18:28:20	Common							1 technite(s) were created this round.
+01.12.2015 18:28:21	Common							Instructing technites in round 379/0
+01.12.2015 18:28:21	Common							ProcessTechnites()
+01.12.2015 18:28:21	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:21	Common							Applying world delta at range 10282...11322 /43562
+01.12.2015 18:28:21	Common							Received technite state chunk containing 2 technites
+01.12.2015 18:28:22	Common							Instructing technites in round 379/1
+01.12.2015 18:28:22	Common							ProcessTechnites()
+01.12.2015 18:28:22	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:22	Common							Applying world delta at range 10282...11322 /43562
+01.12.2015 18:28:22	Common							Received technite state chunk containing 2 technites
+01.12.2015 18:28:22	Common							Instructing technites in round 380/0
+01.12.2015 18:28:22	Common							ProcessTechnites()
+01.12.2015 18:28:22	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:22	Common							Applying world delta at range 10282...11322 /43562
+01.12.2015 18:28:22	Common							Received technite state chunk containing 2 technites
+01.12.2015 18:28:22	Low							11199[19] (TTL=40, Lit=True) {Energy=3, Matter=0} created
+01.12.2015 18:28:22	Low							11199[19] (TTL=38, Lit=True) {Energy=5, Matter=4} died
+01.12.2015 18:28:22	Common							1 technite(s) died this round.
+01.12.2015 18:28:22	Common							1 technite(s) were created this round.
+01.12.2015 18:28:23	Common							Instructing technites in round 380/1
+01.12.2015 18:28:23	Common							ProcessTechnites()
+01.12.2015 18:28:23	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:23	Common							Applying world delta at range 10282...11322 /43562
+01.12.2015 18:28:23	Common							Received technite state chunk containing 2 technites
+01.12.2015 18:28:24	Common							Instructing technites in round 381/0
+01.12.2015 18:28:24	Common							ProcessTechnites()
+01.12.2015 18:28:24	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:24	Common							Applying world delta at range 10282...11322 /43562
+01.12.2015 18:28:24	Common							Applying world delta at range 10282...11322 /43562
+01.12.2015 18:28:24	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:24	Low							11199[19] (TTL=39, Lit=True) {Energy=4, Matter=2} died
+01.12.2015 18:28:24	Common							1 technite(s) died this round.
+01.12.2015 18:28:25	Common							Instructing technites in round 381/1
+01.12.2015 18:28:25	Common							ProcessTechnites()
+01.12.2015 18:28:25	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:25	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:25	Common							Instructing technites in round 382/0
+01.12.2015 18:28:25	Common							ProcessTechnites()
+01.12.2015 18:28:25	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:26	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:26	Common							Instructing technites in round 382/1
+01.12.2015 18:28:26	Common							ProcessTechnites()
+01.12.2015 18:28:26	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:26	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:27	Common							Instructing technites in round 383/0
+01.12.2015 18:28:27	Common							ProcessTechnites()
+01.12.2015 18:28:27	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:27	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:28	Common							Instructing technites in round 383/1
+01.12.2015 18:28:28	Common							ProcessTechnites()
+01.12.2015 18:28:28	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:28	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:28	Common							Instructing technites in round 384/0
+01.12.2015 18:28:28	Common							ProcessTechnites()
+01.12.2015 18:28:28	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:29	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:29	Common							Instructing technites in round 384/1
+01.12.2015 18:28:29	Common							ProcessTechnites()
+01.12.2015 18:28:29	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:29	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:30	Common							Instructing technites in round 385/0
+01.12.2015 18:28:30	Common							ProcessTechnites()
+01.12.2015 18:28:30	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:30	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:31	Common							Instructing technites in round 385/1
+01.12.2015 18:28:31	Common							ProcessTechnites()
+01.12.2015 18:28:31	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:31	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:32	Common							Instructing technites in round 386/0
+01.12.2015 18:28:32	Common							ProcessTechnites()
+01.12.2015 18:28:32	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:32	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:32	Common							Instructing technites in round 386/1
+01.12.2015 18:28:32	Common							ProcessTechnites()
+01.12.2015 18:28:32	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:32	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:33	Common							Instructing technites in round 387/0
+01.12.2015 18:28:33	Common							ProcessTechnites()
+01.12.2015 18:28:33	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:33	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:34	Common							Instructing technites in round 387/1
+01.12.2015 18:28:34	Common							ProcessTechnites()
+01.12.2015 18:28:34	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:34	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:35	Common							Instructing technites in round 388/0
+01.12.2015 18:28:35	Common							ProcessTechnites()
+01.12.2015 18:28:35	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:35	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:35	Common							Instructing technites in round 388/1
+01.12.2015 18:28:35	Common							ProcessTechnites()
+01.12.2015 18:28:35	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:36	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:36	Common							Instructing technites in round 389/0
+01.12.2015 18:28:36	Common							ProcessTechnites()
+01.12.2015 18:28:36	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:36	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:37	Common							Instructing technites in round 389/1
+01.12.2015 18:28:37	Common							ProcessTechnites()
+01.12.2015 18:28:37	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:37	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:38	Common							Instructing technites in round 390/0
+01.12.2015 18:28:38	Common							ProcessTechnites()
+01.12.2015 18:28:38	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:38	Common							Applying world delta at range 20682...21722 /43562
+01.12.2015 18:28:38	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:38	Common							Instructing technites in round 390/1
+01.12.2015 18:28:38	Common							ProcessTechnites()
+01.12.2015 18:28:38	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:39	Common							Applying world delta at range 20682...21722 /43562
+01.12.2015 18:28:39	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:39	Common							Instructing technites in round 391/0
+01.12.2015 18:28:39	Common							ProcessTechnites()
+01.12.2015 18:28:39	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:39	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:40	Common							Instructing technites in round 391/1
+01.12.2015 18:28:40	Common							ProcessTechnites()
+01.12.2015 18:28:40	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:40	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:41	Common							Instructing technites in round 392/0
+01.12.2015 18:28:41	Common							ProcessTechnites()
+01.12.2015 18:28:41	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:41	Common							Applying world delta at range 20682...21722 /43562
+01.12.2015 18:28:41	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:42	Common							Instructing technites in round 392/1
+01.12.2015 18:28:42	Common							ProcessTechnites()
+01.12.2015 18:28:42	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:42	Common							Applying world delta at range 3002...4042 /43562
+01.12.2015 18:28:42	Common							Applying world delta at range 20682...21722 /43562
+01.12.2015 18:28:42	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:42	Common							Instructing technites in round 393/0
+01.12.2015 18:28:42	Common							ProcessTechnites()
+01.12.2015 18:28:42	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:42	Common							Applying world delta at range 3002...4042 /43562
+01.12.2015 18:28:42	Common							Applying world delta at range 20682...21722 /43562
+01.12.2015 18:28:42	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:43	Common							Instructing technites in round 393/1
+01.12.2015 18:28:43	Common							ProcessTechnites()
+01.12.2015 18:28:43	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:43	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:44	Common							Instructing technites in round 394/0
+01.12.2015 18:28:44	Common							ProcessTechnites()
+01.12.2015 18:28:44	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:44	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:45	Common							Instructing technites in round 394/1
+01.12.2015 18:28:45	Common							ProcessTechnites()
+01.12.2015 18:28:45	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:45	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:45	Common							Instructing technites in round 395/0
+01.12.2015 18:28:45	Common							ProcessTechnites()
+01.12.2015 18:28:45	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:46	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:46	Common							Instructing technites in round 395/1
+01.12.2015 18:28:46	Common							ProcessTechnites()
+01.12.2015 18:28:46	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:46	Common							Applying world delta at range 20682...21722 /43562
+01.12.2015 18:28:46	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:47	Common							Instructing technites in round 396/0
+01.12.2015 18:28:47	Common							ProcessTechnites()
+01.12.2015 18:28:47	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:47	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:48	Common							Instructing technites in round 396/1
+01.12.2015 18:28:48	Common							ProcessTechnites()
+01.12.2015 18:28:48	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:48	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:49	Common							Instructing technites in round 397/0
+01.12.2015 18:28:49	Common							ProcessTechnites()
+01.12.2015 18:28:49	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:49	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:49	Common							Instructing technites in round 397/1
+01.12.2015 18:28:49	Common							ProcessTechnites()
+01.12.2015 18:28:49	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:49	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:50	Common							Instructing technites in round 398/0
+01.12.2015 18:28:50	Common							ProcessTechnites()
+01.12.2015 18:28:50	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:50	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:51	Common							Instructing technites in round 398/1
+01.12.2015 18:28:51	Common							ProcessTechnites()
+01.12.2015 18:28:51	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:51	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:52	Common							Instructing technites in round 399/0
+01.12.2015 18:28:52	Common							ProcessTechnites()
+01.12.2015 18:28:52	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:52	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:52	Common							Instructing technites in round 399/1
+01.12.2015 18:28:52	Common							ProcessTechnites()
+01.12.2015 18:28:52	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:52	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:53	Common							Instructing technites in round 400/0
+01.12.2015 18:28:53	Common							ProcessTechnites()
+01.12.2015 18:28:53	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:53	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:54	Common							Instructing technites in round 400/1
+01.12.2015 18:28:54	Common							ProcessTechnites()
+01.12.2015 18:28:54	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:54	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:55	Common							Instructing technites in round 401/0
+01.12.2015 18:28:55	Common							ProcessTechnites()
+01.12.2015 18:28:55	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:55	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:55	Common							Instructing technites in round 401/1
+01.12.2015 18:28:55	Common							ProcessTechnites()
+01.12.2015 18:28:55	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:56	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:56	Common							Instructing technites in round 402/0
+01.12.2015 18:28:56	Common							ProcessTechnites()
+01.12.2015 18:28:56	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:56	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:57	Common							Instructing technites in round 402/1
+01.12.2015 18:28:57	Common							ProcessTechnites()
+01.12.2015 18:28:57	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:57	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:58	Common							Instructing technites in round 403/0
+01.12.2015 18:28:58	Common							ProcessTechnites()
+01.12.2015 18:28:58	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:58	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:59	Common							Instructing technites in round 403/1
+01.12.2015 18:28:59	Common							ProcessTechnites()
+01.12.2015 18:28:59	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:59	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:28:59	Common							Instructing technites in round 404/0
+01.12.2015 18:28:59	Common							ProcessTechnites()
+01.12.2015 18:28:59	Common							Sending 1 technite data response chunks
+01.12.2015 18:28:59	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:00	Common							Instructing technites in round 404/1
+01.12.2015 18:29:00	Common							ProcessTechnites()
+01.12.2015 18:29:00	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:00	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:01	Common							Instructing technites in round 405/0
+01.12.2015 18:29:01	Common							ProcessTechnites()
+01.12.2015 18:29:01	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:01	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:02	Common							Instructing technites in round 405/1
+01.12.2015 18:29:02	Common							ProcessTechnites()
+01.12.2015 18:29:02	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:02	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:02	Common							Instructing technites in round 406/0
+01.12.2015 18:29:02	Common							ProcessTechnites()
+01.12.2015 18:29:02	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:03	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:03	Common							Instructing technites in round 406/1
+01.12.2015 18:29:03	Common							ProcessTechnites()
+01.12.2015 18:29:03	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:03	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:04	Common							Instructing technites in round 407/0
+01.12.2015 18:29:04	Common							ProcessTechnites()
+01.12.2015 18:29:04	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:04	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:05	Common							Instructing technites in round 407/1
+01.12.2015 18:29:05	Common							ProcessTechnites()
+01.12.2015 18:29:05	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:05	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:05	Common							Instructing technites in round 408/0
+01.12.2015 18:29:05	Common							ProcessTechnites()
+01.12.2015 18:29:05	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:06	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:06	Common							Instructing technites in round 408/1
+01.12.2015 18:29:06	Common							ProcessTechnites()
+01.12.2015 18:29:06	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:06	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:07	Common							Instructing technites in round 409/0
+01.12.2015 18:29:07	Common							ProcessTechnites()
+01.12.2015 18:29:07	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:07	Common							Applying world delta at range 10282...11322 /43562
+01.12.2015 18:29:08	Common							Instructing technites in round 409/1
+01.12.2015 18:29:08	Common							ProcessTechnites()
+01.12.2015 18:29:08	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:08	Common							Set world core content to Granite
+01.12.2015 18:29:08	Important							Connection lost to host.
+01.12.2015 18:29:10	Important							Connecting to server on port 30000
+01.12.2015 18:29:13	Important							Connecting to server on port 30000
+01.12.2015 18:29:14	Common							Connected. Authenticating...
+01.12.2015 18:29:14	Common							Received last node-chunk. Completing graph
+01.12.2015 18:29:14	Common							CellStack.Setup: height per layer=0,7, layers per stack=32
+01.12.2015 18:29:14	Common							Set world core content to Granite
+01.12.2015 18:29:14	Common							Applying world delta at range 0...1962 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 1962...3002 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 3002...4042 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 4042...5082 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 5082...6122 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 6122...7162 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 7162...8202 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 8202...9242 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 9242...10282 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 10282...11322 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 11322...12362 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 12362...13402 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 13402...14442 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 14442...15482 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 15482...16522 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 16522...17562 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 17562...18602 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 18602...19642 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 19642...20682 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 20682...21722 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 21722...22762 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 22762...23802 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 23802...24842 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 24842...25882 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 25882...26922 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 26922...27962 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 27962...29002 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 29002...30042 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 30042...31082 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 31082...32122 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 32122...33162 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 33162...34202 /43562
+01.12.2015 18:29:14	Common							Applying world delta at range 34202...35242 /43562
+01.12.2015 18:29:15	Common							Applying world delta at range 35242...36282 /43562
+01.12.2015 18:29:15	Common							Applying world delta at range 36282...37322 /43562
+01.12.2015 18:29:15	Common							Applying world delta at range 37322...38362 /43562
+01.12.2015 18:29:15	Common							Applying world delta at range 38362...39402 /43562
+01.12.2015 18:29:15	Common							Applying world delta at range 39402...40442 /43562
+01.12.2015 18:29:15	Common							Applying world delta at range 40442...41482 /43562
+01.12.2015 18:29:15	Common							Applying world delta at range 41482...42522 /43562
+01.12.2015 18:29:15	Common							Applying world delta at range 42522...43562 /43562
+01.12.2015 18:29:15	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:15	Low							31781[18] (TTL=64, Lit=True) {Energy=3, Matter=0} created
+01.12.2015 18:29:15	Common							1 technite(s) were created this round.
+01.12.2015 18:29:15	Important							Session started: bd26d93e1fb7f44ca7d1a56461694aa5 in round 410/0
+01.12.2015 18:29:15	Common							Instructing technites in round 410/0
+01.12.2015 18:29:15	Common							ProcessTechnites()
+01.12.2015 18:29:15	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:15	Common							Applying world delta at range 31082...32122 /43562
+01.12.2015 18:29:15	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:15	Common							Instructing technites in round 410/1
+01.12.2015 18:29:15	Common							ProcessTechnites()
+01.12.2015 18:29:15	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:15	Common							Applying world delta at range 31082...32122 /43562
+01.12.2015 18:29:15	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:16	Common							Instructing technites in round 411/0
+01.12.2015 18:29:16	Common							ProcessTechnites()
+01.12.2015 18:29:16	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:16	Common							Applying world delta at range 31082...32122 /43562
+01.12.2015 18:29:16	Common							Applying world delta at range 31082...32122 /43562
+01.12.2015 18:29:16	Common							Received technite state chunk containing 2 technites
+01.12.2015 18:29:16	Low							31780[19] (TTL=40, Lit=True) {Energy=3, Matter=0} created
+01.12.2015 18:29:16	Common							1 technite(s) were created this round.
+01.12.2015 18:29:17	Common							Instructing technites in round 411/1
+01.12.2015 18:29:17	Common							ProcessTechnites()
+01.12.2015 18:29:17	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:17	Common							Applying world delta at range 31082...32122 /43562
+01.12.2015 18:29:17	Common							Received technite state chunk containing 2 technites
+01.12.2015 18:29:18	Common							Instructing technites in round 412/0
+01.12.2015 18:29:18	Common							ProcessTechnites()
+01.12.2015 18:29:18	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:18	Common							Applying world delta at range 31082...32122 /43562
+01.12.2015 18:29:18	Common							Received technite state chunk containing 2 technites
+01.12.2015 18:29:18	Common							Instructing technites in round 412/1
+01.12.2015 18:29:18	Common							ProcessTechnites()
+01.12.2015 18:29:18	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:19	Common							Applying world delta at range 31082...32122 /43562
+01.12.2015 18:29:19	Common							Received technite state chunk containing 2 technites
+01.12.2015 18:29:19	Low							31780[19] (TTL=40, Lit=True) {Energy=3, Matter=0} created
+01.12.2015 18:29:19	Low							31780[19] (TTL=38, Lit=True) {Energy=5, Matter=9} died
+01.12.2015 18:29:19	Common							1 technite(s) died this round.
+01.12.2015 18:29:19	Common							1 technite(s) were created this round.
+01.12.2015 18:29:19	Common							Instructing technites in round 413/0
+01.12.2015 18:29:19	Common							ProcessTechnites()
+01.12.2015 18:29:19	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:19	Common							Applying world delta at range 31082...32122 /43562
+01.12.2015 18:29:19	Common							Received technite state chunk containing 2 technites
+01.12.2015 18:29:20	Common							Instructing technites in round 413/1
+01.12.2015 18:29:20	Common							ProcessTechnites()
+01.12.2015 18:29:20	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:20	Common							Applying world delta at range 31082...32122 /43562
+01.12.2015 18:29:20	Common							Received technite state chunk containing 2 technites
+01.12.2015 18:29:21	Common							Instructing technites in round 414/0
+01.12.2015 18:29:21	Common							ProcessTechnites()
+01.12.2015 18:29:21	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:21	Common							Applying world delta at range 31082...32122 /43562
+01.12.2015 18:29:21	Common							Received technite state chunk containing 2 technites
+01.12.2015 18:29:21	Low							31780[19] (TTL=40, Lit=True) {Energy=3, Matter=0} created
+01.12.2015 18:29:21	Low							31780[19] (TTL=39, Lit=True) {Energy=4, Matter=1} died
+01.12.2015 18:29:21	Common							1 technite(s) died this round.
+01.12.2015 18:29:21	Common							1 technite(s) were created this round.
+01.12.2015 18:29:22	Common							Instructing technites in round 414/1
+01.12.2015 18:29:22	Common							ProcessTechnites()
+01.12.2015 18:29:22	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:22	Common							Applying world delta at range 31082...32122 /43562
+01.12.2015 18:29:22	Common							Received technite state chunk containing 2 technites
+01.12.2015 18:29:22	Common							Instructing technites in round 415/0
+01.12.2015 18:29:22	Common							ProcessTechnites()
+01.12.2015 18:29:22	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:22	Common							Applying world delta at range 31082...32122 /43562
+01.12.2015 18:29:22	Common							Received technite state chunk containing 2 technites
+01.12.2015 18:29:22	Low							31780[19] (TTL=40, Lit=True) {Energy=3, Matter=0} created
+01.12.2015 18:29:22	Low							31780[19] (TTL=39, Lit=True) {Energy=4, Matter=1} died
+01.12.2015 18:29:22	Common							1 technite(s) died this round.
+01.12.2015 18:29:22	Common							1 technite(s) were created this round.
+01.12.2015 18:29:23	Common							Instructing technites in round 415/1
+01.12.2015 18:29:23	Common							ProcessTechnites()
+01.12.2015 18:29:23	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:23	Common							Applying world delta at range 31082...32122 /43562
+01.12.2015 18:29:23	Common							Received technite state chunk containing 2 technites
+01.12.2015 18:29:24	Common							Instructing technites in round 416/0
+01.12.2015 18:29:24	Common							ProcessTechnites()
+01.12.2015 18:29:24	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:24	Common							Applying world delta at range 31082...32122 /43562
+01.12.2015 18:29:24	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:24	Low							31780[19] (TTL=39, Lit=True) {Energy=4, Matter=1} died
+01.12.2015 18:29:24	Common							1 technite(s) died this round.
+01.12.2015 18:29:25	Common							Instructing technites in round 416/1
+01.12.2015 18:29:25	Common							ProcessTechnites()
+01.12.2015 18:29:25	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:25	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:25	Common							Instructing technites in round 417/0
+01.12.2015 18:29:25	Common							ProcessTechnites()
+01.12.2015 18:29:25	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:25	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:26	Common							Instructing technites in round 417/1
+01.12.2015 18:29:26	Common							ProcessTechnites()
+01.12.2015 18:29:26	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:26	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:27	Common							Instructing technites in round 418/0
+01.12.2015 18:29:27	Common							ProcessTechnites()
+01.12.2015 18:29:27	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:27	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:28	Common							Instructing technites in round 418/1
+01.12.2015 18:29:28	Common							ProcessTechnites()
+01.12.2015 18:29:28	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:28	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:28	Common							Instructing technites in round 419/0
+01.12.2015 18:29:28	Common							ProcessTechnites()
+01.12.2015 18:29:28	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:29	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:29	Common							Instructing technites in round 419/1
+01.12.2015 18:29:29	Common							ProcessTechnites()
+01.12.2015 18:29:29	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:29	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:30	Common							Instructing technites in round 420/0
+01.12.2015 18:29:30	Common							ProcessTechnites()
+01.12.2015 18:29:30	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:30	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:31	Common							Instructing technites in round 420/1
+01.12.2015 18:29:31	Common							ProcessTechnites()
+01.12.2015 18:29:31	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:31	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:32	Common							Instructing technites in round 421/0
+01.12.2015 18:29:32	Common							ProcessTechnites()
+01.12.2015 18:29:32	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:32	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:32	Common							Instructing technites in round 421/1
+01.12.2015 18:29:32	Common							ProcessTechnites()
+01.12.2015 18:29:32	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:32	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:33	Common							Instructing technites in round 422/0
+01.12.2015 18:29:33	Common							ProcessTechnites()
+01.12.2015 18:29:33	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:33	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:34	Common							Instructing technites in round 422/1
+01.12.2015 18:29:34	Common							ProcessTechnites()
+01.12.2015 18:29:34	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:34	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:35	Common							Instructing technites in round 423/0
+01.12.2015 18:29:35	Common							ProcessTechnites()
+01.12.2015 18:29:35	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:35	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:35	Common							Instructing technites in round 423/1
+01.12.2015 18:29:35	Common							ProcessTechnites()
+01.12.2015 18:29:35	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:35	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:36	Common							Instructing technites in round 424/0
+01.12.2015 18:29:36	Common							ProcessTechnites()
+01.12.2015 18:29:36	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:36	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:37	Common							Instructing technites in round 424/1
+01.12.2015 18:29:37	Common							ProcessTechnites()
+01.12.2015 18:29:37	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:37	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:38	Common							Instructing technites in round 425/0
+01.12.2015 18:29:38	Common							ProcessTechnites()
+01.12.2015 18:29:38	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:38	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:38	Common							Instructing technites in round 425/1
+01.12.2015 18:29:38	Common							ProcessTechnites()
+01.12.2015 18:29:38	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:38	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:39	Common							Instructing technites in round 426/0
+01.12.2015 18:29:39	Common							ProcessTechnites()
+01.12.2015 18:29:39	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:39	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:40	Common							Instructing technites in round 426/1
+01.12.2015 18:29:40	Common							ProcessTechnites()
+01.12.2015 18:29:40	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:40	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:41	Common							Instructing technites in round 427/0
+01.12.2015 18:29:41	Common							ProcessTechnites()
+01.12.2015 18:29:41	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:41	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:41	Common							Instructing technites in round 427/1
+01.12.2015 18:29:41	Common							ProcessTechnites()
+01.12.2015 18:29:41	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:41	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:42	Common							Instructing technites in round 428/0
+01.12.2015 18:29:42	Common							ProcessTechnites()
+01.12.2015 18:29:42	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:42	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:43	Common							Instructing technites in round 428/1
+01.12.2015 18:29:43	Common							ProcessTechnites()
+01.12.2015 18:29:43	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:43	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:44	Common							Instructing technites in round 429/0
+01.12.2015 18:29:44	Common							ProcessTechnites()
+01.12.2015 18:29:44	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:44	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:44	Common							Instructing technites in round 429/1
+01.12.2015 18:29:44	Common							ProcessTechnites()
+01.12.2015 18:29:44	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:45	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:45	Common							Instructing technites in round 430/0
+01.12.2015 18:29:45	Common							ProcessTechnites()
+01.12.2015 18:29:45	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:45	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:46	Common							Instructing technites in round 430/1
+01.12.2015 18:29:46	Common							ProcessTechnites()
+01.12.2015 18:29:46	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:46	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:47	Common							Instructing technites in round 431/0
+01.12.2015 18:29:47	Common							ProcessTechnites()
+01.12.2015 18:29:47	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:47	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:48	Common							Instructing technites in round 431/1
+01.12.2015 18:29:48	Common							ProcessTechnites()
+01.12.2015 18:29:48	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:48	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:48	Common							Instructing technites in round 432/0
+01.12.2015 18:29:48	Common							ProcessTechnites()
+01.12.2015 18:29:48	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:48	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:49	Common							Instructing technites in round 432/1
+01.12.2015 18:29:49	Common							ProcessTechnites()
+01.12.2015 18:29:49	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:49	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:50	Common							Instructing technites in round 433/0
+01.12.2015 18:29:50	Common							ProcessTechnites()
+01.12.2015 18:29:50	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:50	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:51	Common							Instructing technites in round 433/1
+01.12.2015 18:29:51	Common							ProcessTechnites()
+01.12.2015 18:29:51	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:51	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:51	Common							Instructing technites in round 434/0
+01.12.2015 18:29:51	Common							ProcessTechnites()
+01.12.2015 18:29:51	Common							Sending 1 technite data response chunks
+01.12.2015 18:29:52	Common							Received technite state chunk containing 1 technites
+01.12.2015 18:29:52	Common							Set world core content to Lava
+>>>>>>> 649940f... endeausdienstag
