@@ -15,4 +15,4 @@ Technites can not move at this time, to allow addressing them via their location
 Functionality of this base implementation
 -----------------------------------------
 Communication protocols, world and Technite states, as well as helper methods to simplify logic implementation are, or will be, part of this project.
-With the exception of a simple base logic, no advanced logic implementations will be part of this repository.
+With the exception of a simple base logic, no advanced logic implementations will be part of this repository.a
