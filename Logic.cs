@@ -210,14 +210,19 @@ namespace TechniteLogic
 		public static void ProcessTechnites()
 		{
             Out.Log(Significance.Common, "ProcessTechnites()");
-            int spielphase = 0;
+            int spielphase;
 
             foreach (Technite t in Technite.All)
             {
+                t.SetCustomColor(new Technite.Color(255, 0, 0));
+
+                if (t.Location.Layer > 16)
+                    spielphase = 1;
+                else spielphase = 0;
                 switch (spielphase)
                 {
                     case 0: //Wenn spawn unter der Erde -> Hochfressen
-                        Grid.RelativeCell target = Helper.GetSplitTarget(t.Location.TopNeighbor);
+                        Grid.RelativeCell target;
                         //Grid.RelativeCell target = new Grid.RelativeCell(t.Location.TopNeighbor.StackID, 1);
                         //if (target != Grid.RelativeCell.Invalid)
                         
@@ -229,12 +234,21 @@ namespace TechniteLogic
                         //    target = Helper.GetLitOrUpperTechnite(t.Location);
                         //    t.SetNextTask(Technite.Task.TransferEnergyTo, target);
                         //}
-                        if(t.CanSplit)
+                        //if (t.EnergyYieldPerRound > 0)
+                        //{
+                        //    spielphase = 1;
+                        //    target = Helper.GetFoodChoice(t.Location);
+                        //    t.SetNextTask(Technite.Task.GnawAtSurroundingCell, target);
+                        //    break;
+                        //}
+                        if (t.CanSplit)
                         {
+                            target = Helper.GetSplitTarget(t.Location);
                             if (target != Grid.RelativeCell.Invalid)
                             {
                                 Console.WriteLine("target is valid, nämlich: " + target + " nicht zu vergessen: " + target.HeightDelta + " und " + target.NeighborIndex);
                                 t.SetNextTask(Technite.Task.GrowTo, target);
+                                
                             }
                             else
                             {
@@ -242,38 +256,54 @@ namespace TechniteLogic
                                 target = Helper.GetLitOrUpperTechnite(t.Location);
                                 t.SetNextTask(Technite.Task.TransferEnergyTo, target);
                             }
+                            break;
                         }
-                        else if (t.CanConsume)
+                        if (t.CanGnawAt)
                         {
+                            Console.WriteLine("Voll am pimmeln");
                             target = Helper.GetFoodChoice(t.Location);
                             //Grid.RelativeCell target = Helper.GetSplitTarget(t.Location);
-                            t.SetNextTask(Technite.Task.ConsumeSurroundingCell, target);
+                            t.SetNextTask(Technite.Task.GnawAtSurroundingCell, target);
+                            break;
                         }
+                        t.SetNextTask(Technite.Task.None, Grid.RelativeCell.Self);
                         break;
+
+                        
                     case 1: //an der Planetoberfläche
-                            Console.WriteLine("test");
-                            if (Technite.All.Count() < 100)
-                            {
-                                if (t.CanConsume)
-                                {
-                                    target = Helper.GetFoodChoice(t.Location);
-                                    //Grid.RelativeCell target = Helper.GetSplitTarget(t.Location);
-                                    t.SetNextTask(Technite.Task.ConsumeSurroundingCell, target);
-                                }
-                                else if (t.CanSplit)
-                                {
-                                    target = Helper.GetSplitTarget(t.Location);
-                                    t.SetNextTask(Technite.Task.ConsumeSurroundingCell, target);
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine("mehr als 100");
-                            }
+                        //    Console.WriteLine("test");
+                        //    if (Technite.All.Count() < 100)
+                        //    {
+                        //        if (t.CanConsume)
+                        //        {
+                        //            target = Helper.GetFoodChoice(t.Location);
+                        //            //Grid.RelativeCell target = Helper.GetSplitTarget(t.Location);
+                        //            t.SetNextTask(Technite.Task.ConsumeSurroundingCell, target);
+                        //        }
+                        //        else if (t.CanSplit)
+                        //        {
+                        //            target = Helper.GetSplitTarget(t.Location);
+                        //            t.SetNextTask(Technite.Task.ConsumeSurroundingCell, target);
+                        //        }
+                        //    }
+                        //    else
+                        //    {
+                        //        Console.WriteLine("mehr als 100");
+                        //    }
+                        //break;
+
+                        if (t.CanGnawAt)
+                        {
+                            target = Helper.GetSplitTarget(t.Location);
+                            t.SetNextTask(Technite.Task.GnawAtSurroundingCell, target);
+                            break;
+                        }
+                        else t.SetNextTask(Technite.Task.None, Grid.RelativeCell.Self);
                         break;
                     //case 2:
 
                 }
+                t.SetCustomColor(new Technite.Color(0, 0, 255));
             }
 
 

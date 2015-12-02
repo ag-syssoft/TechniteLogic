@@ -25,6 +25,7 @@ namespace TechniteLogic
 							SplitMatterCost = 5,
 							EnergyPackageSize = 5,
 							MatterPackageSize = 5;
+        public static bool isLit = false;
 
 
 		/// <summary>
