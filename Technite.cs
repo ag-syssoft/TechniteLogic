@@ -786,7 +786,7 @@ namespace TechniteLogic
 
 		internal static bool EnoughSupportHere(Grid.CellID cell)
 		{
-			if (Grid.IsSolid(cell.BottomNeighbor.BottomNeighbor))
+			if (Grid.IsSolid(cell.BottomNeighbor))
 				return true;
 			foreach (var n0 in cell.GetHorizontalNeighbors())
 				if (Grid.IsSolid(n0) && Grid.IsSolid(n0.BottomNeighbor))
