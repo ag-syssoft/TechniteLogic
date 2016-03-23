@@ -29,12 +29,73 @@ namespace TechniteLogic
 			ShutDown(0);
 		}
 
+		enum ArgMode
+		{
+			Idle,
+			ID,
+			Location,
+			ParentID,
+			URL,
+			Secret,
+			InitMessage,
+		}
 
 
 		static void Main(string[] args)
 		{
 			Console.CancelKeyPress += new ConsoleCancelEventHandler(onCancel);
-			//Logging.Out.StartService();	//if multiple instances are started, the binding to a fixed ip is bad, so no service
+
+			ArgMode mode = ArgMode.Idle;
+
+
+			string initMessage = "";
+
+			foreach (var arg in args)
+			{
+				switch (mode)
+				{
+					case ArgMode.Idle:
+						if (arg.StartsWith("--"))
+						{
+							string attrib = arg.Substring(2);
+							switch (attrib)
+							{
+								case "id":
+									mode = ArgMode.ID;
+									break;
+								case "at":
+									mode = ArgMode.Location;
+									break;
+								case "parent":
+									mode = ArgMode.ParentID;
+									break;
+								case "url":
+									mode = ArgMode.URL;
+									break;
+								case "secret":
+									mode = ArgMode.Secret;
+									break;
+								default:
+									Console.Error.WriteLine("Unexpected attributed " + arg);
+									break;
+							}
+						}
+						else
+						{
+							mode = ArgMode.InitMessage;
+							initMessage = arg;
+						}
+					break;
+					case ArgMode.InitMessage:
+						initMessage += ' ' + arg;
+						break;
+
+
+
+
+				}
+
+			}
 
 
 			if (args.Length < 1)
