@@ -18,8 +18,8 @@ namespace TechniteLogic
 
 		protected override void OnReadThreadStart()
 		{
-			Out.Log(Significance.Common, "Connected. Authenticating...");
-			Interface.ready.SendTo(this,Interface.CompileProtocolString());
+			Out.Log(Significance.Common, "Connected. Waiting for challenge...");
+			//Interface.ready.SendTo(this,Interface.CompileProtocolString());
 
 		}
 
@@ -36,11 +36,18 @@ namespace TechniteLogic
 
 		
 
-		public void Connect(ushort port)
+		public void Connect(string url)
 		{
 			try
 			{
-                TcpClient.Connect("localhost",port);
+				int colonAt = url.IndexOf(':');
+				if (colonAt < 0)
+					return;
+				{
+					ushort port = ushort.Parse(url.Substring(colonAt + 1));
+					
+					TcpClient.Connect(url.Substring(0, colonAt), port);
+				}
 				StartNoSSLSelf();
 			}
 			catch (Exception /*ex*/)

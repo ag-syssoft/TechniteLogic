@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Math3D;
 using Protocol;
 using Logging;
+using System.Security.Cryptography;
 
 namespace TechniteLogic
 {
@@ -15,50 +16,48 @@ namespace TechniteLogic
 		public enum ChannelID
 		{
 			Unused,
-			Ready,                  //c2s: String: protocol version+name
-			Error,                  //s2c: String: message
-			TechniteStateChunk,     //s2c: TechniteStateChunk
-			InstructTechnites,      //s2c: InstructTechnites
-			TechniteInstructionChunk, //c2s: TechniteInstructionChunk
-
-			NodeChunk,      //s2c: NodeChunk - completed before SessionBegin is sent
-			GridConfig,     //s2c: GridConfig
-			GridDelta,      //s2c: GridDelta
-			WorldInfo,      //s2c: WorldInfo
-			BeginSession,   //s2c: BeginSession
-
-			CreateControlMarker,    //s2c: ControlMarker
-			CreateGameObject,       //s2c: GameObject
-			RemoveControlMarker,    //s2c: UINT32 (compressed location)
-			RemoveGameObject,       //s2c: RemoveGameObject
-
-			RequestNextRound, //c2s: <signal>
-
-			TechniteColorChunk, //c2s: TechniteColorChunk
+			Challenge,          //	s2c : CryptographicID
+			Authenticate,       //	c2s : Authenticate
+			Authenticated,      //	s2c : <signal>
+			StateUpdateBegin,   //	s2c : <signal>
+			EntityContact,      //	s2c : EntityContact
+			OwnTechniteState,   //	s2c : OwnState
+			OtherTechniteState, //	s2c : OtherState
+			TerrainState,       //	s2c : TerrainStateCell[]
+			Message,            //	s2c : Message
+			IsDead,             //	s2c : <signal>
+			RegularInstruction, //	c2s : RegularInstruction
+			MessageInstruction, //	c2s : MessageInstruction
+			ProcessRound,       //	s2c : ProcessRound
 
 			Count     //must remain last
 		};
 
 
-		public static OutChannel<Struct.TechniteInstructionChunk> techniteInstructionChunk = new Protocol.OutChannel<Struct.TechniteInstructionChunk>((uint)ChannelID.TechniteInstructionChunk);
-		public static OutChannel<string> ready = new OutChannel<string>((uint)ChannelID.Ready);
-		public static SignalChannel requestNextRound = new SignalChannel((uint)ChannelID.RequestNextRound);
-		public static OutChannel<Struct.TechniteColorChunk> techniteColorChunk = new OutChannel<Struct.TechniteColorChunk>((uint)ChannelID.TechniteColorChunk);
+		public static OutChannel<Struct.Authenticate> authenticate = new Protocol.OutChannel<Struct.Authenticate>((uint)ChannelID.Authenticate);
+		public static OutChannel<Struct.RegularInstruction> regularInstruction = new Protocol.OutChannel<Struct.RegularInstruction>((uint)ChannelID.RegularInstruction);
+		public static OutChannel<Struct.MessageInstruction> messageInstruction = new Protocol.OutChannel<Struct.MessageInstruction>((uint)ChannelID.MessageInstruction);
+		internal static Client globalClient;
 
 		public static void Register()
         {
-			ChannelMap.Register<string>((uint)ChannelID.Error, Event.Error);
-			ChannelMap.Register<Struct.TechniteStateChunk>((uint)ChannelID.TechniteStateChunk, Event.TechniteStateChunk);
-			ChannelMap.Register<Struct.InstructTechnites>((uint)ChannelID.InstructTechnites,Event.InstructTechnites);
-			ChannelMap.Register<Struct.GridConfig>((uint)ChannelID.GridConfig, Event.GridConfig);
-			ChannelMap.Register<Struct.NodeChunk>((uint)ChannelID.NodeChunk, Event.NodeChunk);
-			ChannelMap.Register<Struct.GridDelta>((uint)ChannelID.GridDelta, Event.GridDelta);
-			ChannelMap.Register<Struct.WorldInfo>((uint)ChannelID.WorldInfo, Event.WorldInfo);
-			ChannelMap.Register<Struct.ControlMarker>((uint)ChannelID.CreateControlMarker, Event.CreateControlMarker);
-			ChannelMap.Register<Struct.GameObject>((uint)ChannelID.CreateGameObject, Event.CreateGameObject);
-			ChannelMap.Register<UInt32>((uint)ChannelID.RemoveControlMarker, Event.RemoveControlMarker);
-			ChannelMap.Register<Struct.GameObjectID>((uint)ChannelID.RemoveGameObject, Event.RemoveGameObject);
-			ChannelMap.Register<Struct.BeginSession>((uint)ChannelID.BeginSession, Event.BeginSession);
+			ChannelMap.Register<Struct.Sha256Hash>((uint)ChannelID.Challenge,Event.Challenge);
+			ChannelMap.RegisterSignal((uint)ChannelID.Authenticated, Event.Authenticated);
+			ChannelMap.RegisterSignal((uint)ChannelID.StateUpdateBegin, Event.StateUpdateBegin);
+			ChannelMap.RegisterSignal((uint)ChannelID.IsDead, Event.IsDead);
+
+			ChannelMap.Register<Struct.EntityContact>((uint)ChannelID.EntityContact, Event.EntityContact);
+			ChannelMap.Register<Struct.OwnState>((uint)ChannelID.OwnTechniteState, Event.OwnTechniteState);
+			ChannelMap.Register<Struct.OtherState>((uint)ChannelID.OtherTechniteState, Event.OtherTechniteState);
+			ChannelMap.Register<Struct.TerrainStateCell[]>((uint)ChannelID.TerrainState, Event.TerrainState);
+			ChannelMap.Register<Struct.Message>((uint)ChannelID.Message, Event.Message);
+			ChannelMap.Register<Struct.ProcessRound>((uint)ChannelID.ProcessRound, Event.ProcessRound);
+
+
+
+			//ChannelMap.Register<Struct.GridConfig>((uint)ChannelID.GridConfig, Event.GridConfig);
+			//ChannelMap.Register<Struct.NodeChunk>((uint)ChannelID.NodeChunk, Event.NodeChunk);
+			//ChannelMap.Register<Struct.WorldInfo>((uint)ChannelID.WorldInfo, Event.WorldInfo);
 
 		}
 
@@ -66,132 +65,149 @@ namespace TechniteLogic
 		public class Struct
 		{
 
-			public struct TechniteResources
-			{
-				public byte energy,
-							matter;
-
-
-			}
 
 			public struct WorldInfo
 			{
 				public byte coreContent;
 			}
 
-			public struct TechniteState
+
+			public struct CommonTechniteState
 			{
 				public UInt32 location;
-				public TechniteResources resources;
-				public byte taskResult,
-							state;
+				public byte resources;
 			}
 
-			public struct Color
-			{
-				public UInt32 index;
-				public byte r, g, b;
 
-				public Color(UInt32 index, Technite.Color c)
+			public struct OwnState
+			{
+				public CommonTechniteState commonState;
+				public byte taskResult;
+				public byte compressedState;
+				public float visionRadius;
+			}
+
+			public struct Uuid
+			{
+				public UInt64 v0, v1;
+
+				public Uuid(Guid id) : this()
 				{
-					this.index = index;
-					r = c.Red;
-					g = c.Green;
-					b = c.Blue;
+					byte[] bytes = id.ToByteArray();
+					v0 = BitConverter.ToUInt64(bytes, 0);
+					v1 = BitConverter.ToUInt64(bytes, 8);
+				}
+
+				public byte[] Bytes
+				{
+					get
+					{
+						byte[] rs = new byte[2 * 8];
+						BitConverter.GetBytes(v0).CopyTo(rs, 0);
+						BitConverter.GetBytes(v1).CopyTo(rs, 8);
+						return rs;
+					}
+				}
+
+				public Guid Guid
+				{
+					get
+					{
+						return new Guid(Bytes);
+					}
+					
 				}
 			}
 
-			public struct TechniteColorChunk
+			public struct OtherState
 			{
-				public UInt32 offset;
-				public Color[] colors;
+				public Uuid id;
+				public CommonTechniteState commonState;
 			}
 
 
-			public enum TechniteChunkFlags
-			{
-				IsFirst = 0x1,
-				IsLast = 0x2
 
+			public struct TerrainStateCell
+			{
+				public UInt32 compressedLocation;
+				public byte content;
+			};
+
+
+			public struct EntityContact
+			{
+				public Uuid id;
+				public string type;
+				public byte height;
+				public UInt32 location;
+				public UInt16 currentHealth;
+				public UInt16 maxHealth;
 			}
 
-			public struct TechniteStateChunk
+			public struct Message
 			{
-				public byte flags;
-				public TechniteState[] states;
+				public Uuid sender;
+				public string message;
+			}
 
+			public struct Sha256Hash
+			{
+				public UInt64 v0, v1, v2, v3;
 
-				public bool FlagIsSet(TechniteChunkFlags flag)
+				public Sha256Hash(byte[] data)
 				{
-					return ((int)flags & (int)flag) != 0;
+					Debug.Assert(data.Length == 32);
+					v0 = BitConverter.ToUInt64(data, 0);
+					v1 = BitConverter.ToUInt64(data, 8);
+					v2 = BitConverter.ToUInt64(data, 16);
+					v3 = BitConverter.ToUInt64(data, 24);
 				}
-
+				public byte[] Bytes
+				{
+					get
+					{
+						byte[] rs = new byte[4 * 8];
+						BitConverter.GetBytes(v0).CopyTo(rs,0);
+						BitConverter.GetBytes(v1).CopyTo(rs, 8);
+						BitConverter.GetBytes(v2).CopyTo(rs, 16);
+						BitConverter.GetBytes(v3).CopyTo(rs, 24);
+						return rs;
+					}
+				}
 			}
 
-			public struct TechniteInstruction
+			public struct Authenticate
+			{
+				public Uuid myID;
+				public Sha256Hash challengeResponse;
+				public string protocolVersion;
+			}
+
+
+			public struct RegularInstruction
 			{
 				public byte nextTask,
-							taskTarget,
+							relativeTarget,
 							taskParameter;
 			}
 
-			public struct TechniteInstructionChunk
+			public struct MessageInstruction
 			{
-				public const int MaxPerChunk = 10000;
-				public UInt32 offset;
-				public TechniteInstruction[] instructions;
+				public Uuid receiver;
+				public byte receiverLocation;
+				public string message;
 			}
 
 
-			public struct GridDeltaBlock
-			{
-				public UInt32 repitition;
-				public byte value;
-			}
+			
 
-
-			public struct GameObjectID
-			{
-				public UInt32	location;
-				public bool		isGhost;
-				public Objects.GameObject.ObjectType type;
-			}
-
-			public struct GameObject
-			{
-				public GameObjectID id;
-				public UInt32	birthRound;
-				public byte		height;
-				public bool		isBroad;
-				public string	className;
-				public bool		isMine;
-			}
-
-			public struct ControlMarker
-			{
-				public UInt32	location;
-				public float	radius;
-				public byte		typeIndex;
-				public UInt32	birthRound;
-			}
-
-
-			public struct InstructTechnites
+			public struct ProcessRound
 			{
 				public UInt32 roundNumber,
 								techniteSubRoundNumber;
 			}
 
-
-			public struct GridDelta
-			{
-				public UInt32 nodeOffset,
-								nodeCount;
-				public GridDeltaBlock[] contentBlocks,
-										techniteFactionBlocks;
-
-			}
-
+			
 			public struct GridNode
             {
                 public UInt32[] neighbors;
@@ -209,94 +225,23 @@ namespace TechniteLogic
 								energyYieldAtLayer;
 			}
 
-			public struct Chunk<T>
-			{
-				public bool isLast;
-				public T[] elements;
-
-			}
-
 			public struct NodeChunk
 			{
 				public bool isLast;
 				public GridNode[] nodes;
 			}
 
-			public struct BeginSession
-			{
-				public string factionUUID;
-				public byte techniteGridID;
-
-				public UInt32 roundNumber,
-								techniteSubRoundNumber;
-			}
-
-			//public struct SessionBegin
-			//{
-			//	public GridConfig grid;
-			//	public byte myFactionGridID;
-			//}
 		}
 
-        public static class Event
+		public static class Event
 		{
 
-			public static void InstructTechnites(Protocol.Client cl, Struct.InstructTechnites instruct)
+			static byte[] Concat(byte[] a, byte[] b)
 			{
-				Technite.Cleanup();	//updates must be done by now
-				Session.roundNumber = instruct.roundNumber;
-				Session.techniteSubRoundNumber = instruct.techniteSubRoundNumber;
-				Out.Log(Significance.Common, "Instructing technites in round " + Session.roundNumber+"/"+Session.techniteSubRoundNumber);
-				Logic.ProcessTechnites();
-
-
-				SendColorState(cl);
-
-				int numTechnites = Technite.Count;
-				int numChunks = numTechnites / Struct.TechniteInstructionChunk.MaxPerChunk;
-				if ((numTechnites % Struct.TechniteInstructionChunk.MaxPerChunk)!= 0)
-					numChunks++;
-
-
-				Out.Log(Significance.Common, "Sending "+numChunks+" technite data response chunks");
-				var e = Technite.All.GetEnumerator();
-				int offset = 0;
-				for (int i = 0; i < numChunks; i++)
-				{
-					int chunkSize = Math.Min(Struct.TechniteInstructionChunk.MaxPerChunk, numTechnites - offset);
-
-					Struct.TechniteInstructionChunk chunk = new Struct.TechniteInstructionChunk();
-					chunk.offset = (uint)offset;
-					chunk.instructions = new Struct.TechniteInstruction[chunkSize];
-					for (int j = 0; j < chunkSize; j++)
-					{
-						bool success = e.MoveNext();
-						Debug.Assert(success);
-                        Technite t = e.Current;
-						chunk.instructions[j] = t.ExportInstruction();
-					}
-
-					techniteInstructionChunk.SendTo(cl,chunk);
-
-					offset += chunkSize;
-				}
-			}
-
-			public static void TechniteStateChunk(Protocol.Client cl, Struct.TechniteStateChunk chunk)
-			{
-				Out.Log(Significance.Common, "Received technite state chunk containing "+chunk.states.Length+" technites");
-				if (chunk.FlagIsSet(Struct.TechniteChunkFlags.IsFirst))
-					Technite.Reset();
-				foreach (var state in chunk.states)
-					Technite.CreateOrUpdate(state);
-				if (chunk.FlagIsSet(Struct.TechniteChunkFlags.IsLast))
-					Technite.Cleanup();
-
-			}
-
-			internal static void GridDelta(Protocol.Client cl, Struct.GridDelta gridDelta)
-			{
-				Grid.ApplyDelta(gridDelta);
+				byte[] c = new byte[a.Length + b.Length];
+				a.CopyTo(c, 0);
+				b.CopyTo(c, a.Length);
+				return c;
 			}
 
 			internal static void NodeChunk(Protocol.Client cl, Struct.NodeChunk nodeChunk)
@@ -307,26 +252,11 @@ namespace TechniteLogic
 			internal static void GridConfig(Protocol.Client cl, Struct.GridConfig gridConfig)
 			{
 				Grid.BeginSession(gridConfig.heightPerLayer, gridConfig.numLayersPerStack);
-				if (Technite.MatterYield.Length != gridConfig.matterYieldByContentType.Length)
-				{
-					Out.Log(Significance.ProgramFatal, "Received matter yield vector (" + gridConfig.matterYieldByContentType.Length + ") does not match number of supported content types (" + Technite.MatterYield.Length + ").");
-					return;
-				}
-				if (Technite.MatterDegradeTo.Length != gridConfig.matterDegradationTable.Length)
-				{
-					Out.Log(Significance.ProgramFatal, "Received matter degradation vector (" + gridConfig.matterDegradationTable.Length + ") does not match number of supported content types (" + Technite.MatterDegradeTo.Length + ").");
-					return;
-				}
 
-                Technite.MatterYield = gridConfig.matterYieldByContentType;
-				Technite.MatterDegradeTo = gridConfig.matterDegradationTable;
+				//...
+			}
 
-				Technite.InitialTTLAtLayer = gridConfig.initialTTLAtLayer;
-				Technite.EnergyYieldAtLayer = gridConfig.energyYieldAtLayer;
-
-		}
-
-		internal static void WorldInfo(Protocol.Client cl, Struct.WorldInfo worldInfo)
+			internal static void WorldInfo(Protocol.Client cl, Struct.WorldInfo worldInfo)
 			{
 				Grid.World.Setup((Grid.Content)worldInfo.coreContent);
 
@@ -339,98 +269,82 @@ namespace TechniteLogic
 				return;
 			}
 
-			internal static void CreateControlMarker(Protocol.Client arg1, Struct.ControlMarker marker)
+			internal static void Challenge(Protocol.Client peer, Struct.Sha256Hash challenge)
 			{
-				Objects.Add(marker);
+				SHA256 sha = SHA256.Create();
+				Struct.Authenticate rs = new Struct.Authenticate();
+				
+				rs.challengeResponse = new Struct.Sha256Hash(sha.ComputeHash(Concat(Session.secret, challenge.Bytes)));
+				rs.myID = new Struct.Uuid(Technite.Me.ID);
+				rs.protocolVersion = CompileProtocolString();
+				Interface.authenticate.SendTo(peer, rs);
 			}
 
-			internal static void CreateGameObject(Protocol.Client arg1, Struct.GameObject obj)
+			internal static void Authenticated(Protocol.Client peer)
 			{
-				Objects.Add(obj);
+				Out.Log(Significance.Important,"Authenticated");
 			}
 
-			internal static void RemoveControlMarker(Protocol.Client arg1, UInt32 markerID)
+			internal static void StateUpdateBegin(Protocol.Client peer)
 			{
-				Objects.RemoveControlMarker(markerID);
+				Contacts.Deprecate();
+				Technite.DeprecateOthers();
+				Grid.World.FlushVisibility();
+				Messages.Clear();
 			}
 
-			internal static void RemoveGameObject(Protocol.Client arg1, Struct.GameObjectID objID)
+			internal static void IsDead(Protocol.Client peer)
 			{
-				Objects.Remove(objID);
+				Out.Log(Significance.ClientFatal, "Died");
+				peer.ForceDisconnect();
 			}
 
-			internal static void BeginSession(Protocol.Client arg1, Struct.BeginSession session)
+			internal static void EntityContact(Protocol.Client peer, Struct.EntityContact contact)
 			{
-				Session.Begin(session);
+				Contacts.Add(contact);
+			}
+
+			internal static void OwnTechniteState(Protocol.Client peer, Struct.OwnState state)
+			{
+				Technite.Me.Update(state);
+			}
+
+			internal static void OtherTechniteState(Protocol.Client peer, Struct.OtherState state)
+			{
+				Technite.AddContact(state.id.Guid).Update(state.commonState);
+			}
+
+			internal static void TerrainState(Protocol.Client peer, Struct.TerrainStateCell[] state)
+			{
+				foreach (var st in state)
+				{
+					var loc = new Technite.CompressedLocation(st.compressedLocation).CellID;
+
+					Grid.World.Update(loc, (Grid.Content)st.content);
+				}
+			}
+
+			internal static void Message(Protocol.Client peer, Struct.Message message)
+			{
+				Messages.Add(Technite.Find(message.sender.Guid), message.message);
+			}
+
+			internal static void ProcessRound(Protocol.Client peer, Struct.ProcessRound process)
+			{
+				Contacts.Tidy();
+				Technite.Tidy();
+				Session.roundNumber = process.roundNumber;
+				Session.techniteSubRoundNumber = process.techniteSubRoundNumber;
+				Logic.Execute();
+
 			}
 		}
-
-		static List<Struct.Color> colorBuffer = new List<Struct.Color>();
 
 
 		public static string CompileProtocolString()
 		{
-			return "Aquinas v1.6." + (int)ChannelID.Count;
+			return "Aquinas v2.0." + (int)ChannelID.Count;
 		}
-
-		private static void SendColorChunks(Protocol.Client cl, UInt32 offset, List<Struct.Color> list)
-		{
-			//Struct.TechniteColorChunk chunk = new Struct.TechniteColorChunk();
-			//chunk.offset = offset;
-			//chunk.colors = colorBuffer.ToArray();
-			//colorBuffer.Clear();
-			//techniteColorChunk.SendTo(client, chunk);
-
-			int numVecs = list.Count();
-			int numChunks = numVecs / Struct.TechniteInstructionChunk.MaxPerChunk;
-			if ((numVecs % Struct.TechniteInstructionChunk.MaxPerChunk) != 0)
-				numChunks++;
-
-
-			Out.Log(Significance.Common, "Sending " + numChunks + " technite color chunk(s), starting from "+offset);
-			int localOffset = 0;
-			for (int i = 0; i < numChunks; i++)
-			{
-				int chunkSize = Math.Min(Struct.TechniteInstructionChunk.MaxPerChunk, numVecs - localOffset);
-
-				Struct.TechniteColorChunk chunk = new Struct.TechniteColorChunk();
-				chunk.offset = offset;
-				chunk.colors = new Struct.Color[chunkSize];
-				list.CopyTo(localOffset, chunk.colors, 0, chunkSize);
-				techniteColorChunk.SendTo(cl, chunk);
-				offset += (uint)chunkSize;
-				localOffset += chunkSize;
-            }
-
-
-		}
-
-		public static void SendColorState(Protocol.Client client)
-		{
-			colorBuffer.Clear();
-			UInt32 at=0;
-			foreach (Technite t in Technite.All)
-			{
-				if (t.UsesCustomColor)
-				{
-					//if (colorBuffer.Count == 0)
-					//	offset = at;
-					colorBuffer.Add(new Struct.Color(at, t.CustomColor ));
-				}
-				//else
-				//	if (colorBuffer.Count > 0)
-				//{
-				//	SendColorChunks(client, offset, colorBuffer);
-				//	colorBuffer.Clear();
-    //            }
-				at++;
-			}
-
-			if (colorBuffer.Count > 0)
-			{
-				SendColorChunks(client, 0, colorBuffer);
-				colorBuffer.Clear();
-			}
-		}
+		
 	}
 }

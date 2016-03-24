@@ -173,13 +173,13 @@ namespace TechniteLogic
 			public CellStack()
 			{
 				for (int i = 0; i < volumeCell.Length; i++)
-					volumeCell[i] = new Cell() { content = Content.Undefined, techniteFactionID = 0 };
+					volumeCell[i] = new Cell() { content = Content.Undefined };
 			}
 
             public struct Cell
             {
 				public Content content;
-				public byte techniteFactionID;
+				public bool isVisible;
 
 
 				internal void ApplyContentDelta(byte value)
@@ -188,11 +188,6 @@ namespace TechniteLogic
 						content = (Content)(value);
 				}
 
-				internal void ApplyTechniteDelta(byte value)
-				{
-					if (value != 0)
-						techniteFactionID = (byte)(value - 1);
-				}
 			}
 		}
 
@@ -209,6 +204,8 @@ namespace TechniteLogic
 				}
 			}
 
+			private static List<CellID> visible = new List<CellID>();
+
 			public static CellStack[] CellStacks
 			{
 				get; private set;
@@ -217,50 +214,6 @@ namespace TechniteLogic
 			public static CellStack.Cell FloorCell { get; private set; }
 			public static CellStack.Cell CeilingCell { get; private set; }
 
-
-			private static void ApplyDeltaField(Interface.Struct.GridDelta delta, Interface.Struct.GridDeltaBlock[] blocks, Action<CellStack, uint, byte> action)
-			{
-				if (blocks.Length != 0)
-				{
-					//Out.Log(Significance.Low, "  Applying " + blocks.Length + " blocks...");
-					uint at = 0;
-					foreach (var block in blocks)
-					{
-						for (int i = 0; i < block.repitition; i++)
-						{
-							uint stackIndex = (at % delta.nodeCount) + delta.nodeOffset;
-							uint layer = at / delta.nodeCount;
-
-							CellStack stack = CellStacks[stackIndex];
-							action(stack, layer, block.value);
-
-							at++;
-						}
-					}
-					Debug.Assert(at == delta.nodeCount * CellStack.LayersPerStack);
-				}
-			}
-
-
-			public static void ApplyDelta(Interface.Struct.GridDelta delta)
-			{
-				if (CellStacks == null)
-				{
-					Out.Log(Significance.ProgramFatal, "World not initialized. Cannot apply delta.");
-					return;
-				}
-				if (delta.nodeOffset + delta.nodeCount > Graph.Nodes.Length)
-				{
-					Out.Log(Significance.ProgramFatal, "Invalid node range for world delta: ["+delta.nodeOffset+","+(delta.nodeOffset+delta.nodeCount)+") /"+ Graph.Nodes.Length);
-					return;
-				}
-				Out.Log(Significance.Common, "Applying world delta at range "+delta.nodeOffset+"..."+(delta.nodeOffset+delta.nodeCount)+ " /"+Graph.Nodes.Length);
-
-
-				ApplyDeltaField(delta, delta.contentBlocks, (stack, layer, value) => stack.volumeCell[layer].ApplyContentDelta(value));
-				ApplyDeltaField(delta, delta.techniteFactionBlocks, (stack, layer, value) => stack.volumeCell[layer].ApplyTechniteDelta(value));
-
-			}
 
 			internal static void Setup(Content coreContent)
 			{
@@ -290,17 +243,25 @@ namespace TechniteLogic
 				FloorCell = new CellStack.Cell();
 				CeilingCell = new CellStack.Cell();
 				CellStack.StaticReset();
+				visible.Clear();
             }
+
+			internal static void Update(CellID loc, Content content)
+			{
+				CellStacks[loc.StackID].volumeCell[loc.Layer].content = content;
+				CellStacks[loc.StackID].volumeCell[loc.Layer].isVisible = true;
+				visible.Add(loc);
+			}
+
+			internal static void FlushVisibility()
+			{
+				foreach (var loc in visible)
+					CellStacks[loc.StackID].volumeCell[loc.Layer].isVisible = true;
+				visible.Clear();
+			}
 		}
 
 		
-
-		public static void ApplyDelta(Interface.Struct.GridDelta delta)
-		{
-			World.Create();
-			World.ApplyDelta(delta);
-		}
-
 
 
 		/// <summary>

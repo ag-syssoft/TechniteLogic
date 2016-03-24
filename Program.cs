@@ -40,6 +40,34 @@ namespace TechniteLogic
 			InitMessage,
 		}
 
+		static string serverURL = "";
+
+
+		public static byte[] StringToByteArrayFastest(string hex)
+		{
+			if (hex.Length % 2 == 1)
+				throw new Exception("The binary key cannot have an odd number of digits");
+
+			byte[] arr = new byte[hex.Length >> 1];
+
+			for (int i = 0; i < hex.Length >> 1; ++i)
+			{
+				arr[i] = (byte)((GetHexVal(hex[i << 1]) << 4) + (GetHexVal(hex[(i << 1) + 1])));
+			}
+
+			return arr;
+		}
+
+		public static int GetHexVal(char hex)
+		{
+			int val = (int)hex;
+			//For uppercase A-F letters:
+			return val - (val < 58 ? 48 : 55);
+			//For lowercase a-f letters:
+			//return val - (val < 58 ? 48 : 87);
+			//Or the two combined, but a bit slower:
+			//return val - (val < 58 ? 48 : (val < 97 ? 55 : 87));
+		}
 
 		static void Main(string[] args)
 		{
@@ -89,8 +117,14 @@ namespace TechniteLogic
 					case ArgMode.InitMessage:
 						initMessage += ' ' + arg;
 						break;
-
-
+					case ArgMode.URL:
+						serverURL = arg;
+						break;
+					case ArgMode.Secret:
+						Session.secret = StringToByteArrayFastest(arg);
+						Debug.Assert(Session.secret.Length == 32);
+						break;
+					
 
 
 				}
@@ -98,21 +132,6 @@ namespace TechniteLogic
 			}
 
 
-			if (args.Length < 1)
-			{
-				Console.Error.WriteLine("Missing parameters. Use 'exe [port]'. Exiting");
-				ShutDown(-1);
-				return;
-			}
-
-			ushort serverPort;
-
-			if (!ushort.TryParse(args[0], out serverPort))
-			{
-				Console.Error.WriteLine("Unable to parse parameter '"+args[0]+"' to port number. Exiting");
-				ShutDown(-1);
-				return;
-			}
 
 			Interface.Register();
 
@@ -121,13 +140,14 @@ namespace TechniteLogic
 			for (;;)
 			{
 				Client client = new Client();
+				Interface.globalClient = client;
 
-				Out.Log(Logging.Significance.Important, "Connecting to server on port " + serverPort);
-				client.Connect(serverPort);
+				Out.Log(Logging.Significance.Important, "Connecting to server at" + serverURL);
+				client.Connect(serverURL);
 
 				Grid.FlushAllData();
 				Technite.FlushAllData();
-				Objects.FlushAllData();
+				Contacts.FlushAllData();
 
 				System.Threading.Thread.Sleep(2000);
 			}
