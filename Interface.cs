@@ -19,11 +19,13 @@ namespace TechniteLogic
 			Challenge,          //	s2c : CryptographicID
 			Authenticate,       //	c2s : Authenticate
 			Authenticated,      //	s2c : <signal>
+			NodeChunk,          //	s2c : NodeChunk
+			GridConfig,         //	s2c : GridConfig
 			StateUpdateBegin,   //	s2c : <signal>
 			EntityContact,      //	s2c : EntityContact
 			OwnTechniteState,   //	s2c : OwnState
 			OtherTechniteState, //	s2c : OtherState
-			TerrainState,       //	s2c : TerrainStateCell[]
+			TerrainState,       //	s2c : NETA<BYTE>
 			Message,            //	s2c : Message
 			IsDead,             //	s2c : <signal>
 			RegularInstruction, //	c2s : RegularInstruction
@@ -55,8 +57,8 @@ namespace TechniteLogic
 
 
 
-			//ChannelMap.Register<Struct.GridConfig>((uint)ChannelID.GridConfig, Event.GridConfig);
-			//ChannelMap.Register<Struct.NodeChunk>((uint)ChannelID.NodeChunk, Event.NodeChunk);
+			ChannelMap.Register<Struct.GridConfig>((uint)ChannelID.GridConfig, Event.GridConfig);
+			ChannelMap.Register<Struct.NodeChunk>((uint)ChannelID.NodeChunk, Event.NodeChunk);
 			//ChannelMap.Register<Struct.WorldInfo>((uint)ChannelID.WorldInfo, Event.WorldInfo);
 
 		}
@@ -66,10 +68,10 @@ namespace TechniteLogic
 		{
 
 
-			public struct WorldInfo
-			{
-				public byte coreContent;
-			}
+			//public struct WorldInfo
+			//{
+			//	public byte coreContent;
+			//}
 
 
 			public struct CommonTechniteState
@@ -219,10 +221,9 @@ namespace TechniteLogic
 			{
 				public float heightPerLayer;
 				public int numLayersPerStack;
-				public byte[] matterYieldByContentType;
-				public byte[] matterDegradationTable;
 				public byte[] initialTTLAtLayer,
 								energyYieldAtLayer;
+				public byte coreContent;
 			}
 
 			public struct NodeChunk
@@ -252,15 +253,16 @@ namespace TechniteLogic
 			internal static void GridConfig(Protocol.Client cl, Struct.GridConfig gridConfig)
 			{
 				Grid.BeginSession(gridConfig.heightPerLayer, gridConfig.numLayersPerStack);
+				Grid.World.Setup((Grid.Content)gridConfig.coreContent);
 
 				//...
 			}
 
-			internal static void WorldInfo(Protocol.Client cl, Struct.WorldInfo worldInfo)
-			{
-				Grid.World.Setup((Grid.Content)worldInfo.coreContent);
+			//internal static void WorldInfo(Protocol.Client cl, Struct.WorldInfo worldInfo)
+			//{
+			//	Grid.World.Setup((Grid.Content)worldInfo.coreContent);
 
-			}
+			//}
 
 			internal static void Error(Protocol.Client client, string message)
 			{
