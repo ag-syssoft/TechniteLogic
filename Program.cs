@@ -76,7 +76,7 @@ namespace TechniteLogic
 			ArgMode mode = ArgMode.Idle;
 
 
-			string initMessage = "";
+			Session.initMessage = "";
 
 			foreach (var arg in args)
 			{
@@ -111,11 +111,40 @@ namespace TechniteLogic
 						else
 						{
 							mode = ArgMode.InitMessage;
-							initMessage = arg;
+							Session.initMessage = arg;
 						}
-					break;
+						continue;
+					case ArgMode.ID:
+						Technite.Me.ID = new Guid(StringToByteArrayFastest(arg));
+						Console.WriteLine("Updated my id to " + Technite.Me.ID);
+						break;
+					case ArgMode.Location:
+						{
+							int dotAt = arg.IndexOf('.');
+							if (dotAt == -1)
+							{
+								Console.Error.WriteLine("Malformatted technite location: " + arg);
+								break;
+							}
+							
+							try
+							{
+								uint stackID = uint.Parse(arg.Substring(0, dotAt));
+								int layer = int.Parse(arg.Substring(dotAt + 1));
+								Technite.Me.Location = new Grid.CellID(stackID, layer);
+								Console.WriteLine("Updated my location to " + Technite.Me.Location);
+							}
+							catch (Exception e)
+							{
+								Console.Error.WriteLine(e+" while trying to convert " + arg+" to location");
+							}
+						}
+						break;
+					case ArgMode.ParentID:
+						Session.ParentTechniteID = new Guid(StringToByteArrayFastest(arg));
+						break;
 					case ArgMode.InitMessage:
-						initMessage += ' ' + arg;
+						Session.initMessage += ' ' + arg;
 						break;
 					case ArgMode.URL:
 						serverURL = arg;
@@ -124,10 +153,9 @@ namespace TechniteLogic
 						Session.secret = StringToByteArrayFastest(arg);
 						Debug.Assert(Session.secret.Length == 32);
 						break;
-					
-
 
 				}
+				mode = ArgMode.Idle;
 
 			}
 

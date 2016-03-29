@@ -13,6 +13,8 @@ namespace TechniteLogic
 		public static UInt32 techniteSubRoundNumber = 0;
 
 		public static byte[] secret = null;
+		internal static string initMessage;
 
+		public static Guid ParentTechniteID { get; internal set; }
 	}
 }
