@@ -151,7 +151,29 @@ namespace TechniteLogic
 		{
 			Out.Log(Significance.Common, "Execute()");
 
+			List<Grid.RelativeCell> candidates = new List<Grid.RelativeCell>();
+			foreach (var loc in Technite.Me.Location.GetRelativeNeighbors())
+			{
+				Grid.CellID cell = Technite.Me.Location + loc;
+				if (Grid.IsClearOrWater(cell) && Technite.EnoughSupportHere(cell))
+				{
+					candidates.Add(loc);
+				}
+//				else
+	//				Out.Log(Significance.Unusual, cell + " is " + Grid.World.GetCell(cell).content);
 
+			}
+
+			Out.Log(Significance.Unusual, "Got " + candidates.Count + " movement options from " + Technite.Me.Location);
+			if (candidates.Count > 0)
+			{
+				int choice = random.Next(candidates.Count - 1);
+
+				Grid.RelativeCell loc = candidates[choice];
+				Grid.CellID cell = Technite.Me.Location + loc;
+				Out.Log(Significance.Unusual, "Set target to " + cell);
+				Technite.Me.SetNextTask(Technite.Task.Move, loc);
+			}
 		}
 	}
 }
