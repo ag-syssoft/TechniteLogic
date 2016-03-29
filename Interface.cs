@@ -306,6 +306,8 @@ namespace TechniteLogic
 				Technite.Tidy();
 				Session.roundNumber = process.roundNumber;
 				Session.techniteSubRoundNumber = process.techniteSubRoundNumber;
+				Out.Log(Significance.Important, "Processing round "+Session.roundNumber+", "+Session.techniteSubRoundNumber);
+
 				Logic.Execute();
 
 			}
