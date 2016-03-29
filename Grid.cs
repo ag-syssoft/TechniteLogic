@@ -217,6 +217,7 @@ namespace TechniteLogic
 
 			internal static void Setup(Content coreContent)
 			{
+				Create();
 				FloorCell = new CellStack.Cell(){content = coreContent};
 				CeilingCell = new CellStack.Cell(){content = Content.Clear};
 				Out.Log(Significance.Common, "Set world core content to "+FloorCell.content);
