@@ -125,6 +125,17 @@ namespace TechniteLogic
 			return IsSolid(World.GetCell(location).content,includeTechnites);
 		}
 
+		public static bool IsClearOrWater(Content content)
+		{
+			return content == Content.Clear
+				|| content == Content.Water
+				;
+		}
+
+		public static bool IsClearOrWater(CellID location)
+		{
+			return IsClearOrWater(World.GetCell(location).content);
+		}
 
 
 
