@@ -8,6 +8,20 @@ namespace TechniteLogic
 		static List<Tuple<Technite, string>> messages = new List<Tuple<Technite, string>>();
 
 
+		public static IEnumerable<Tuple<Technite, string>>	All
+		{
+			get
+			{
+				return messages;
+			}
+		}
+		public static IEnumerable<Tuple<Technite, string>> From(Technite sender)
+		{
+			foreach (var msg in messages)
+				if (msg.Item1 == sender)
+					yield return msg;
+		}
+
 		public static void Clear()
 		{
 			messages.Clear();

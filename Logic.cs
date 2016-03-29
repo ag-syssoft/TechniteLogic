@@ -151,6 +151,12 @@ namespace TechniteLogic
 		{
 			Out.Log(Significance.Common, "Execute()");
 
+			foreach (var msg in Messages.All)
+			{
+				Out.Log(Significance.Unusual, "Got message from "+(msg.Item1 != null ? msg.Item1.ToString() : "(none)")+": "+msg.Item2);
+
+			}
+
 			List<Grid.RelativeCell> candidates = new List<Grid.RelativeCell>();
 			foreach (var loc in Technite.Me.Location.GetRelativeNeighbors())
 			{
