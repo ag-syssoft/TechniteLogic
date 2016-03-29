@@ -89,38 +89,6 @@ namespace TechniteLogic
 				public float visionRadius;
 			}
 
-			public struct Uuid
-			{
-				public UInt64 v0, v1;
-
-				public Uuid(Guid id) : this()
-				{
-					byte[] bytes = id.ToByteArray();
-					v0 = BitConverter.ToUInt64(bytes, 0);
-					v1 = BitConverter.ToUInt64(bytes, 8);
-				}
-
-				public byte[] Bytes
-				{
-					get
-					{
-						byte[] rs = new byte[2 * 8];
-						BitConverter.GetBytes(v0).CopyTo(rs, 0);
-						BitConverter.GetBytes(v1).CopyTo(rs, 8);
-						return rs;
-					}
-				}
-
-				public Guid Guid
-				{
-					get
-					{
-						return new Guid(Bytes);
-					}
-					
-				}
-			}
-
 			public struct OtherState
 			{
 				public Uuid id;
@@ -273,11 +241,12 @@ namespace TechniteLogic
 
 			internal static void Challenge(Protocol.Client peer, Struct.Sha256Hash challenge)
 			{
+				Out.Log(Significance.Important, "Received challenge. Authenticating...");
 				SHA256 sha = SHA256.Create();
 				Struct.Authenticate rs = new Struct.Authenticate();
 				
 				rs.challengeResponse = new Struct.Sha256Hash(sha.ComputeHash(Concat(Session.secret, challenge.Bytes)));
-				rs.myID = new Struct.Uuid(Technite.Me.ID);
+				rs.myID = Technite.Me.ID;
 				rs.protocolVersion = CompileProtocolString();
 				Interface.authenticate.SendTo(peer, rs);
 			}
@@ -313,7 +282,7 @@ namespace TechniteLogic
 
 			internal static void OtherTechniteState(Protocol.Client peer, Struct.OtherState state)
 			{
-				Technite.AddContact(state.id.Guid).Update(state.commonState);
+				Technite.AddContact(state.id).Update(state.commonState);
 			}
 
 			internal static void TerrainState(Protocol.Client peer, Struct.TerrainStateCell[] state)
@@ -328,7 +297,7 @@ namespace TechniteLogic
 
 			internal static void Message(Protocol.Client peer, Struct.Message message)
 			{
-				Messages.Add(Technite.Find(message.sender.Guid), message.message);
+				Messages.Add(Technite.Find(message.sender), message.message);
 			}
 
 			internal static void ProcessRound(Protocol.Client peer, Struct.ProcessRound process)

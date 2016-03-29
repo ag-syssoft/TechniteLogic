@@ -337,17 +337,17 @@ namespace TechniteLogic
 		Grid.CellID			location;
 		State				state;
 
-		internal static Technite Find(Guid guid)
+		internal static Technite Find(Uuid id)
 		{
 			Technite rs;
-			if (idMap.TryGetValue(guid, out rs))
+			if (idMap.TryGetValue(id, out rs))
 				return rs;
 			return null;
 		}
 
 		float				visionRadius;
 
-		public static Technite AddContact(Guid id)
+		public static Technite AddContact(Uuid id)
 		{
 			Technite rs = new Technite(id, Grid.CellID.Invalid);
 			idMap.Add(id, rs);
@@ -356,7 +356,7 @@ namespace TechniteLogic
 			return rs;
 		}
 
-		Guid				id;
+		Uuid				id;
 
 		//public struct Instruction
 		//{
@@ -403,7 +403,7 @@ namespace TechniteLogic
 		/// </summary>
 		public State		Status {  get { return state;  } }
 
-		public Guid			ID
+		public Uuid			ID
 		{
 			get
 			{
@@ -477,7 +477,7 @@ namespace TechniteLogic
 			Interface.regularInstruction.SendTo(Interface.globalClient, inst);
 		}
 
-		protected /**/				Technite(Guid id, Grid.CellID loc)
+		protected /**/				Technite(Uuid id, Grid.CellID loc)
 		{
 			location = loc;
 			this.id = id;
@@ -487,11 +487,11 @@ namespace TechniteLogic
 
 
 		private static Dictionary<Grid.CellID,Technite>	map = new Dictionary<Grid.CellID,Technite>();
-		private static Dictionary<Guid, Technite> idMap = new Dictionary<Guid, Technite>();
+		private static Dictionary<Uuid, Technite> idMap = new Dictionary<Uuid, Technite>();
 
 		private static List<Technite>	all = new List<Technite>();
 
-		public static readonly Technite Me = new Technite(Guid.Empty,Grid.CellID.Invalid);
+		public static readonly Technite Me = new Technite(Uuid.Empty,Grid.CellID.Invalid);
 
 		public static IEnumerable<Technite> All { get { return all; } }
 		public static int Count { get {  return all.Count; } }
@@ -506,7 +506,7 @@ namespace TechniteLogic
 			idMap.Clear();
 			all.Clear();
 			Me.location = Grid.CellID.Invalid;
-			Me.id = Guid.Empty;
+			Me.id = Uuid.Empty;
 		}
 
 

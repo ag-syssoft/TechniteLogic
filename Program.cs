@@ -50,9 +50,9 @@ namespace TechniteLogic
 
 			byte[] arr = new byte[hex.Length >> 1];
 
-			for (int i = 0; i < hex.Length >> 1; ++i)
+			for (int i = 0; i < arr.Length; ++i)
 			{
-				arr[i] = (byte)((GetHexVal(hex[i << 1]) << 4) + (GetHexVal(hex[(i << 1) + 1])));
+				arr[i] = (byte)((GetHexVal(hex[i << 1]) << 4) | (GetHexVal(hex[(i << 1) + 1])));
 			}
 
 			return arr;
@@ -60,6 +60,14 @@ namespace TechniteLogic
 
 		public static int GetHexVal(char hex)
 		{
+			
+			if (hex >= 'a' && hex <= 'f')
+				return 10 + (hex - 'a');
+			if (hex >= 'A' && hex <= 'F')
+				return 10 + (hex - 'A');
+			if (hex >= '0' && hex <= '9')
+				return (hex - '0');
+			return 0;
 			int val = (int)hex;
 			//For uppercase A-F letters:
 			return val - (val < 58 ? 48 : 55);
@@ -115,7 +123,7 @@ namespace TechniteLogic
 						}
 						continue;
 					case ArgMode.ID:
-						Technite.Me.ID = new Guid(StringToByteArrayFastest(arg));
+						Technite.Me.ID = new Uuid(StringToByteArrayFastest(arg));
 						Console.WriteLine("Updated my id to " + Technite.Me.ID);
 						break;
 					case ArgMode.Location:
@@ -159,8 +167,6 @@ namespace TechniteLogic
 
 			}
 
-
-
 			Interface.Register();
 
 
@@ -170,7 +176,7 @@ namespace TechniteLogic
 				Client client = new Client();
 				Interface.globalClient = client;
 
-				Out.Log(Logging.Significance.Important, "Connecting to server at" + serverURL);
+				Out.Log(Logging.Significance.Important, "Connecting to server at " + serverURL);
 				client.Connect(serverURL);
 
 				Grid.FlushAllData();
