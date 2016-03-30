@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Logging;
 using Math3D;
+using System.ServiceModel.Dispatcher;
+using System.Runtime.Serialization;
 
 namespace TechniteLogic
 {
@@ -144,6 +146,20 @@ namespace TechniteLogic
 
 		private static Random random = new Random();
 
+		private static JsonQueryStringConverter converter = new JsonQueryStringConverter();
+
+		[DataContract]
+		struct MoveToInstruction
+		{
+			[DataMemberAttribute]
+			public uint gotoStack,
+						gotoLayer;
+
+		}
+
+
+		static Grid.CellID currentTarget = Grid.CellID.Invalid;
+
 		/// <summary>
 		/// Central logic method. Invoked once per round to determine the next task for each technite.
 		/// </summary>
@@ -154,31 +170,116 @@ namespace TechniteLogic
 			foreach (var msg in Messages.All)
 			{
 				Out.Log(Significance.Unusual, "Got message from "+(msg.Item1 != null ? msg.Item1.ToString() : "(none)")+": "+msg.Item2);
-
-			}
-
-			List<Grid.RelativeCell> candidates = new List<Grid.RelativeCell>();
-			foreach (var loc in Technite.Me.Location.GetRelativeNeighbors())
-			{
-				Grid.CellID cell = Technite.Me.Location + loc;
-				if (Grid.IsClearOrWater(cell) && Technite.EnoughSupportHere(cell))
+				if (msg.Item1 == null)
 				{
-					candidates.Add(loc);
+					try
+					{
+						MoveToInstruction target = (MoveToInstruction)converter.ConvertStringToValue(msg.Item2, typeof(MoveToInstruction));
+						currentTarget = new Grid.CellID(target.gotoStack, (int)target.gotoLayer);
+					}
+					catch (Exception ex)
+					{
+						Out.Log(Significance.ClientFatal, ex.ToString());
+					}
 				}
-//				else
-	//				Out.Log(Significance.Unusual, cell + " is " + Grid.World.GetCell(cell).content);
-
 			}
 
-			Out.Log(Significance.Unusual, "Got " + candidates.Count + " movement options from " + Technite.Me.Location);
-			if (candidates.Count > 0)
-			{
-				int choice = random.Next(candidates.Count - 1);
 
-				Grid.RelativeCell loc = candidates[choice];
-				Grid.CellID cell = Technite.Me.Location + loc;
-				Out.Log(Significance.Unusual, "Set target to " + cell);
-				Technite.Me.SetNextTask(Technite.Task.Move, loc);
+
+
+			if (currentTarget != Grid.CellID.Invalid)
+			{
+				if (currentTarget != Technite.Me.Location)
+				{
+					Queue<Grid.CellID> path = new Queue<Grid.CellID>();
+					Dictionary<Grid.CellID, int> costs = new Dictionary<Grid.CellID, int>();
+					Dictionary<Grid.CellID, Grid.CellID> prev = new Dictionary<Grid.CellID, Grid.CellID>();
+					costs.Add(Technite.Me.Location, 0);
+					//prev.Add(Technite.Me.Location, Technite.Me.Location);
+					path.Enqueue(Technite.Me.Location);
+					List<Grid.CellID> route = new List<Grid.CellID>();
+					while (path.Count > 0)
+					{
+						Grid.CellID next = path.Dequeue();
+						if (next == currentTarget)
+						{
+							Grid.CellID p;
+//							route.Add(next);
+							while (prev.TryGetValue(next, out p))
+							{
+								route.Add(next);
+								next = p;
+							}
+							break;
+						}
+						int cost = costs[next];
+
+						foreach (var n in next.GetNeighbors())
+						{
+							if (!Technite.EnoughSupportHere(n,true))
+								continue;
+							if (!Grid.IsClearWaterOrUndefined(n))
+								continue;
+							int cost2;
+							if (costs.TryGetValue(n, out cost2))
+							{
+								if (cost2 <= cost + 1)
+									continue;
+								costs[n] = cost + 1;
+								prev[n] = next;
+							}
+							else
+							{
+								costs.Add(n, cost + 1);
+								prev.Add(n, next);
+							}
+							path.Enqueue(n);
+						}
+					}
+					route.Reverse();
+
+					if (route.Count > 0)
+					{
+						Grid.CellID cell = route[0];
+						Grid.RelativeCell loc;
+						if (Technite.Me.Location.FindRelative(cell, out loc))
+						{
+							Out.Log(Significance.Unusual, "Set target to " + cell);
+							Technite.Me.SetNextTask(Technite.Task.Move, loc);
+						}
+						else
+							Out.Log(Significance.Unusual, "Relativation failed from " + Technite.Me.Location+" to "+cell);
+					}
+					else
+						Out.Log(Significance.Unusual, "Route not found to destination " + currentTarget);
+				}
+
+			}
+			else
+			{
+				List<Grid.RelativeCell> candidates = new List<Grid.RelativeCell>();
+				foreach (var loc in Technite.Me.Location.GetRelativeNeighbors())
+				{
+					Grid.CellID cell = Technite.Me.Location + loc;
+					if (Grid.IsClearOrWater(cell) && Technite.EnoughSupportHere(cell))
+					{
+						candidates.Add(loc);
+					}
+					//				else
+					//				Out.Log(Significance.Unusual, cell + " is " + Grid.World.GetCell(cell).content);
+
+				}
+
+				Out.Log(Significance.Unusual, "Got " + candidates.Count + " movement options from " + Technite.Me.Location);
+				if (candidates.Count > 0)
+				{
+					int choice = random.Next(candidates.Count - 1);
+
+					Grid.RelativeCell loc = candidates[choice];
+					Grid.CellID cell = Technite.Me.Location + loc;
+					Out.Log(Significance.Unusual, "Set target to " + cell);
+					Technite.Me.SetNextTask(Technite.Task.Move, loc);
+				}
 			}
 		}
 	}

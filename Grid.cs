@@ -98,9 +98,9 @@ namespace TechniteLogic
 		/// Content.Unknown is excluded here, because Unknown may be water, depending on server configuration, which can not support technites.
 		/// </summary>
 		/// <param name="content">Content type to check</param>
-		/// <param name="includeTechnites">Set true to also consider technites as solid</param>
+		/// <param name="technitesAreSolid">Set true to also consider technites as solid</param>
 		/// <returns>True, if the specified content type is solid enough to support a technite, false otherwise</returns>
-		public static bool IsSolid(Content content, bool includeTechnites=false)
+		public static bool IsSolid(Content content, bool technitesAreSolid=false, bool undefinedIsSolid=false)
 		{
 			return content == Content.Earth 
 				|| content == Content.Foundation 
@@ -110,7 +110,8 @@ namespace TechniteLogic
 				|| content == Content.Rock
 				|| content == Content.Sand
 				|| content == Content.Snow 
-				|| (includeTechnites && content == Content.Technite)
+				|| (technitesAreSolid && content == Content.Technite)
+				|| (undefinedIsSolid && content == Content.Undefined)
 				;
 		}
 
@@ -118,11 +119,11 @@ namespace TechniteLogic
 		/// Location-based version of <see cref="IsSolid(Content content, bool includeTechnites)"/>
 		/// </summary>
 		/// <param name="location">Location to check the content of</param>
-		/// <param name="includeTechnites">Set true to also consider technites as solid</param>
+		/// <param name="technitesAreSolid">Set true to also consider technites as solid</param>
 		/// <returns>True, if the determined content type is solid enough to support a technite, false otherwise</returns>
-		public static bool IsSolid(CellID location, bool includeTechnites=false)
+		public static bool IsSolid(CellID location, bool technitesAreSolid=false, bool undefinedIsSolid=false)
 		{
-			return IsSolid(World.GetCell(location).content,includeTechnites);
+			return IsSolid(World.GetCell(location).content,technitesAreSolid, undefinedIsSolid);
 		}
 
 		public static bool IsClearOrWater(Content content)
@@ -137,6 +138,18 @@ namespace TechniteLogic
 			return IsClearOrWater(World.GetCell(location).content);
 		}
 
+		public static bool IsClearWaterOrUndefined(Content content)
+		{
+			return content == Content.Clear
+				|| content == Content.Water
+				|| content == Content.Undefined
+				;
+		}
+
+		public static bool IsClearWaterOrUndefined(CellID location)
+		{
+			return IsClearWaterOrUndefined(World.GetCell(location).content);
+		}
 
 
 		public class CellStack
@@ -273,7 +286,8 @@ namespace TechniteLogic
 			}
 		}
 
-		
+
+
 
 
 		/// <summary>
@@ -513,6 +527,18 @@ namespace TechniteLogic
 					if (delta != 0)
 						yield return new RelativeCell(delta);
 				}
+			}
+
+			internal bool FindRelative(CellID cell, out RelativeCell rs)
+			{
+				foreach (var rel in GetRelativeNeighbors())
+					if (this + rel == cell)
+					{
+						rs = rel;
+						return true;
+					}
+				rs = new RelativeCell();
+				return false;
 			}
 		}
 

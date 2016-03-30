@@ -510,12 +510,12 @@ namespace TechniteLogic
 		}
 
 
-		internal static bool EnoughSupportHere(Grid.CellID cell)
+		internal static bool EnoughSupportHere(Grid.CellID cell, bool undefinedIsSolid=false)
 		{
 			if (Grid.IsSolid(cell.BottomNeighbor))
 				return true;
 			foreach (var n0 in cell.GetHorizontalNeighbors())
-				if (Grid.IsSolid(n0) && Grid.IsSolid(n0.BottomNeighbor))
+				if (Grid.IsSolid(n0,false, undefinedIsSolid) && Grid.IsSolid(n0.BottomNeighbor,false, undefinedIsSolid))
 					return true;
 			return false;
 		}
