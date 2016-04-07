@@ -539,6 +539,14 @@ namespace TechniteLogic
 
 		}
 
+		public void PrintDebugMessage(string message)
+		{
+			if (message.Length > 512)
+				throw new ArgumentOutOfRangeException("Message length ("+message.Length+") exceeds maximum allowed length (512)");
+			//Interface.DebugMessage.SendTo(client)
+
+		}
+
 
 		/// <summary>
 		/// Updates the next task to execute. Technites can memorize and execute only one task per round, thus the logic

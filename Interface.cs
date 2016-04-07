@@ -34,7 +34,8 @@ namespace TechniteLogic
 
 			RequestNextRound, //c2s: <signal>
 
-			TechniteColorChunk, //c2s: TechniteColorChunk
+			TechniteColorChunk,     //c2s: TechniteColorChunk
+			TechniteDebugMessage,   //c2s: TechniteDebugMessage
 
 			Count     //must remain last
 		};
@@ -44,6 +45,7 @@ namespace TechniteLogic
 		public static OutChannel<string> ready = new OutChannel<string>((uint)ChannelID.Ready);
 		public static SignalChannel requestNextRound = new SignalChannel((uint)ChannelID.RequestNextRound);
 		public static OutChannel<Struct.TechniteColorChunk> techniteColorChunk = new OutChannel<Struct.TechniteColorChunk>((uint)ChannelID.TechniteColorChunk);
+		public static OutChannel<Struct.DebugMessage> DebugMessage = new OutChannel<Struct.DebugMessage>((uint)ChannelID.TechniteDebugMessage);
 
 		public static void Register()
         {
@@ -231,6 +233,13 @@ namespace TechniteLogic
 								techniteSubRoundNumber;
 			}
 
+
+			public struct DebugMessage
+			{
+				public UInt32 location;
+				public string message;
+			}
+
 			//public struct SessionBegin
 			//{
 			//	public GridConfig grid;
@@ -370,7 +379,7 @@ namespace TechniteLogic
 
 		public static string CompileProtocolString()
 		{
-			return "Aquinas v1.6." + (int)ChannelID.Count;
+			return "Aquinas v1.7." + (int)ChannelID.Count;
 		}
 
 		private static void SendColorChunks(Protocol.Client cl, UInt32 offset, List<Struct.Color> list)
