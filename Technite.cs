@@ -41,13 +41,18 @@ namespace TechniteLogic
 		/// </summary>
 		public struct CompressedLocation
 		{
-			private readonly UInt32		Data;
+			public readonly UInt32		Data;
 
 //			public UInt32	Data { get { return Data; } }
 
 			public CompressedLocation(UInt32 data)
 			{
 				Data = data;
+			}
+
+			public CompressedLocation(Grid.CellID id)
+			{
+				Data = (uint)(((uint)id.Layer & 0xFF) | (id.StackID << 8));
 			}
 
 			public	Grid.CellID	CellID
@@ -543,8 +548,7 @@ namespace TechniteLogic
 		{
 			if (message.Length > 512)
 				throw new ArgumentOutOfRangeException("Message length ("+message.Length+") exceeds maximum allowed length (512)");
-			//Interface.DebugMessage.SendTo(client)
-
+			Interface.DebugMessage.SendTo(Session.Client, new Interface.Struct.DebugMessage() { location = new CompressedLocation(Location).Data, message = message });
 		}
 
 
