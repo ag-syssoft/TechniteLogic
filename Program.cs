@@ -60,7 +60,7 @@ namespace TechniteLogic
 			for (;;)
 			{
 				Client client = new Client();
-
+				Session.Client = client;
 				Out.Log(Logging.Significance.Important, "Connecting to server on port " + serverPort);
 				client.Connect(serverPort);
 

@@ -14,6 +14,7 @@ namespace TechniteLogic
 
 		public static string FactionUUID { get; private set; }
 		public static byte TechniteGridID { get; private set; }
+		internal static Client Client { get; set; }
 
 		public static void Begin(Interface.Struct.BeginSession session)
 		{
