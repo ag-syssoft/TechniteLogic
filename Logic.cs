@@ -183,7 +183,10 @@ namespace TechniteLogic
 						Out.Log(Significance.Low, "...");
 
 				if (t.Status.TTL <= 1)
+				{
+					t.PrintDebugMessage("I'll be dead next round");
 					t.SetCustomColor(new Technite.Color(255, 0, 0));
+				}
 				else
 				{
 					float r0 = Grid.CellStack.HeightPerLayer * 2f;
