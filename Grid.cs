@@ -218,6 +218,21 @@ namespace TechniteLogic
 			public static CellStack.Cell CeilingCell { get; private set; }
 
 
+			
+			/// <summary>
+			/// Visually marks a world cell.
+			/// The markings are bulk-transferred to the server at the end of the next Logic.ProcessTechnites() invokation.
+			/// Older markings are preserved at reduced opacity.
+			/// Visualization occurs in the form of a vertical bar atop the marked cell.
+			/// The marking may be invisible, if the chosen layer is submerged too deeply.
+			/// </summary>
+			/// <param name="cell">Cell to visually mark.</param>
+			/// <param name="c">Color to use. The rendering uses additive blending equations. Dark colors will be less visible, black will be invisible.</param>
+			public static void Mark(CellID cell, Technite.Color c)
+			{
+				Interface.MarkCell(new Technite.CompressedLocation(cell).Data, new Interface.Struct.RGB8(c));
+			}
+
 			private static void ApplyDeltaField(Interface.Struct.GridDelta delta, Interface.Struct.GridDeltaBlock[] blocks, Action<CellStack, uint, byte> action)
 			{
 				if (blocks.Length != 0)

@@ -36,6 +36,7 @@ namespace TechniteLogic
 
 			TechniteColorChunk,     //c2s: TechniteColorChunk
 			TechniteDebugMessage,   //c2s: TechniteDebugMessage
+			TechniteDebugMarkers,   //c2s: TechniteDebugMarkers
 
 			Count     //must remain last
 		};
@@ -46,6 +47,7 @@ namespace TechniteLogic
 		public static SignalChannel requestNextRound = new SignalChannel((uint)ChannelID.RequestNextRound);
 		public static OutChannel<Struct.TechniteColorChunk> techniteColorChunk = new OutChannel<Struct.TechniteColorChunk>((uint)ChannelID.TechniteColorChunk);
 		public static OutChannel<Struct.DebugMessage> DebugMessage = new OutChannel<Struct.DebugMessage>((uint)ChannelID.TechniteDebugMessage);
+		public static OutChannel<Struct.TechniteDebugMarker[]> DebugMarkers = new OutChannel<Struct.TechniteDebugMarker[]>((uint)ChannelID.TechniteDebugMarkers);
 
 		public static void Register()
         {
@@ -89,17 +91,26 @@ namespace TechniteLogic
 							state;
 			}
 
+			public struct RGB8
+			{
+				public byte r, g, b;
+
+				public RGB8(Technite.Color c)
+				{
+					r = c.Red;
+					g = c.Green;
+					b = c.Blue;
+				}
+			}
 			public struct Color
 			{
 				public UInt32 index;
-				public byte r, g, b;
+				public RGB8 rgb;
 
 				public Color(UInt32 index, Technite.Color c)
 				{
 					this.index = index;
-					r = c.Red;
-					g = c.Green;
-					b = c.Blue;
+					rgb = new RGB8(c);
 				}
 			}
 
@@ -240,6 +251,14 @@ namespace TechniteLogic
 				public string message;
 			}
 
+			public struct TechniteDebugMarker
+			{
+				public UInt32 location;
+				public RGB8 color;
+			}
+
+
+
 			//public struct SessionBegin
 			//{
 			//	public GridConfig grid;
@@ -247,7 +266,14 @@ namespace TechniteLogic
 			//}
 		}
 
-        public static class Event
+		private static List<Struct.TechniteDebugMarker> newMarkers = new List<Struct.TechniteDebugMarker>();
+
+		internal static void MarkCell(uint markerLocation, Struct.RGB8 markerColor)
+		{
+			newMarkers.Add(new Struct.TechniteDebugMarker() { color = markerColor, location = markerLocation });
+		}
+
+		public static class Event
 		{
 
 			public static void InstructTechnites(Protocol.Client cl, Struct.InstructTechnites instruct)
@@ -258,6 +284,9 @@ namespace TechniteLogic
 				Out.Log(Significance.Common, "Instructing technites in round " + Session.roundNumber+"/"+Session.techniteSubRoundNumber);
 				Logic.ProcessTechnites();
 
+				if (newMarkers.Count > 0)
+					DebugMarkers.SendTo(cl, newMarkers.ToArray());
+				newMarkers.Clear();
 
 				SendColorState(cl);
 
