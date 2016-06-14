@@ -427,10 +427,22 @@ namespace TechniteLogic
 		bool				usesCustomColor = false;
 
 
+		/// <summary>
+		/// Readonly color representation.
+		/// Stores channel values as 8 bit unsigned integers (bytes).
+		/// </summary>
 		public struct Color
 		{
 			public readonly byte Red, Green, Blue;
 
+			/// <summary>
+			/// Constructs a new color from int values.
+			/// 255 is the maximum possible channel value.
+			/// (255,0,0) is red, (1,0,0) is basically black
+			/// </summary>
+			/// <param name="red">Red channel value in the range [0,255]</param>
+			/// <param name="green">Green channel value in the range [0,255]</param>
+			/// <param name="blue">Blue channel value in the range [0,255]</param>
 			public Color(byte red, byte green, byte blue)
 			{
 				Red = red;
@@ -438,14 +450,27 @@ namespace TechniteLogic
 				Blue = blue;
 			}
 
-			public			Color(Vec3 color)
+			/// <summary>
+			/// Constructs a new color from a floating point vector.
+			/// Channel values outside the allowed range are clamped.
+			/// </summary>
+			/// <param name="color">Vector to set the channels from. x maps to red, y to green, and z to blue. All values are expected in the range [0,1]</param>
+			public Color(Vec3 color)
 			{
 				Red = ClampF(color.x);
 				Green = ClampF(color.y);
 				Blue = ClampF(color.z);
 			}
 
-			public			Color(double red, double green, double blue)
+			/// <summary>
+			/// Constructs a new color from three floating point values.
+			/// Channel values outside the allowed range are clamped.
+			/// (1.0,0.0,0.0) is red.
+			/// </summary>
+			/// <param name="red">Red channel value in the range [0,1]</param>
+			/// <param name="green">Green channel value in the range [0,1]</param>
+			/// <param name="blue">Blue channel value in the range [0,1]</param>
+			public Color(double red, double green, double blue)
 			{
 				Red = ClampF(red);
 				Green = ClampF(green);
@@ -461,7 +486,13 @@ namespace TechniteLogic
 				return (byte)Math.Min(Math.Max(0.0, f * 255.0), 255.0);
 			}
 
-			internal static Color Random(Random r)
+			/// <summary>
+			/// Generates a new random color.
+			/// The resulting color is of arbitrary hue, brightness, and saturation.
+			/// </summary>
+			/// <param name="r">Random variable to derive the colors from</param>
+			/// <returns>New color</returns>
+			public static Color Random(Random r)
 			{
 				return new Color(r.NextDouble(), r.NextDouble(), r.NextDouble());
 			}
