@@ -146,7 +146,8 @@ namespace TechniteLogic
 					Grid.Content content = Grid.World.GetCell(cell).content;
 					int rs = 100;
 					if (content != Grid.Content.Clear && content != Grid.Content.Water)
-						rs -= 90;
+						return NotAChoice;
+						//rs -= 90;
 					if (Grid.World.GetCell(cell.TopNeighbor).content == Grid.Content.Technite)
 						return NotAChoice;  //probably a bad idea to split beneath technite
 
@@ -166,8 +167,10 @@ namespace TechniteLogic
 		/// </summary>
 		public static void ProcessTechnites()
 		{
-			Out.Log(Significance.Common, "ProcessTechnites()");
+			Out.Log(Significance.Common, "ProcessTechnites("+ Session.roundNumber+"/"+Session.techniteSubRoundNumber + ")");
 
+			for (uint i = 0; i < 12; i++)
+				Grid.World.Mark(new Grid.CellID(i, Grid.CellStack.LayersPerStack), new Technite.Color(255, 255, 0));
 			//let's do some simple processing
 
 			//			bool slightlyVerbose = Technite.All.Count() < 20;
