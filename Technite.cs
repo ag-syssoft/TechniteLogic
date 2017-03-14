@@ -257,7 +257,7 @@ namespace TechniteLogic
 			/// The task parameter specifies the amount of energy that should be used for the burst.
 			/// The sensor radius applied is calculated as the square root of this amount.
 			/// The task fails if the local technite does not have enough energy to execute the burst.
-			/// The sensor bubble remains in place until the next round is processed, and captures any technites or units within.
+			/// The sensor bubble remains in place until the next round is processed, and detects any technites or units within.
 			/// </summary>
 			Scan,
 
